@@ -27,7 +27,9 @@ $f_body = get_field('body_code');
     <?php wp_head(); ?>
     <link rel="stylesheet" href="<?=get_template_directory_uri() ?>/css/asw.css?t=<?=time()?>" />
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="https://cdn.sable.asia/tracking-672b8dd9c38c6d2ad2a8bbdd.js" data-cfasync="false"></script>
+
+    <!-- <script src="https://cdn.sable.asia/tracking-672b8dd9c38c6d2ad2a8bbdd.js" data-cfasync="false"></script> -->
+    
     <?php if ($_SERVER['HTTP_HOST'] == "https://dev.assetwise.co.th"): ?>
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
