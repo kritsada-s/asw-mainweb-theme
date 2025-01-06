@@ -143,6 +143,7 @@ $f_footer = get_field('footer_code');
     <p class="w-400 py-1"><a target="_blank" href="https://aswland.assetwise.co.th/" class="link-footer"><?php pll_e('เสนอขายที่ดิน')?></a></p>
     <p class="w-400 py-1"><a target="_blank" href="https://procurement.assetwise.co.th/" class="link-footer"><?php pll_e('เสนอขายสินค้าและบริการ')?></a></p>
     <p class="w-400 py-1"><a target="_blank" href="https://www.assetaplus.com/" class="link-footer"><?php pll_e('ฝากขาย-ฝากเช่า')?></a></p>
+    <p class="w-400 py-1"><a target="_blank" href="https://career.assetwise.co.th/" class="link-footer"><?php pll_e('ร่วมงานกับเรา')?></a></p>
   </div>
 </div>
 
