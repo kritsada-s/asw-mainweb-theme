@@ -16,7 +16,8 @@
 		height: 28px;
 		position: absolute;
 		left: -1.5px;
-		top: 50px;
+		top: auto;
+    bottom: 2px;
 		background-color: #F1683B;
 		transition: all .2s;
 	}
@@ -135,11 +136,24 @@
 		animation-play-state: paused;
 	}
 
+	/* #recent-projects {
+		background: url("/wp-content/uploads/2022/12/circle.png");
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-position: left 8rem;
+	} */
+
 </style>
 
 <?php 
+
 $f = get_fields();
 $slider = $f['banner']['home_banner'];
+$d_banners = $f['banners']['desktop_banner'];
+$m_banners = $f['banners']['mobile_banner'];
+$soldout_projects = $f['sold_out_projects_listed'];
+$recent_projects = $f['recent_projects'];
+
 function pad($num){
 	if ($num>9) {
 		return $num;
@@ -422,285 +436,16 @@ function pad($num){
 	let allSlideVideo = []
 	let allSlideVideoMob = []
 </script>
-<section id="home-slider">
-	<div id="home-slider-inner">
-		<!-- <div class="home-slider-shadow pointer-events-none"></div> -->
-		<div id="home-slider-slides">
-			<?php 
-			foreach ($slider as $key => $v) {
-				switch ($v['acf_fc_layout']) {
-					case 'desktop_banner':
-					$new_banner_onclick_condition = ' data-click="0" ';
-					if ($v['url'] != '') {
-						$new_banner_onclick_condition = ' onclick="window.open(`'.$v['url'].'`)" ';
-					}
-					?>
-					<div class="home-slider-slide bg-cover pointer" <?=$new_banner_onclick_condition?> style="background-image:url('<?=$v['image']['sizes']['1536x1536']?>')"></div>
-					<?php
 
-					break;
-					case 'video_banner':
-					?>
-					<div class="home-slider-slide bg-cover home-slider-slide-video" style="background-color:#000;">
-						<div class="plyr-slider-wrap">
-							<div id="slide_player_<?=$key?>" loops data-plyr-provider="youtube" data-plyr-embed-id="<?=acf_oembed_to_youtubeID($v['video'])?>"></div>
-						</div>
-					</div>
-
-					<script>
-						const slide_player_<?=$key?> = new Plyr('#slide_player_<?=$key?>',{
-							controls:['play-large'],
-							loop:{ active: true}
-						});
-						allSlideVideo.push(slide_player_<?=$key?>)
-						// slide_player_3.pause()
-					</script>
-					<?php
-					break;
-				}
-			}
-			?> 
-		</div>
-		<!-- <div id="home-slider-arrow">
-			<img src="/wp-content/uploads/2022/09/slide-arrow-l.png" class="-l" onclick="changeSlider(-1);stopAutoplay()">
-			<img src="/wp-content/uploads/2022/09/slide-arrow-r.png" class="-r" onclick="changeSlider(1);stopAutoplay()">
-		</div>
-		<div id="home-slider-count">
-			<div >
-				<h3 class="-num-min">01</h3>
-			</div>
-			<div class="-num-bar">
-				<div class=""></div>
-			</div>
-			<div><h3 class="-num-next">02</h3></div>
-			<div>
-				<p style="margin-left: 3px;">/<span class="-num-max">06</span></p>
-			</div>
-		</div> -->
-	</div>
-	<div id="home-slider-inner-mob">
-		<style type="text/css">
-			#home-slider-inner-mob .home-slider-slide[data-active="0"]{
-				opacity: 1;
-				z-index: 10;
-			}
-		</style>
-		<div id="home-slider-slides-mob">
-			<?php 
-			$data_active = -1;
-			foreach ($slider as $key => $v) {
-				switch ($v['acf_fc_layout']) {
-					case 'mobile_banner':
-					$data_active++
-					?>
-					<div class="home-slider-slide bg-cover" onclick="location.href='<?=$v['url']?>'" style="background-image:url('<?=$v['image']['sizes']['1536x1536']?>')" data-active="<?=$data_active?>" data-i="<?=$data_active?>"></div>
-					<?php
-					break;
-					case 'video_banner':
-					$data_active++
-					?>
-					<div class="home-slider-slide bg-cover home-slider-slide-video" style="background-color:#000;" data-active="<?=$data_active?>" data-i="<?=$data_active?>" onclick="clearInterval(mhbannerInterval)">
-						<div class="plyr-slider-wrap">
-							<div id="slide_player_mob_<?=$key?>" loops data-plyr-provider="youtube" data-plyr-embed-id="<?=acf_oembed_to_youtubeID($v['video'])?>" data-active="<?=$data_active?>"></div>
-						</div>
-					</div>
-
-					<script>
-						const slide_player_mob_<?=$key?> = new Plyr('#slide_player_mob_<?=$key?>',{
-							controls:['play-large'],
-							loop:{ active: true}
-						});
-						allSlideVideoMob.push(slide_player_mob_<?=$key?>)
-					</script>
-					<?php
-					break;
-				}
-			}
-			?> 
-		</div>
-	</div>
-
-	<script type="text/javascript">
-		home_slides = document.querySelector('#home-slider-inner #home-slider-slides')
-		home_slide = document.querySelectorAll('#home-slider-inner .home-slider-slide')
-		home_slide_active = 0;
-		home_slide[0].style.opacity = 1;
-		home_slide[0].style.zIndex = 1;
-		home_slide_nex = get_home_slide_nex(1);
-		let autoPlay = 1;
-		document.querySelector('#home-slider-inner #home-slider-count .-num-min').innerText = pad(1,2)
-		document.querySelector('#home-slider-inner #home-slider-count .-num-next').innerText = pad(home_slide_nex,2)
-		document.querySelector('#home-slider-inner #home-slider-count .-num-max').innerText = pad(home_slide.length,2)
-		document.querySelector('#home-slider-inner #home-slider-count').style.setProperty('--z',home_slide.length)
-		function changeSlider(plus){
-			document.querySelector('#home-slider-inner #home-slider-count .-num-bar div').classList.remove('go')
-			if (autoPlay) {
-				setTimeout(()=>{
-					document.querySelector('#home-slider-inner #home-slider-count .-num-bar div').classList.add('go')
-				},100)
-			}
-			for(let s of home_slide){
-				s.style.opacity = 0;
-				s.style.zIndex = -1;
-			}
-			home_slide_active += plus
-
-
-			if ( home_slide_active >= home_slide.length) {
-				home_slide_active = 0;
-			}else if(home_slide_active < 0){
-				home_slide_active = home_slide.length-1;
-			}
-			home_slide[home_slide_active].style.opacity = 1;
-			home_slide[home_slide_active].style.zIndex = 1;
-			document.querySelector('#home-slider-inner #home-slider-count .-num-min').innerText = pad(home_slide_active+1,2)
-			document.querySelector('#home-slider-inner #home-slider-count .-num-next').innerText = pad(get_home_slide_nex(home_slide_active+1),2)
-			document.querySelector('#home-slider-inner #home-slider-count').style.setProperty('--i',home_slide_active)
-			for(let i of allSlideVideo){
-				i.pause()
-			}
-		}
-
-		autoPlaySlide = setInterval(()=>{
-			if (autoPlay) {
-				changeSlider(1);
-			}
-
-		},5000)
-		function stopAutoplay(){
-			autoPlay = 0
-		}
-		function get_home_slide_nex(now){
-			now++
-			// xconsolex.log(now)
-			if (now>home_slide.length) {
-				now = 1
-				// xconsolex.log('if')
-				// xconsolex.log(now)
-			}
-			return now
-		}
-		setTimeout(()=>{
-			document.querySelector('#home-slider-inner #home-slider-count .-num-bar div').classList.add('go')
-		},100)
-	</script>
+<section id="banners">
+  <?php if ($d_banners) : ?>
+    <?= wp_get_attachment_image($d_banners, 'full', false, ['class' => 'w-full hidden md:block']) ?>
+  <?php endif; ?>
+  <?php if ($m_banners) : ?>
+    <?= wp_get_attachment_image($m_banners, 'full', false, ['class' => 'w-full md:hidden']) ?>
+  <?php endif; ?>
 </section>
 
-<div id="home-slide-cmd-mob">
-	<style type="text/css">
-		/*-- Mobile Version --*/
-		@media (max-width: 1116px) {
-			#home-slider-arrow {
-				transform: scale(0.8) translateY(50%);
-				transform-origin: bottom left;
-			}
-		}
-		/*-- Mobile Version --*/
-		@media (max-width: 767px) {
-
-
-			#home-slider {
-				padding-top: 100%;
-			}
-
-			#home-slider-inner-mob {
-				display: block;
-			}
-
-			#home-slide-cmd-mob {
-				padding: 14px 15px;
-				display: grid;
-				grid-template-columns: 40px auto 40px;
-				grid-column-gap: 40px;
-				color: var(--ci-grey-100);
-			}
-
-			#home-slide-cmd-mob .-num-bar {
-				width: 100%;
-				height: 1px;
-				background: var(--ci-blue-500);
-				position: relative;
-			}
-
-			#home-slide-cmd-mob .-num-bar div {
-				width: 100%;
-				height: 2px;
-				background: var(--ci-veri-500);
-				position: absolute;
-				top: -.5px;
-				width: 0%;
-				transition: 2950ms linear;
-			}
-
-			#home-slider-count-mob {
-				display: flex;
-				gap: 10px;
-				justify-content: space-between;
-				align-items: center;
-			}
-
-			
-			/*.mini-filter {
-				left: 0;
-			}*/
-
-			.plyr__video-embed iframe {
-				transform: scale(1.8);
-			}
-
-		}
-	</style>
-	<div class="hsm-arrow -l" onclick="mhbanner_slide_plus(1);clearInterval(mhbannerInterval)">
-		<img src="/wp-content/uploads/2022/09/slide-arrow-l.png" class="-l" onclick="">
-	</div>
-	<div id="home-slider-count-mob">
-		<div >
-			<h5 class="-num-min">01</h5>
-		</div>
-		<div class="-num-bar" data-play="0">
-			<div class=""></div>
-		</div>
-		<div><h5 class="-num-next">
-			<span class="-num-next-num">02</span><span style="margin-left: 3px;color: var(--ci-grey-400);font-weight: 300;font-size: 20px;">/<span class="-num-max"><?=pad($data_active+1)?></span></span></h5></div>
-		</div>
-		<div class="hsm-arrow -r" onclick="mhbanner_slide_plus(-1);clearInterval(mhbannerInterval)">
-			<img src="/wp-content/uploads/2022/09/slide-arrow-r.png" class="-r" onclick="">
-		</div>
-		<script type="text/javascript">
-			let mhbannerAutoPlay = 1;
-			setTimeout(()=>{
-				document.querySelector('#home-slider-count-mob .-num-bar div').style.width = "100%"
-			},50)
-			mhbannerInterval = setInterval(()=>{
-				mhbanner_slide_plus(-1)
-				document.querySelector('#home-slider-count-mob .-num-bar div').style.width = "0%"
-				document.querySelector('#home-slider-count-mob .-num-bar div').style.transition = "0ms"
-				setTimeout(()=>{
-					document.querySelector('#home-slider-count-mob .-num-bar div').style.width = "100%"
-					document.querySelector('#home-slider-count-mob .-num-bar div').style.transition = "2950ms linear"
-				},50)
-				
-			},3000)
-			function mhbanner_slide_plus(p){
-				let x = document.querySelectorAll('#home-slider-inner-mob .home-slider-slide')
-				let lim = x.length
-				for(let i of x){
-					i.dataset.active = (Number(i.dataset.active)+p)%lim
-				}
-				let now = Number(document.querySelector('#home-slider-inner-mob .home-slider-slide[data-active="0"]').dataset.i)
-				document.querySelector('#home-slider-count-mob .-num-min').innerText = pad(now+1,2)
-				let next = now+2
-				if (next>lim) {
-					next = 1
-				}
-				document.querySelector('#home-slider-count-mob .-num-next-num').innerText = pad(next,2)
-				for(let i of allSlideVideoMob){
-					i.pause()
-				}
-			}
-		</script>
-	</div>
-</div>
 <div class="cont-pd pt-4">
 	<div class="flex flex-row items-center">
 		<a href="/<?=pll_current_language()?>/home" class="cl-ci-blue-400"><?php pll_e('หน้าแรก')?></a>
@@ -709,8 +454,9 @@ function pad($num){
 	</div>
 </div>
 <sp class=""></sp>
+
 <!--=== The Section Boxes : about us ===-->
-<section id="about-us" class="">
+<section id="recent-projects" class="">
 	<!-- <div id="bg-circle" class="absolute">
 		<img src="/wp-content/uploads/2022/12/circle.png">
 	</div> -->
@@ -730,7 +476,6 @@ function pad($num){
 						display: inline;
 					}
 				}
-				
 			</style>
 			<style type="text/css">
 				.arrow-l{
@@ -814,29 +559,25 @@ function pad($num){
 					transition: .8s all;
 				}
 			</style>
-			<div id="reward-asw" class="lg:col-span-9">
+			<div id="soldout-asw" class="lg:col-span-9">
 				<div class="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-6 md:gap-x-3 md:gap-y-10">
 					<?php
-					foreach ($f['reward'] as $key => $value){ 
-						// pre($value);
-						?>
+					foreach ($recent_projects as $key => $value) { ?>
 						<div class="col-span-1 pointer reward-hover relative overflow-hidden" onclick="openModal();currentSlide(<?= $key ?>)" data-show="0" data-x="null">
-							<div  class="bg-cover blank reward-img" ratio="1:1"  style="background-image: url('<?= $value['trophy']['url'] ?>');"></div>
-							<div class="top-left about-year">
-								<span class="reward-year f26-22"><?=$value['year']?></span>
-							</div>
+							<div  class="bg-cover blank reward-img" ratio="1:1"  style="background-image: url('<?= $value['images']['thumbnail'] ?>');"></div>
 							<div class="reward-hovered flex flex-col pl-4 pb-4 text-white justify-end">
-								<h5><?=$value['name']?></h5>
+								<h5><?= $value['project_name'] ?></h5>
 								<sp class="h-5"></sp>
 								<p><?php pll_e('อ่านเพิ่มเติม')?></p>
 							</div>
 						</div>
 						<div class="col-span-1 block md:hidden">
-							<span class="cl-ci-grey-100" style="font-size: 22px;line-height: 28px;font-weight: 500;"><?= $value['name'] ?></span>
+							<h5><?= $value['project_name'] ?></h5>
+							<small><?= $value['location'] ?></small>
+							<p class="text-[18px]"><?= $value['description'] ?></p>
 							<p class="cl-ci-veri-300" style="font-size: 22px;line-height: 28px;font-weight: 400;padding-top: 8px;" onclick="openModal();currentSlide(<?= $key ?>)"><?php pll_e('อ่านเพิ่มเติม')?></p>
 						</div>
-					<?php }
-					?>
+					<?php } ?>
 				</div>
 				<sp class="h-12 md:h-20"></sp>
 			</div>
@@ -846,45 +587,25 @@ function pad($num){
 				<div class="fixed" style="top: 0;z-index: 1;background-color: transparent;width: 100%;height: 100%;" onclick="closeModal()"></div>
 				<div class="modal-img-content" style="z-index: 9;">
 					<?php
-					foreach ($f['reward'] as $key => $value) {
+					foreach ($recent_projects as $key => $value) {
 						// pre($value);
 						// $value['project'][$i]->ID
 						?>
 						<div class="mySlides" style="justify-content: center;align-items: center;height: 85vh;">
 							<div class="grid grid-rows-3 md:grid-rows-1 md:grid-cols-12" style="width: 100%;">
 								<div class="row-span-1 md:col-span-7">
-									<div class="bg-cover blank" mob-ratio="1:1" style="background-image:url('<?=$value['image']['url']?>');height: 100%;">
+									<div class="bg-cover blank bg-gray-200" mob-ratio="1:1" style="background-image:url('<?=$value['images']['popup_image']?>');height: 100%;">
 									</div>
 								</div>
 								<div class="row-span-2 md:row-span-1 md:col-span-5 bg-white flex ">
 									<div class="px-4 pt-10 pb-10 md:px-8 md:pt-12 md:pb-32 w-full">
-										<?php 
-										$pjSize = ofsize($value['projects']);
-										if ($pjSize>0) {
-											?>
-											<span class="cl-ci-grey-400" style="font-size: 18px;font-weight: 700;line-height: 20px;">Project</span>
-											<h5 class="cl-ci-grey-100" style="font-size: 30px;line-height: 32px;font-weight: 500;">
-												<?php
-												foreach ($value['projects'] as $kk => $val) {
-													if ($kk == 0) {
-														echo $val->post_title;
-													}
-													else{
-														echo ", " . $val->post_title;
-													}
-												}
-												?>
-											</h5>
-											<sp style="height: 33px;" ></sp>
-											<?php
-										}
-										?>
-										<span class="cl-ci-grey-400" style="font-size: 18px;font-weight: 700;line-height: 20px;">Award Winner</span>
-										<h5 class="cl-ci-grey-100" style="font-size: 30px;line-height: 32px;font-weight: 500;"><?= $value['name'] ?></h5>
+										<span class="cl-ci-grey-400" style="font-size: 18px;font-weight: 700;line-height: 20px;">รายละเอียดโครงการ</span>
+										<h5 class="cl-ci-grey-100" style="font-size: 30px;line-height: 32px;font-weight: 500;"><?= $value['project_name'] ?></h5>
+										<small><?= $value['location'] ?></small>
 										<sp style="height: 23px;" ></sp>
-										<img src="<?= $value['trophy']['url']?>" style="height: 160px;width:auto;margin:0;">
-										<sp style="height: 13px;" ></sp>
-										<span class="cl-ci-grey-400" style="font-size: 22px;font-weight: 400;line-height: 28px;">by <?=$value['by']?></span>
+										<p><?= $value['description'] ?></p>
+										<sp style="height: 23px;" ></sp>
+										<a class="mt-7 text-[#123F6D] hover:text-[#123F6D]/70 font-medium" href="<?= $value['link'] ?>" title="">รายละเอียดเพิ่มเติม</a>
 									</div>
 								</div>
 							</div>
@@ -934,27 +655,32 @@ function pad($num){
 			iCount++
 		}
 		if(document.body.clientWidth < 768){ 
-			width_hline_gap = width_hline;
-			width_hline_gap += ((elAll.length - 1) * 16); // 32px
-			menu.style.width = 'calc(100vw - 32px)';
+			// width_hline_gap = width_hline;
+			// width_hline_gap += ((elAll.length - 1) * 16); // 32px
+			// menu.style.width = 'calc(100vw - 32px)';
 
-			if (width_hline_gap < menu.offsetWidth) { // flex
-				// menu.style.width = 100+'%';
-				menu.style.justifyContent = 'flex-start';
-				// gapWidth = (menu.offsetWidth - width_hline) / (elAll.length - 1) 
-				left_hline = left_hline + (current*32)
-				hbar.style.left = left_hline + 'px';
-				hline.style.width =  100 + '%';
-			} else{
-				// menu.style.width = 'calc(100vw - 32px)';
-				width_hline_gap = 0;
-				width_hline += ((elAll.length - 1) * 16); // 16px
-				// menu.style.columnGap = 16 + "px";
-				left_hline = left_hline + (current*16);
+			// if (width_hline_gap < menu.offsetWidth) { // flex
+			// 	// menu.style.width = 100+'%';
+			// 	//menu.style.justifyContent = 'flex-start';				
+			// 	// gapWidth = (menu.offsetWidth - width_hline) / (elAll.length - 1) 
 
-				hbar.style.left = left_hline + 'px';
-				hline.style.width = width_hline + 'px';
-			}
+			// 	left_hline = left_hline + (current*32)
+				
+			// 	hbar.style.right = 0;
+			// 	hbar.style.left = 'auto';
+			// 	hline.style.width =  100 + '%';
+			// } else{
+			// 	// menu.style.width = 'calc(100vw - 32px)';
+			// 	width_hline_gap = 0;
+			// 	width_hline += ((elAll.length - 1) * 16); // 16px
+			// 	// menu.style.columnGap = 16 + "px";
+			// 	left_hline = left_hline + (current*16);
+
+			// 	hbar.style.left = 'auto';
+			// 	hbar.style.right = 0;
+			// 	hline.style.width = width_hline + 'px';
+			// }
+			return;
 			
 		}else if (document.body.clientWidth >= 768 && document.body.clientWidth < 1024){
 			width_hline_gap = width_hline;

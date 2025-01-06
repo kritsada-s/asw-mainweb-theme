@@ -842,27 +842,7 @@ function pad($num){
 		<div class="grid grid-flow-row lg:grid-cols-12 gap-4">
 			<div class="lg:col-span-3" >
 				<!--=== The Section Boxes : about-menu about-page ===-->
-				<section id="about-menu" class="lg:pl-6 lg:pb-10 pt-4">
-					<h1><?php pll_e( 'รู้จักแอสเซทไวส์'); ?></h1>
-					<div id="menu-about" class="flex flex-row lg:flex-col side-nav-menu-about relative pt-9 pb-2.5 lg:py-0 scroll-hid lg:mt-8" style="">
-						<div onclick="show_info(0)" class="about-menu px-0 lg:px-4 cl-ci-orange-500 font-medium">
-							<?php pll_e( 'เกี่ยวกับแอสเซทไวส์'); ?>
-						</div>
-						<sp class="hidden lg:block" style="height: 1rem;"></sp>
-						<!-- onclick="show_info(1)" -->
-						<div  class="about-menu px-0 lg:px-4">
-							<a href="/<?=pll_current_language()?>/award" class=""><?php pll_e( 'รางวัลและความสำเร็จ'); ?></a>
-						</div>
-						<sp class="hidden lg:block" style="height: 1rem;"></sp>
-
-						<div class="hidden lg:block absolute bg-ci-grey-900" style="width: 1px;height: 100%;left: 0px;z-index: 1;">
-							<div class="about_vbar"></div>
-						</div>
-						<div class="block lg:hidden absolute bg-ci-grey-900 about_hline" style="height: 2.5px;bottom: 1.15px;z-index: 1;">
-							<div class="about_hbar"></div>
-						</div>
-					</div>
-				</section>
+				<?php get_template_part('page-templates/about-page-sidebar'); ?>
 			</div>
 			<style type="text/css">
 				@media (max-width: 767px) {

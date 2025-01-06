@@ -6,7 +6,7 @@
 	}
 	.about-menu{
 		color: var(--ci-grey-400);
-		transition: all .s;
+		transition: all .15s;
 	}
 	.cl-ci-orange-500{
 		color: var(--ci-orange-500) !important;
@@ -26,9 +26,6 @@
 	.about-ani:hover .bg-cover, .about-ani:hover, .about-wrap:hover .about-ani {
 		transform: scale(1.07);
 		transition: all .8s;
-	}
-	.about_hline{
-		/*width: 100%;*/
 	}
 	.about_hbar{
 		width: 28px;
@@ -59,8 +56,6 @@
 			scroll-behavior: smooth;
 			background-color: white;
 			overflow-y: hidden;
-			/*width: 95.5vw;*/
-			/*width: 100%;*/
 		}
 		#bg-circle{
 			left: -40%;
@@ -70,19 +65,16 @@
 		}
 
 	}
-	@media (max-width: 767px){
+	@media (max-width: 767px) {
 		.side-nav-menu, .side-nav-menu-about {
 			border-left: 0; 
 			border-bottom: 0; 
 		}
-		.side-nav-menu-about{
-			/*width: 91.5vw;*/
-		}
 		#bg-circle{
 			top: calc(10% + 50vw);
 		}
-
-	</style>
+	}
+</style>
 
 	<?php 
 	$f = get_fields();
@@ -584,27 +576,7 @@
 		<div class="grid grid-flow-row lg:grid-cols-12 gap-4">
 			<div class="lg:col-span-3">
 				<!--=== The Section Boxes : about-menu ===-->
-				<section id="about-menu" class="lg:pl-6 lg:pb-10">
-					<h1>รู้จักแอสเซทไวส์</h1>
-					<div id="menu-about" class="flex flex-row lg:flex-col side-nav-menu-about relative pt-9 pb-2.5 lg:py-0 scroll-hid lg:mt-8" style="">
-						<div onclick="show_info(0)" class="about-menu px-0 lg:px-3 cl-ci-orange-500 font-medium">
-							เกี่ยวกับแอสเซทไวส์
-						</div>
-						<sp class="hidden lg:block" style="height: 1rem;"></sp>
-
-						<div onclick="show_info(1)" class="about-menu px-0 lg:px-3">
-							รางวัลและความสำเร็จ
-						</div>
-						<sp class="hidden lg:block" style="height: 1rem;"></sp>
-
-						<div class="hidden lg:block absolute bg-ci-grey-900" style="width: 2.5px;height: 100%;left: 1.15px;z-index: 1;">
-							<div class="about_vbar"></div>
-						</div>
-						<div class="block lg:hidden absolute bg-ci-grey-900 about_hline" style="height: 2.5px;bottom: 1.15px;z-index: 1;">
-							<div class="about_hbar"></div>
-						</div>
-					</div>
-				</section>
+				<?php get_template_part('page-templates/about-page-sidebar'); ?>
 			</div>
 			<div id="about-asw" class="lg:col-span-9">
 				<div class="cont-pd">
