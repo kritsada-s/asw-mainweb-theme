@@ -14,6 +14,9 @@
       case 2:
         path = '/recent-projects';
         break;
+      case 3:
+        path = '/20th-anniversary';
+        break;
     }
 
     if (path === window.location.pathname.replace(/\/$/, '')) {
@@ -47,6 +50,10 @@
 <section id="about-menu" class="lg:pl-6 lg:pb-10 about-page-sidebar">
   <h1>รู้จักแอสเซทไวส์</h1>
   <div id="menu-about" class="flex flex-row lg:flex-col side-nav-menu-about relative pt-5 md:pt-9 pb-2.5 lg:py-0 scroll-hid lg:mt-8">
+    <div onclick="handle_about_menu(3)" class="about-menu px-0 lg:px-3 <?= $current_page === '20th-anniversary' ? 'font-medium about-active-menu-item' : '' ?>">
+      20<sup>th</sup> Anniversary
+    </div>
+    <sp class="hidden lg:block" style="height: 1rem;"></sp>
     <div onclick="handle_about_menu(0)" class="about-menu px-0 lg:px-3 <?= $current_page === 'about-us' ? 'font-medium about-active-menu-item' : '' ?>">
       เกี่ยวกับแอสเซทไวส์
     </div>
@@ -55,11 +62,11 @@
     <div onclick="handle_about_menu(1)" class="about-menu px-0 lg:px-3 <?= $current_page === 'award' ? 'font-medium about-active-menu-item' : '' ?>">
       รางวัลและความสำเร็จ
     </div>
-    <sp class="hidden lg:block" style="height: 1rem;"></sp>
+    <!-- <sp class="hidden lg:block" style="height: 1rem;"></sp>
 
     <div onclick="handle_about_menu(2)" class="about-menu px-0 lg:px-3 <?= $current_page === 'recent-projects' ? 'font-medium about-active-menu-item' : '' ?>">
       โครงการที่ผ่านมา
-    </div>
+    </div> -->
 
     <div class="hidden lg:block absolute bg-ci-grey-900" style="width: 2.5px;height: 100%;left: 1.15px;z-index: 1;">
       <div class="about_vbar"></div>
