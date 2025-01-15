@@ -707,12 +707,12 @@ function pad($num)
 		height: calc(100% - 32px);
 	}
 
-	/*-- Mobile Version --*/
-	@media (max-width: 890px) {
+	-- Mobile Version --
+	/*@media (max-width: 890px) {
 		#desktop_promotion::before {}
 
 		#home_promotion_slides_wrap::after {
-			/*			bottom: 4px !important;*/
+			bottom: 4px !important;
 		}
 	}
 
@@ -725,11 +725,11 @@ function pad($num)
 		width: 500%;
 		height: 40px;
 		z-index: 0;
-		left: -100%;*/
+		left: -100%;
 	}
 
-	#home_promotion_slides_wrap::after {
-		/*content: " ";
+	/*#home_promotion_slides_wrap::after {
+		content: " ";
 		background: var(--ci-blue-300);
 		position: absolute;
 		left: 0;
@@ -738,8 +738,8 @@ function pad($num)
 		height: calc(100% - 72px);
 		z-index: 2;
 		left: -100%;
-		bottom: 32px;*/
-	}
+		bottom: 32px;
+	}*/
 
 	#home_promotion_slides_wrap::after {
 		content: " ";
@@ -1172,8 +1172,6 @@ if ($f['featured_1']['is_open'] == 'open') {
 
 	/*-- Mobile Version --*/
 	@media (max-width: 1023px) {
-		.three-block {}
-
 		#virtual-360,
 		#finplus,
 		#asw-app {
@@ -1192,10 +1190,6 @@ if ($f['featured_1']['is_open'] == 'open') {
 
 	/*-- Mobile Version --*/
 	@media (min-width: 768px) and (max-width: 1320px) {
-		.desktop-360-pic {
-			/*		display: none;*/
-		}
-
 		.mobile-360-pic {
 			position: static !important;
 			background-size: cover;
@@ -1936,10 +1930,6 @@ if ($f['featured_1']['is_open'] == 'open') {
 
 <!-- WRS Home Banner -->
 <section id="wrs_banner" class="py-12" style="background-image: url('/wp-content/uploads/2022/12/circle.png'); background-size: cover; background-position: left;">
-	<?php
-		$list_item_class = 'font-medium text-[26px] font-normal text-neutral-500 hover:text-neutral-900';
-		$wrs_link = 'https://career.assetwise.co.th';
-	?>
 	<div class="container mx-auto flex flex-col md:flex-row px-16 md:px-0 gap-7 md:gap-0">
 		<div class="w-full flex md:w-1/2 md:pr-20 md:justify-end">
 			<div class="inner inline-block w-auto">
@@ -1950,29 +1940,10 @@ if ($f['featured_1']['is_open'] == 'open') {
 		</div>
 		<div class="w-full md:w-1/2 flex justify-center md:justify-start pl-6 md:pl-24 border-l-[6px] border-l-[var(--ci-veri-500)]">
 			<div class="inner w-full md:w-1/2 flex flex-col">
-				<ul class="mb-5 flex flex-col gap-2">
-					<li>
-						<p>
-							<a href="<?= $wrs_link ?>" class="<?= $list_item_class ?>">พนักงานขายประจำโครงการ</a>
-						</p>
-					</li>
-					<li>
-						<p>
-							<a href="<?= $wrs_link ?>" class="<?= $list_item_class ?> flex gap-2 items-center">เจ้าหน้าที่ฝ่ายจัดซื้อ <span class="bg-red-500 text-white px-3 py-[2px] rounded-lg text-sm leading-none">ด่วน</span></a>
-						</p>
-					</li>
-					<li>
-						<p>
-							<a href="<?= $wrs_link ?>" class="<?= $list_item_class ?>">ผู้จัดการโครงการ</a>
-						</p>
-					</li>
-					<li>
-						<p>
-							<a href="<?= $wrs_link ?>" class="<?= $list_item_class ?>">สถาปนิก</a>
-						</p>
-					</li>
+				<ul id="wrs_jobs_list" class="mb-5 flex flex-col gap-1">
+					<li class="text-neutral-700">Loading...</li>
 				</ul>
-				<a href="<?= $wrs_link ?>" class="bg-[var(--ci-veri-500)] hover:bg-[var(--ci-veri-300)] w-fit px-5 py-1 rounded text-white font-medium align-self-end">ดูตำแหน่งทั้งหมด</a>
+				<a href="https://careers.assetwise.co.th/jobs/" class="bg-[var(--ci-veri-500)] hover:bg-[var(--ci-veri-300)] w-fit px-5 py-1 rounded text-white font-medium align-self-end"><?php pll_e('ดูตำแหน่งทั้งหมด') ?></a>
 			</div>
 		</div>
 	</div>
@@ -2093,10 +2064,6 @@ if ($f['featured_1']['is_open'] == 'open') {
 			width: 100%;
 		}
 
-		.sec-all-pro {
-			/*			padding-bottom: 3rem;*/
-		}
-
 		.txt-townhome {
 			padding-top: 1.25rem;
 			padding-bottom: 1.25rem;
@@ -2120,7 +2087,7 @@ if ($f['featured_1']['is_open'] == 'open') {
 	<img src="/wp-content/uploads/2022/11/leaves-shadow2-1.png" class="absolute pointer-events-none leaf10">
 	<div class="cont-pd text-center">
 		<div class="">
-			<div id="show_pro_foot" class="flex flex-row justify-center" style="">
+			<div id="show_pro_foot" class="flex flex-row justify-center">
 				<a id="txt_pro" onclick="show_allpro(-1)" class="btn cl-white b5 padding-xl-hzt">
 					<h6 class="f26-20"><?php pll_e('แสดงโครงการทั้งหมดของแอสเซทไวส์') ?></h6>
 

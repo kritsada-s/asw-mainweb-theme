@@ -2834,3 +2834,51 @@ function custom_login_logo() {
 }
 
 add_action('login_enqueue_scripts', 'custom_login_logo');
+
+function asw_front_page_scripts() {
+    if (is_front_page()) {
+        ?>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('Fetching jobs data...');
+                // Add your front page specific JavaScript code here
+                const myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                myHeaders.append("Authorization", "Bearer TcSUiv0UDb31Oyiy/9w+tyDcyYCwbIjhFCSufmpjFZAR9qLGXxADP3dK17ult9Ur56mHHsnooRRERRYX40bR+RUCpTPRUyhVTj0XYHVz0ZNR6KK/wI8uQQKx+hvDdf4cm9wLoglDQ92itnpc9wHiNFxGrbsssfHJPrzxxNDe5y8IOwIzOOqifFTGoESCQSTRXkdO7Tj+woTkLQYkMW2bdxK0McokHO6ZcVZAPPsDqLiriCkWS+ps4nGc0xJpjE9SVAxUkV+pNmAcUgmPXMTXtQ==");
+
+                const raw = JSON.stringify({
+                "companyID": "00000000-0000-0000-0000-000000000000",
+                "bConnectionID": "7B93F134-D373-4227-B5A6-6B619FF0E355",
+                "departmentName": "",
+                "jobPosition": "",
+                "perPage": 10,
+                "page": 1,
+                "total": 10,
+                "searchStr": "",
+                "urgently": true,
+                "announce": true,
+                "published": true
+                });
+
+                const requestOptions = {
+                method: "POST",
+                headers: myHeaders,
+                body: raw,
+                redirect: "follow"
+                };
+
+                fetch("https://aswservice.com/wrsapi/JobAnnouncement/JobAnnouncementsByPage", requestOptions)
+                .then((response) => response.json())
+                .then((result) => {
+                    //console.log(result.jobs);
+                    const jobsListElement = document.getElementById('wrs_jobs_list');
+                    jobsListElement.innerHTML = result.jobs.map(job => `<li><a href="https://careers.assetwise.co.th/jobs/?id=${job.jobID}" class="text-neutral-500 hover:text-neutral-900 cursor-pointer">${job.jobPosition}</a></li>`).join('');
+                })
+                .catch((error) => console.error(error));
+            });
+        </script>
+        <?php
+    }
+}
+add_action('wp_footer', 'asw_front_page_scripts');
+
