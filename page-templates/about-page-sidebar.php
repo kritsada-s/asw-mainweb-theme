@@ -48,19 +48,19 @@
   }
 </style>
 <section id="about-menu" class="lg:pl-6 lg:pb-10 about-page-sidebar">
-  <h1>รู้จักแอสเซทไวส์</h1>
+  <h1><?= pll__('รู้จักแอสเซทไวส์') ?></h1>
   <div id="menu-about" class="flex flex-row lg:flex-col side-nav-menu-about relative pt-5 md:pt-9 pb-2.5 lg:py-0 scroll-hid lg:mt-8">
     <div onclick="handle_about_menu(3)" class="about-menu px-0 lg:px-3 <?= $current_page === '20th-anniversary' ? 'font-medium about-active-menu-item' : '' ?>">
       20<sup>th</sup> Anniversary
     </div>
     <sp class="hidden lg:block" style="height: 1rem;"></sp>
     <div onclick="handle_about_menu(0)" class="about-menu px-0 lg:px-3 <?= $current_page === 'about-us' ? 'font-medium about-active-menu-item' : '' ?>">
-      เกี่ยวกับแอสเซทไวส์
+      <?= pll__('เกี่ยวกับแอสเซทไวส์') ?>
     </div>
     <sp class="hidden lg:block" style="height: 1rem;"></sp>
 
     <div onclick="handle_about_menu(1)" class="about-menu px-0 lg:px-3 <?= $current_page === 'award' ? 'font-medium about-active-menu-item' : '' ?>">
-      รางวัลและความสำเร็จ
+      <?= pll__('รางวัลและความสำเร็จ') ?>
     </div>
     <!-- <sp class="hidden lg:block" style="height: 1rem;"></sp>
 

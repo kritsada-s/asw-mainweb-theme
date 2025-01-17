@@ -75,7 +75,6 @@
 		}
 	}
 </style>
-
 	<?php 
 	$f = get_fields();
 	$slider = $f['banner']['home_banner'];
@@ -467,8 +466,6 @@
 	<style type="text/css">
 		/*-- Mobile Version --*/
 		@media (max-width: 1024px) {
-
-
 			#home-slider{
 				padding-top:100%;
 			}
@@ -581,13 +578,16 @@
 			<div id="about-asw" class="lg:col-span-9">
 				<div class="cont-pd">
 					<div class="flex flex-col justify-center">
-						<img src="https://assetwise.test/wp-content/uploads/2025/01/20th-logo.webp" class="w-3/5 mx-auto">
+						<div class="flex flex-row justify-center items-center">
+							<img src="/wp-content/uploads/2022/11/unnamed-file.png" class="relative m-0 mr-4" style="top:-17px;">
+							<div class="f40-30"><?php echo $f['first_quote'] ?></div>  
+							<img src="/wp-content/uploads/2022/11/1.png" class="relative m-0 ml-4" style="bottom:-12.5px;">
+						</div>
 						<sp class="l"></sp>
 						<div class="px-0 sm:px-12 lg:px-24 cl-ci-grey-300">
-							คือ หัวใจสำคัญที่บริษัท แอสเซทไวส์ จำกัด (มหาชน) ใช้ในการสร้างสรรค์และพัฒนาที่อยู่อาศัยที่ดีเพราะเราเชื่อว่าบ้านที่ดีคือจุดเริ่มต้นของความสุข
-							และความสำเร็จในชีวิต เราจึงค้นคว้า รับฟัง และทำความเข้าใจคนอยู่ให้มากที่สุด เพื่อพัฒนาโครงการที่เติมเต็มทุกความต้องการ ทั้งในวันนี้และวันข้างหน้า
-							ไม่ว่าจะเป็นการออกแบบที่สวยงาม โดดเด่น ฟังก์ชั่นและพื้นที่ใช้สอยที่คิดเผื่อรอบด้าน เทคโนโลยีแห่งอนาคตเพื่อความสะดวกยิ่งกว่า บริการที่เข้าใจและใส่ใจรวมถึงพื้นที่ส่วนกลางที่รองรับการใช้งานของคนทุกรุ่นทุกสไตล์
+							<?php echo $f['description'] ?>
 						</div>
+						<img src="https://dev.assetwise.co.th/wp-content/uploads/2025/01/20th-logo.webp" class="mx-auto w-3/4">
 						<sp class="vl"></sp>
 						<div class="">
 							<iframe width="800" height="430" src="https://www.youtube.com/embed/JjH1h6HP0R0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -595,7 +595,7 @@
 						<sp style="height: 90px;"></sp>
 						<div class="flex flex-row justify-center items-center">
 							<img src="/wp-content/uploads/2022/11/unnamed-file.png" class="relative m-0 mr-4" style="top:-40px;">
-							<h3 class="text-center f40-30">AssetWise การสร้างที่อยู่ที่ดีที่สุด <br class="hidden sm:block"> คือการรับฟังคนอยู่ให้มากที่สุด</h3>
+							<h3 class="text-center f40-30"><?= pll__('AssetWise การสร้างที่อยู่ที่ดีที่สุด<br class="hidden sm:block">คือการรับฟังคนอยู่ให้มากที่สุด') ?></h3>
 							<img src="/wp-content/uploads/2022/11/1.png" class="relative m-0 ml-4" style="bottom:-40px;">
 						</div>
 						<sp style="height: 87px;" ></sp>
@@ -606,24 +606,187 @@
 								height: 70%;
 							}
 						</style>
+						<style type="text/css">
+							.wavebar{
+								height: 100%;
+								/* background-color: yellow; */
+							}
+							[data-play="0"] .wavebar span{
+								animation-play-state: paused !important;
+							}
+							.wavebar span{
+								background-color: #1e9f9b;
+								height: 0;
+								width: 100%;
+								padding-top: 15%;
+								display: block;
+								margin: 0 auto 20%;
+								will-change: width;
+								border-radius: 3px;
+							}
+							.wavebar.wave-2 span{
+								background-color: #F1683B;
+							}
+							.wavebar span:nth-child(0){
+								/*		width: 30%;*/
+								animation:wavebar .6s 0s infinite alternate linear;
+							}
+							.wavebar span:nth-child(19),
+							.wavebar span:nth-child(1){
+								/*width: 50% !important;*/
+								animation:wavebar1 .6s -.9s infinite alternate linear;
+							}
+							.wavebar span:nth-child(18),
+							.wavebar span:nth-child(2){
+								/*width: 50% !important;*/
+								animation:wavebar2 .6s -.8s infinite alternate linear;
+							}
+							.wavebar span:nth-child(17),
+							.wavebar span:nth-child(3){
+								/*		width: 100%;*/
+								animation:wavebar3 .6s -.7s infinite alternate linear;
+							}
+							.wavebar span:nth-child(16),
+							.wavebar span:nth-child(4){
+								/*		width: 80%;*/
+								animation:wavebar4 .4s -.6s infinite alternate linear;
+							}
+							.wavebar span:nth-child(15),
+							.wavebar span:nth-child(5){
+								/*		width: 60%;*/
+								animation:wavebar5 .6s -.5s infinite alternate linear;
+							}
+							.wavebar span:nth-child(14),
+							.wavebar span:nth-child(6){
+								/*		width: 60%;*/
+								animation:wavebar6 .6s -.4s infinite alternate linear;
+							}
+							.wavebar span:nth-child(13),
+							.wavebar span:nth-child(7){
+								/*		width: 60%;*/
+								animation:wavebar7 .6s -.3s infinite alternate linear;
+							}
+							.wavebar span:nth-child(8){
+								/*		width: 60%;*/
+								animation:wavebar8 .5s -.2s infinite alternate linear;
+							}
+							.wavebar span:nth-child(9){
+								/*		width: 60%;*/
+								animation:wavebar9 .55s -.2s infinite alternate linear;
+							}
+							.wavebar span:nth-child(10){
+								/*		width: 60%;*/
+								animation:wavebar10 .6s -.2s infinite alternate linear;
+							}
+							.wavebar span:nth-child(11){
+								/*		width: 60%;*/
+								animation:wavebar11 .45s -.2s infinite alternate linear;
+							}
+							.wavebar span:nth-child(12){
+								/*		width: 60%;*/
+								animation:wavebar12 .4s -.2s infinite alternate linear;
+							}
+
+							@keyframes wavebar{
+								from{width:20%}
+								to{width:100%}
+							}
+							@keyframes wavebar1{
+								from{width:20%}
+								to{width:30%}
+							}
+							@keyframes wavebar2{
+								from{width:20%}
+								to{width:38%}
+							}
+							@keyframes wavebar3{
+								from{width:20%}
+								to{width:40%}
+							}
+							@keyframes wavebar4{
+								from{width:20%}
+								to{width:55%}
+							}
+							@keyframes wavebar5{
+								from{width:20%}
+								to{width:30%}
+							}
+							@keyframes wavebar6{
+								from{width:20%}
+								to{width:45%}
+							}
+							@keyframes wavebar7{
+								from{width:20%}
+								to{width:60%}
+							}
+							@keyframes wavebar8{
+								from{width:20%}
+								to{width:95%}
+							}
+							@keyframes wavebar9{
+								from{width:20%}
+								to{width:100%}
+							}
+							@keyframes wavebar10{
+								from{width:20%}
+								to{width:95%}
+							}
+							@keyframes wavebar11{
+								from{width:20%}
+								to{width:90%}
+							}
+							@keyframes wavebar12{
+								from{width:20%}
+								to{width:85%}
+							}
+
+
+							.paused {
+								animation-play-state: paused;
+							}
+
+						</style>
 						<div class="about-fung relative">
 							<?php
 							$v = get_fields();
 							foreach ($v['fearture_link'] as $key => $value){ 
 								if ($key % 2 == 0) { ?>
 									<div class="grid grid-flow-row md:grid-cols-12">
-										<div class="col-span-7 mr-9 flex flex-row gap-3">
-											<div class="gap-6 flex flex-col">
+										<div class="col-span-6 md:mr-9 flex flex-row gap-3">
+											<div class="gap-6 flex flex-col h-fit">
 												<div class="f40-36 cl-ci-blue-300" style="transform: rotate(-90deg);">
 													<?php
 													echo sprintf("%02d", $key+1);
 													?>
 												</div>
-												<img src="/wp-content/uploads/2022/12/Group-1088-1.png" class="about-line">
+												<!-- <img src="/wp-content/uploads/2022/12/Group-1088-1.png" class="about-line"> -->
+												<div class="wavebar wave-1">
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+												</div>
 											</div>
-											<div class="bg-cover blank" ratio="16:9" style="background-image: url('<?= $value['image']['url'] ?>');"></div>
+											<div>
+												<img src="<?= $value['image']['url'] ?>" class="">
+											</div>
 										</div>
-										<div class="col-span-5">
+										<div class="col-span-6 md:col-span-5">
 											<div class="pt-8">
 												<h3 class="f40-30"><?= $value['title'] ?></h3>
 												<sp style="height: 28px;" ></sp>
@@ -631,31 +794,61 @@
 											</div>
 										</div>
 									</div>
-									<sp style="height: 72px;" ></sp>
+									<sp class="h-[72px]"></sp>
 								<?php }
 								else{ ?>
-									<div class="grid grid-flow-row md:grid-cols-12">
-										<div class="md:col-span-1 lg:col-span-2"></div>
-										<div class="row-start-3 md:row-start-1 md:col-start-2 md:col-span-5 lg:col-start-3 lg:col-span-5">
-											<div class="pt-8 text-right">
+									<div class="grid grid-flow-row-reverse md:grid-flow-row md:grid-cols-12">
+										<div class="col-span-1 hidden md:flex"></div>
+										<div class="hidden md:flex col-span-6 md:col-span-5 md:mr-9 mb-[72px] md:mb-0">
+											<div class="pt-8">
 												<h3 class="f40-30"><?= $value['title'] ?></h3>
 												<sp style="height: 28px;" ></sp>
 												<span style="font-size: 22px;line-height: 28px;" class="cl-ci-grey-300"><?= $value['description'] ?></span>
 											</div>
 										</div>
-										<div class="md:col-start-7 md:col-span-6 lg:col-start-8 lg:col-span-5 ml-9 flex flex-row gap-3">
-											<div class="bg-cover blank" style="background-image: url('<?= $value['image']['url'] ?>');height: 100%;"></div>
-											<div class="gap-6 flex flex-col">
+										<div class="col-span-6 flex flex-row gap-3">
+											<div>
+												<img src="<?= $value['image']['url'] ?>" class="">
+											</div>
+											<div class="gap-6 flex flex-col h-fit">
 												<div class="f40-36 cl-ci-blue-300" style="transform: rotate(-90deg);">
 													<?php
 													echo sprintf("%02d", $key+1);
 													?>
 												</div>
-												<img src="/wp-content/uploads/2022/12/Group-1088-2.png" class="about-line">
+												<!-- <img src="/wp-content/uploads/2022/12/Group-1088-1.png" class="about-line"> -->
+												<div class="wavebar wave-2">
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+													<span></span>
+												</div>
+											</div>
+										</div>
+										<div class="flex md:hidden col-span-6 md:col-span-5 md:mr-9 mb-[72px] md:mb-0">
+											<div class="pt-8">
+												<h3 class="f40-30"><?= $value['title'] ?></h3>
+												<sp style="height: 28px;" ></sp>
+												<span style="font-size: 22px;line-height: 28px;" class="cl-ci-grey-300"><?= $value['description'] ?></span>
 											</div>
 										</div>
 									</div>
-									<sp style="height: 72px;" ></sp>
+									<sp class="h-0 md:h-20"></sp>
 								<?php }
 							}
 							?>
@@ -670,17 +863,6 @@
 							</h3>
 						</div>
 						<sp class="rem-6"></sp>
-						<hr class="bg-ci-grey-800">
-						<sp class="rem-5"></sp>
-						<!-- <sp class="l"></sp> -->
-						<h2 class="text-center f40-30">จรรยาบรรณธุรกิจ (Code of Conduct)</h2>
-						<sp class="vl"></sp>
-						<div class="md:px-20">
-							<div class="bg-cover blank" ratio="facebook" style="background-image: url('<?= $v['coc_image']['url'] ?>');"></div>
-						</div>
-						<sp class="rem-3"></sp>
-						<span class="cl-ci-grey-300 md:px-36"><?= $v['coc'] ?></span>
-						<sp class="vl"></sp>
 					</div>
 				</div>
 			</div>
@@ -775,7 +957,7 @@
 					<?php }
 					?>
 				</div>
-				<sp class="h-12 md:h-20" style=""></sp>
+				<sp class="h-12 md:h-20"></sp>
 			</div>
 
 			<div id="Modal-img" class="modal-img scroll-hid">
@@ -841,6 +1023,9 @@
 				<img src="/wp-content/uploads/2022/09/slide-arrow-r.png" class="absolute pointer hidden md:block arrow-r" onclick="plusSlides(1)">
 			</div>
 		</div>
+	</div>
+	<div id="project_listed_2th">
+		<?php get_template_part('template-parts/all-projects-section'); ?>
 	</div>
 </section>
 
@@ -1050,8 +1235,29 @@
 		document.querySelector('#about-info-section').scrollIntoView({
 			behavior: 'smooth'
 		});
-
-
 	}
+
+	function checkWaveScroll(){
+		let headerHeight = document.querySelector('#masthead').offsetHeight
+		let miniSec = document.querySelectorAll('.about-mini-section')
+		let windowHeight = window.innerHeight
+		for(let i of miniSec){
+			let thisRect = i.getBoundingClientRect()
+			if (thisRect.y<headerHeight) {
+				i.dataset.play = 0
+			}else{
+				i.dataset.play = 1
+			}
+
+			if (thisRect.y<=windowHeight-100) {
+				i.dataset.show = 1
+			}
+		}
+	}
+
+	window.onscroll = ()=>{
+		checkWaveScroll()
+	}
+	checkWaveScroll()
 
 </script>
