@@ -264,6 +264,7 @@ function seed_scripts()
 
     wp_enqueue_script('s-scripts', get_theme_file_uri('/js/scripts.js'), array(), filemtime(get_theme_file_path('/js/scripts.js')), true);
     wp_enqueue_script('s-vanilla', get_theme_file_uri('/js/main-vanilla.js'), array(), filemtime(get_theme_file_path('/js/main-vanilla.js')), true);
+    wp_localize_script( 's-scripts', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
 
     if ($GLOBALS['s_jquery'] == 'enable') {
         wp_enqueue_script('s-jquery', get_theme_file_uri('/js/main-jquery.js'), array('jquery'), filemtime(get_theme_file_path('/js/main-jquery.js')), true);
@@ -2279,7 +2280,9 @@ function wpa_promotion_post_link( $post_link, $id = 0 ){
             if ($parent) {
                 $parent_ID = $parent->ID;
                 $parent_terms = wp_get_object_terms( $parent_ID, 'promotion_type' );
-                return str_replace( '%promotion_type%' , $parent_terms[0]->slug , $post_link );
+                if (count($parent_terms) > 0) {
+                    return str_replace( '%promotion_type%' , $parent_terms[0]->slug , $post_link );
+                }
             }
         }
     }
@@ -2887,3 +2890,5 @@ function asw_front_page_scripts() {
     }
 }
 add_action('wp_footer', 'asw_front_page_scripts');
+
+include_once(get_template_directory() . '/inc/api.php');

@@ -289,7 +289,6 @@ if (str_contains($_SERVER['REQUEST_URI'], 'condominium')) {
     }
 </script> 
 
-
 <header id="masthead" class="site-header _heading fixed whitespace-nowrap" style="z-index: 9999;">
     <div class="container mx-auto" style="padding-left: 0;padding-right: 0;">
         <div class="grid grid-cols-12 md:gap-4 w-full header-layout">
@@ -297,7 +296,7 @@ if (str_contains($_SERVER['REQUEST_URI'], 'condominium')) {
             <div class="col-span-6 xl:col-span-9 flex items-center relative site-left-bar">
                 <div class="site-branding">
                     <a href="<?php echo home_url(); ?>" class="logo_lang- logo-hide-cont-left-">
-                        <img src="/wp-content/uploads/2023/05/CleanShot-2566-05-08-at-04.57.00@2x.png">
+                    <img src="https://assetwise.co.th/wp-content/uploads/2025/05/logo-hr-02.svg" alt="AssetWise" style="width: 186px;">
                     </a>
                     <div class="grid grid-flow-col gap-4" id="header-nav-items">
                         <nav id="site-navigation" class="site-nav-d _desktop txt-menu dbfon" style="font-weight: 400;">
@@ -308,7 +307,7 @@ if (str_contains($_SERVER['REQUEST_URI'], 'condominium')) {
             </div>
             <div class="col-span-6 xl:col-span-3 text-right flex items-center site-right-bar justify-end -pl-12">
                 <div class="site-tools flex flex-row items-center gap-4 xl:gap-5">
-                    <div class="flex flex-row items-center change-lang pointer" data-lang-count="1" style="-margin-right: 10px;">
+                    <div class="flex flex-row items-center change-lang pointer" data-lang-count="1">
                         <div class="-h-lang-this-lang">
                             <img src="/wp-content/themes/seed-spring/img/th.png" alt="ไทย" />
                             <h6 class="inline-block site-lang-txt">ไทย</h6>

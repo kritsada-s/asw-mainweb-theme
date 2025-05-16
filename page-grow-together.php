@@ -1,10 +1,10 @@
 <?php 
-get_header();
-
-// wp_enqueue_script('momentjs-min', 'https://cdn.jsdelivr.net/momentjs/latest/moment.min.js', array(), '', true);
-// wp_enqueue_script('datepickerjs-min', 'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js', array(), '', true);
-// wp_enqueue_style('datepickercss', 'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css', array(), '', 'all');
-
+get_header(); 
+wp_enqueue_script('momentjs-min', 'https://cdn.jsdelivr.net/momentjs/latest/moment.min.js', array(), '', array('strategy' => 'defer'));
+wp_enqueue_script('datepickerjs-min', 'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js', array(), '', array('strategy' => 'defer'));
+wp_enqueue_style('datepickercss', 'https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css', array(), '', 'all');
+wp_enqueue_script('swal', 'https://cdn.jsdelivr.net/npm/sweetalert2@11', array(), '', array('strategy' => 'defer'));
+$image_path = 'https://assetwise.co.th/wp-content/themes/seed-spring/img/asw-club-grow-together';
 ?>
 
 <style>
@@ -17,6 +17,7 @@ get_header();
   }
   #form input, #form textarea {
     background-color: #fff;
+    font-size: 22px;
     border: none;
     border-radius: 5px;
     width: 100%;
@@ -24,7 +25,7 @@ get_header();
   }
   #form {
     background: #aecab8;
-    background-image: url('https://assetwise.test/wp-content/uploads/2025/04/bg-02-3.png');
+    background-image: url('<?php echo $image_path ?>/bg-02-3.png');
     background-size: 100% 100%;
     background-position: center bottom;
     background-repeat: no-repeat;
@@ -41,8 +42,12 @@ get_header();
     border-radius: 5px;
     padding: 10px 20px;
   }
+  #form #submit:disabled {
+    background-color: #ccc;
+    color: #fff;
+  }
   #info {
-    background-image: url('https://assetwise.test/wp-content/uploads/2025/04/bg-01-2.png');
+    background-image: url('<?php echo $image_path ?>/bg-01-2.png');
     background-size: 100% 100%;
     background-position: center bottom;
     background-repeat: no-repeat;
@@ -51,27 +56,48 @@ get_header();
     align-items: center;
   }
 
+  .swal2-container .swal2-html-container {
+    font-size: 24px;
+    padding-top: 10px;
+  }
+
+  .swal2-container .swal2-confirm {
+    background-color: var(--btn-bg);
+    color: #032855;
+    font-size: 24px;
+    padding: 5px 10px;
+    width: 100px;
+  }
+
+  .daterangepicker .prev, .daterangepicker .next {
+    position: relative;
+  }
+  .daterangepicker .drp-buttons button.btn {
+    color: #032855;
+    font-size: 24px;
+  }
+
   @media screen and (max-width: 520px) {
     #info {
-      background-image: url('https://assetwise.test/wp-content/uploads/2025/04/bg-info-m-2.png');
+      background-image: url('<?php echo $image_path ?>/bg-info-m-2.png');
       padding-bottom: 2rem;
     }
     #form {
       padding: 20px 0 60px;
-      background-image: url('https://assetwise.test/wp-content/uploads/2025/04/bg-form-m-2.png');
+      background-image: url('<?php echo $image_path ?>/bg-form-m-2.png');
     }
   }
 </style>
 
 <section id="heroBanner">
-  <img src="https://assetwise.test/wp-content/uploads/2025/04/asw-club_grow-together_desktop_banner.jpg" alt="Grow Together" class="img-fluid hidden md:block">
-  <img src="https://assetwise.test/wp-content/uploads/2025/04/asw-club_grow-together_mobile_banner.jpg" alt="Grow Together" class="img-fluid md:hidden">
+  <img src="<?php echo $image_path ?>/asw-club_grow-together_desktop_banner.jpg" alt="Grow Together" class="img-fluid hidden md:block">
+  <img src="<?php echo $image_path ?>/asw-club_grow-together_mobile_banner.jpg" alt="Grow Together" class="img-fluid md:hidden">
 </section>
 
 <section id="info" class="py-20">
   <div class="container mx-auto px-4 lg:px-0">
-    <img src="https://assetwise.test/wp-content/uploads/2025/04/aswVlub_grow-together-benefit_d.png" alt="" class="hidden md:block">
-    <img src="https://assetwise.test/wp-content/uploads/2025/04/aswClub_grow-together-benefit_m.png" alt="" class="md:hidden">
+    <img src="<?php echo $image_path ?>/aswClub_grow-together-benefit_d.png" alt="" class="hidden md:block">
+    <img src="<?php echo $image_path ?>/aswClub_grow-together-benefit_m.png" alt="" class="md:hidden">
   </div>
 </section>
 
@@ -81,21 +107,21 @@ get_header();
       <h2 class="text-white text-center font-medium text-[48px]">ลงทะเบียนร้านค้า</h2>
     </div>
     <div class="col-12 lg:w-3/5 mx-auto">
-      <form action="" class="grid grid-cols-1 lg:grid-cols-2 gap-x-0 md:gap-x-4 gap-y-5">
+      <form method="POST" action="" class="grid grid-cols-1 lg:grid-cols-2 gap-x-0 md:gap-x-4 gap-y-5">
         <div class="form-group col-span-2">
-          <label for="shopName">ชื่อร้านค้า <span>*</span></label>
-          <input type="text" class="form-control" id="shopName" name="shopName">
+          <label for="shopName">ชื่อร้านค้า <span class="text-red-500" style="font-size: 32px;">*</span></label>
+          <input type="text" class="form-control" id="shopName" name="shopName" required>
         </div>
         <div class="form-group col-span-2 md:col-span-1">
-          <label for="contactNumber">เบอร์ติดต่อ <span class="text-red-500">*</span></label>
-          <input type="text" class="form-control" id="contactNumber" name="contactNumber" placeholder="089-999-9999">
+          <label for="contactNumber">เบอร์ติดต่อ <span class="text-red-500" style="font-size: 32px;">*</span></label>
+          <input type="tel" class="form-control" id="contactNumber" name="contactNumber" placeholder="089-999-9999" required pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
         </div>
         <div class="form-group col-span-2 md:col-span-1">
-          <label for="email">อีเมล <span class="text-red-500">*</span></label>
-          <input type="text" class="form-control" id="email" name="email" placeholder="example@gmail.com">
+          <label for="email">อีเมล <span class="text-red-500" style="font-size: 32px;">*</span></label>
+          <input type="text" class="form-control" id="email" name="email" placeholder="example@gmail.com" required>
         </div>
         <div class="form-group col-span-2">
-          <label for="address">ที่อยู่ร้านค้า <span class="text-red-500">*</span></label>
+          <label for="address">ที่อยู่ร้านค้า</label>
           <input type="text" class="form-control" id="address" name="address">
         </div>
         <div class="form-group col-span-2">
@@ -117,10 +143,60 @@ get_header();
     </div>
   </div>
 </section>
-<!-- <script>
-  $(document).ready(function() {
-    console.log('ready');
-    $('input[name="promotionPeriod"]').daterangepicker();
+<script>
+  jQuery(document).ready( function($){
+    let promotionPeriod = jQuery('input[name="promotionPeriod"]');
+    promotionPeriod.daterangepicker();
+
+    jQuery('form').on('submit', function(e){
+      e.preventDefault();
+      let formData = jQuery(this).serialize();
+      let utm_source = window.location.search.split('utm_source=')[1];
+      let utm_medium = window.location.search.split('utm_medium=')[1];
+      let utm_campaign = window.location.search.split('utm_campaign=')[1];
+      let utm_content = window.location.search.split('utm_content=')[1];
+      let utm_term = window.location.search.split('utm_term=')[1];
+
+      formData += '&utm_source='+utm_source;
+      formData += '&utm_medium='+utm_medium;
+      formData += '&utm_campaign='+utm_campaign;
+      formData += '&utm_content='+utm_content;
+      formData += '&utm_term='+utm_term;
+
+      jQuery.ajax({
+        url: ajaxurl,
+        type: 'POST',
+        data: formData+'&action=handle_grow_together_form',
+        dataType: 'json',
+        beforeSend: function() {
+          jQuery('#submit').prop('disabled', true);
+          jQuery('#submit').html('กำลังส่งข้อมูล...');
+        },
+        success: function(response) {
+          Swal.fire({
+            title: 'SUCCESS',
+            text: 'ลงทะเบียนร้านค้าเรียบร้อย',
+            icon: 'success',
+            confirmButtonText: 'ตกลง',
+            confirmButtonColor: '#FFCA5F'
+          });
+          jQuery('#submit').prop('disabled', false);
+          jQuery('#submit').html('ส่งข้อมูล');
+        },
+        error: function() {
+          Swal.fire({
+            title: 'ERROR',
+            text: 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง',
+            icon: 'error',
+            confirmButtonText: 'ตกลง',
+            confirmButtonColor: '#FFCA5F'
+          });
+          jQuery('#submit').prop('disabled', false);
+          jQuery('#submit').html('ส่งข้อมูล');
+        }
+      });
+    });
+    
   });
-</script> -->
+</script>
 <?php get_footer() ?>

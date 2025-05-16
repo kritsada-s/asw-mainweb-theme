@@ -188,7 +188,7 @@
 					<div>
 						<img class="promo-leaf01" src="/wp-content/uploads/2022/11/shutterstock_1574382076-1.png">
 					</div>
-					<h1>โครงการที่เข้าร่วม</h1>
+					<h1><?php pll_e('โครงการที่เข้าร่วม')?></h1>
 					<sp style="height: 52px;" ></sp>
 					<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 						<?php

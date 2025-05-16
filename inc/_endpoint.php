@@ -7,80 +7,13 @@ do_action('qm/debug', 'API Endpoint Loaded');
 function get_project_brand($post_id) {
   $query = get_the_terms($post_id, 'project-type');
   $brand = [];
-  $brand_th = '';
-  $brand_en = '';
   if ($query) {
       foreach ($query as $term) {
           if ($term->parent != 0) {
-            switch ($term->slug) {
-              case 'atmozcondo':
-                $brand_th = 'แอทโมซ คอนโด';
-                $brand_en = 'Atmoz Condo';
-                break;
-              case 'kave':
-                $brand_th = 'เคฟ คอนโด';
-                $brand_en = 'Kave Condo';
-                break;
-              case 'modiz':
-                $brand_th = 'โมดิซ คอนโด';
-                $brand_en = 'Modiz Condo';
-                break;
-              case 'kavalon':
-                $brand_th = 'เควาลอน';
-                $brand_en = 'Kavalon';
-                break;
-              case 'aquarous-jomtien-pattaya':
-                $brand_th = 'อะควาเรียส จอมเทียน พัทยา';
-                $brand_en = 'Aquarous Jomtien Pattaya';
-                break;
-              case 'brown':
-                $brand_th = 'บราวน์ คอนโด';
-                $brand_en = 'Brown Condo';
-                break;
-              case 'ivory':
-                $brand_th = 'ไอเวอร์รี่';
-                $brand_en = 'Ivory';
-                break;
-              case 'maxxi-prime':
-                $brand_th = 'แม็กซ์ซี่ ไพร์ม';
-                $brand_en = 'Maxxi Prime';
-                break;
-              case 'maroonratchada32':
-                $brand_th = 'มารูน รัชดา 32';
-                $brand_en = 'Maroon Ratchada 32';
-                break;
-              case 'chann':
-                $brand_th = 'ฌาณ';
-                $brand_en = 'Chann';
-                break;
-              case 'baan-puripuri':
-                $brand_th = 'บ้านปุริปุริ';
-                $brand_en = 'Baan Puripuri';
-                break;
-              case 'esta':
-                $brand_th = 'เอสต้า';
-                $brand_en = 'Esta';
-                break;
-              case 'glam':
-                $brand_th = 'แกลม';
-                $brand_en = 'Glam';
-                break;
-              case 'the-arbor':
-                $brand_th = 'ดิ อาเบอร์';
-                $brand_en = 'The Arbor';
-                break;
-              case 'the-honor-house':
-                $brand_th = 'ดิ ออเนอร์';
-                $brand_en = 'The Honor';
-              default:
-                $brand_th = 'อื่น ๆ';
-                $brand_en = 'Other';
-                break;
-            }
-            $brand = array(
-                'th' => $brand_th,
-                'en' => $brand_en
-            );
+              $brand[] = array(
+                  'name' => $term->name,
+                  'key' => $term->slug
+              );
           }
       }
   }
@@ -162,26 +95,7 @@ function get_location_by_post_id($post_id) {
           }
       }
   }
-  return $location[0];
-}
-
-// =======================================================
-// Process Project Coordinates
-// =======================================================
-function get_project_coordinates($post_id) {
-  $coordinates = get_field('coordinates', $post_id);
-  if ($coordinates) {
-    $latlong = explode(',', $coordinates);
-    return array(
-      'latitude' => $latlong[0],
-      'longitude' => $latlong[1]
-    );
-  } else {
-    return array(
-      'latitude' => '13.877243574729327',
-      'longitude' => '100.61954961125954'
-    );
-  }
+  return $location;
 }
 
 add_filter('acf/rest_api/field_objects/prepare_field', function($field) {
@@ -434,15 +348,23 @@ function get_projects($request) {
         'brand_icon' => $logo,
         'status' => $status,
         'utm_source' => 'asw-app_register',
-        'project_code' => $fields['project_code'],
-        'cis_project_id' => (int)$fields['project_id'],
-        'brand_name' => get_project_brand($post_id),
-        'location' => get_location_by_post_id($post_id),
-        'price' => $fields['price'],
-        'coordinates' => get_project_coordinates($post_id),
+        'project_code' => (int)$fields['project_id'],
+        'brand_name' => array(
+          'th' => '',
+          'en' => ''
+        ),
+        'location' => array(
+          'th' => '',
+          'en' => ''
+        ),
+        'price' => '',
+        'coordinates' => array(
+          'latitude' => '',
+          'longitude' => ''
+        ),
         'address' => array(
-          'th' => $fields['project_address'],
-          'en' => get_trans_term($fields['project_address'], 'en')
+          'th' => '',
+          'en' => ''
         )
       );
     }
@@ -473,14 +395,38 @@ add_action('rest_api_init', function () {
   ));
 });
 
+add_action('rest_api_init', function () {
+  register_rest_route('wp/v2', '/project-test/(?P<id>[0-9]+)', array(
+      'methods' => 'GET',
+      'callback' => 'get_specific_project_test',
+      'permission_callback' => '__return_true',
+      'args' => array(
+          'id' => array(
+              'required' => true,
+              'validate_callback' => function($param) {
+                  return is_numeric($param);
+              }
+          )
+      )
+  ));
+});
+
 function process_progress_gallery($content) {
   $processed_content = array();
-  if (is_array($content)) {
-    if (isset($content) && count($content) > 0) {
+  if (isset($content) && count($content) > 0) {
       foreach ($content as $image) {
-        $processed_content[] = $image['url'];
+          $processed_content[] = $image['url'];
       }
-    }
+  }
+  return $processed_content;
+}
+
+function process_gallery_fields($content) {
+  $processed_content = array();
+  if (isset($content['gallery']) && count($content['gallery']) > 0) {
+      foreach ($content['gallery'] as $image) {
+          $processed_content[] = $image['url'];
+      }
   }
   return $processed_content;
 }
@@ -522,151 +468,328 @@ function process_house_plan_fields($content) {
   return $processed_content;
 }
 
-function processed_project_contents($fields, $content_layout_key, $post_type) {
-  // Get content fields
-  $all_fields = [];
-  $processed_project_content = [];
-
-  if (isset($fields[$content_layout_key]) && is_array($fields[$content_layout_key])) {
-    $all_fields = $fields[$content_layout_key];
+function process_content_by_layout($content, $post_type) {
+  if (!isset($content['acf_fc_layout'])) {
+      return $content;
   }
 
-  // foreach ($all_fields as $section) {
-  //   var_dump($section['acf_fc_layout']);
-  // }
+  $processed_content = array();
+  
+  // Base content fields that all layouts share
+  $processed_content['layout'] = $content['acf_fc_layout'];
+  //$processed_content['is_show'] = isset($content['is_show']) ? $content['is_show'] : null;
 
-  $processed_project_content['progress'] = [];
-  $processed_project_content['brochure'] = '';
-  $processed_project_content['nearbyPlaces'] = [];
-  $processed_project_content['google_maps'] = '';
-  $processed_project_content['gallery'] = [];
-  $processed_project_content['plans'] = [];
-  $processed_project_content['videos'] = [];
-
-  foreach ($all_fields as $section) {
-    switch ($section['acf_fc_layout']) {
-      case 'project_information':
-
-        if ($section['more_information'] !== false) {
-          $processed_project_content['brochure'] = $section['more_information']['url'];
-        }
-
-        if((int)$section['percent'] > 0 && $section['hide-progress'] !== 'hide') {
-          $processed_project_content['progress'] = array(
-            'updatedDate' => date('Y-m-d\TH:i:s', strtotime('first day of this month')),
-            'overall' => (int)$section['percent'] ?? 0,
-            'progressListed' => $section['progress_list'] ?? [],
-            'progressImages' => process_progress_gallery($section['image']) ?? [],
+  // Process specific layout types
+  switch ($content['acf_fc_layout']) {
+      case 'banner':
+          $processed_content['banner_fields'] = array(
+              'desktop' => isset($content['banner']) ? $content['banner']['url'] : null,
+              'mobile' => isset($content['banner_mobile']) ? $content['banner_mobile']['url'] : null,
           );
-        }
-        break;
-
-      case 'location':
-        if (isset($section['nearby_place']) && is_array($section['nearby_place'])) {
-          foreach ($section['nearby_place'] as $tab) {
-            $tabname = $tab['tab_name'];
-            foreach ($tab['place'] as $place) {
-              $processed_project_content['nearbyPlaces'][] = array(
-                'group' => $tabname,
-                'name' => $place['place_name'],
-                'distance' => $place['distance']
+          break;
+      case 'project_information':
+          if ($content['hide-progress'] !== 'hide') {
+              $processed_content['project_information_fields'] = array(
+                  'e-brochure' => $content['more_information']['url'] !== '' ? $content['more_information']['url'] : null,
+                  'overall_text' => isset($content['overall']) ? $content['overall'] : '',
+                  'percent' => isset($content['percent']) ? $content['percent'] : '',
+                  'progress_listed' => isset($content['progress_list']) ? $content['progress_list'] : [],
+                  'progress_gallery' => isset($content['image']) && count($content['image']) > 0 ? process_progress_gallery($content['image']) : [],
               );
-            }
+          } else {
+              $processed_content['project_information_fields'] = null;
           }
-        }
-        $processed_project_content['google_maps'] = $section['google_maps'];
-        break;
-
+          break;
       case 'gallery':
-        if (count($section['gallery']) > 0) {
-          foreach ($section['gallery'] as $image) {
-            array_push($processed_project_content['gallery'], $image['url']);
-          }
-        }
-        break;
-
+          $processed_content['gallery_fields'] = process_gallery_fields($content);
+          break;
       case 'plan':
-        if ($post_type === 'condominium') {
-          foreach ($section['plan'] as $tab) {
-            if ($tab['tab_name'] && (stripos($tab['tab_name'], 'unit') !== false || stripos($tab['tab_name'], 'ห้อง') !== false)) {
-              foreach ($tab['building'] as $building) {
-              foreach ($building['floor'] as $floor) {
-                array_push($processed_project_content['plans'], array(
-                  'name' => $floor['floor_name'],
-                  'image' => $floor['floor_image']['url']
-                  ));
-                }
-              }
-            }
+          if ($post_type === 'condominium') {
+              $processed_content['unit_plan_fields'] = array(
+                  'type' => $post_type,
+                  'plan_listed' => process_plan_fields($content)
+              );
+          } else {
+              $processed_content['unit_plan_fields'] = array(
+                  'type' => $post_type,
+                  'plan_listed' => process_house_plan_fields($content)
+              );
           }
-        } else {
-          $processed_project_content['plans'] = process_house_plan_fields($section);
-        }
-        break;
-      case 'video':
-        foreach ($section['tab'] as $tab) {
-          if ($tab['video']) {
-            $url = explode('/', $tab['video'][0]['video_url'])[count(explode('/', $tab['video'][0]['video_url'])) - 1];
-            if (!strpos($url, 'youtube')) {
-              $url = 'https://www.youtube.com/embed/' . $url;
-            }
-            array_push($processed_project_content['videos'], array(
-              'title' => $tab['tab_name'],
-              'url' => $url
-            ));
-          }
-        }
-        break;
-    }
+          break;
+      case 'location':
+          $processed_content['location_fields'] = array(
+              'google_map' => isset($content['google_maps']) ? $content['google_maps'] : null,
+          );
+          break;
+      default:
+          break;
   }
 
-  return $processed_project_content;
+  return $processed_content;
 }
 
 function get_specific_project($request) {
-  $id = (int)$request['id'];
-  $lang = pll_get_post_language($id);
-  $content_layout_key = 'v2_content';
+  $th_id = (int)$request['id'];
+  $en_id = pll_get_post($th_id, 'en');
 
-  $fields = get_fields($id);
-
-  // Get Project Coordinates
-  if (isset($fields['coordinates']) && count(explode(',', $fields['coordinates'])) > 1) {
-    $coordinates = explode(',', str_replace(' ', '', $fields['coordinates']));
-  } else {
-    $coordinates = ['13.877243574729327', '100.61954961125954'];
-  }
-
-  // Get Project Address
-  if (isset($fields['project_address']) && $fields['project_address'] !== '') {
-    $address = $fields['project_address'];
-  } else {
-    $address = '9 Ram Intra 5 Alley, Lane 23, Anusawari, Bang Khen, Bangkok 10220';
-  }
-
-  $processed_project_content = processed_project_contents($fields, $content_layout_key, get_post_type($id));
-
-  $project_data = array(
-    'profileImage' => get_the_post_thumbnail_url($id, 'full'),
-    'name' => get_the_title($id),
-    'description' => $fields['project_short_description'] ?? 'AssetWise | High-Quality Homes and Condominiums',
-    'progress' => $processed_project_content['progress'],
-    'location' => array(
-      'latitude' => $coordinates[0],
-      'longitude' => $coordinates[1],
-      'address' => $address,
-      'mapUrl' => $processed_project_content['google_maps']
-    ),
-    'nearbyLocations' => $processed_project_content['nearbyPlaces'] ?? [],
-    'plans' => $processed_project_content['plans'] ?? [],
-    'gallery' => $processed_project_content['gallery'],
-    'brochure' => $processed_project_content['brochure'] ?? '',
-    'videos' => $processed_project_content['videos'] ?? [],
-    'webLink' => get_permalink($id),
-    'utm_source' => 'asw-app_register'
+  $args = array(
+    'post_type' => array('house', 'condominium'),
+    'post__in' => [$th_id, $en_id],
+    'post_status' => 'publish',
   );
 
-  return rest_ensure_response($project_data);
+  $id = array(
+    'th' => $th_id,
+    'en' => $en_id
+  );
+
+  $query = new WP_Query($args);
+
+  foreach ($query->posts as $post) {
+    $post_id = $post->ID;
+    
+    // Get ACF fields
+    $fields = get_fields($post_id);
+    $post_type = get_post_type($post_id);
+    $status_terms = get_the_terms($post_id, 'project_status');
+    $status = $status_terms ? $status_terms[0]->slug : null;
+
+    // Process content layouts
+    $processed_content = array();
+    
+    // Define content layout key based on URL
+    $content_layout_key = (strpos($_SERVER['HTTP_HOST'], 'assetwise.co.th') !== false) ? 'v2_content' : 'content';
+    
+    // Get content fields
+    $all_fields = [];
+    if (isset($fields[$content_layout_key]) && is_array($fields[$content_layout_key])) {
+        $all_fields = $fields[$content_layout_key];
+    }
+
+    foreach ($all_fields as $section) {
+        switch ($section['acf_fc_layout']) {
+            case 'project_information':
+                //$processed_content['project_information_fields'] = $section;
+                $processed_content['brochure'] = $section['more_information']['url'];
+                $processed_content['progress'] = array(
+                    'updatedDate' => date('Y-m-d\TH:i:s', strtotime('first day of this month')),
+                    'overall' => (int)$section['percent'],
+                    'progressListed' => $section['progress_list'],
+                    'progressImages' => process_progress_gallery($section['image']),
+                );
+                break;
+            case 'location':
+                $processed_content['nearbyPlaces'] = [];
+                // foreach ($section['nearby_place'] as $tab) {
+                //     $tabname = $tab['tab_name'];
+                //     foreach ($tab['place'] as $place) {
+                //         $processed_content['nearbyPlaces'][] = array(
+                //             'group' => $tabname,
+                //             'name' => $place['place_name'],
+                //             'distance' => $place['distance']
+                //         );
+                //     }
+                // }
+                $processed_content['google_maps'] = $section['google_maps'];
+                break;
+            case 'gallery':
+                $processed_content['gallery_fields'] = $section;
+                break;
+            // case 'plan':
+            //     $processed_content['plans'] = [];
+            //     foreach ($section['plan'] as $tab) {
+            //         if ($tab['tab_name'] && (stripos($tab['tab_name'], 'unit') !== false || stripos($tab['tab_name'], 'ห้อง') !== false)) {
+            //             foreach ($tab['building'] as $building) {
+            //                 foreach ($building['floor'] as $floor) {
+            //                     array_push($processed_content['plans'], array(
+            //                         'name' => $floor['floor_name'],
+            //                         'image' => $floor['floor_image']['url']
+            //                     ));
+            //                 }
+            //             }
+            //         }
+            //     }
+            //     break;
+            case 'video':
+                $processed_content['videos'] = [];
+                foreach ($section['tab'] as $tab) {
+                    if ($tab['video']) {
+                        $url = explode('/', $tab['video'][0]['video_url'])[count(explode('/', $tab['video'][0]['video_url'])) - 1];
+                        if (!strpos($url, 'youtube')) {
+                            $url = 'https://www.youtube.com/embed/' . $url;
+                        }
+                        array_push($processed_content['videos'], array(
+                            'title' => $tab['tab_name'],
+                            'url' => $url
+                        ));
+                    }
+                }
+                break;
+        }
+    }
+
+    // Prepare Content
+
+    // Build response
+    $project = array(
+        'profileImage' => get_the_post_thumbnail_url($post_id, 'full'),
+        'name' => get_the_title($post_id),
+        'lang' => pll_get_post_language($post_id),
+        'description' => get_the_excerpt() ? get_the_excerpt() : '',
+        'progress' => $processed_content['progress'],
+        'location' => array(
+            'latitude' => '',
+            'longitude' => '',
+            'address' => '',
+            'mapUrl' => $processed_content['google_maps']
+        ),
+        // 'nearbyLocations' => $processed_content['nearbyPlaces'],
+        // 'plans' => $processed_content['plans'],
+        'nearbyLocations' => [],
+        'plans' => [],
+        'gallery' => process_gallery_fields($processed_content['gallery_fields']),
+        'brochures' => $processed_content['brochure'],
+        'videos' => $processed_content['videos']
+    );
+    
+    wp_reset_postdata();
+    //array_push($data, $project);
+  }
+
+  return rest_ensure_response($project);
+  
+  return new WP_Error('no_project', 'Project not found', array('status' => 404));
+}
+
+function get_specific_project_test($request) {
+  $th_id = (int)$request['id'];
+  $en_id = pll_get_post($th_id, 'en');
+
+  $args = array(
+    'post_type' => array('house', 'condominium'),
+    'post__in' => [$th_id, $en_id],
+    'post_status' => 'publish',
+  );
+
+  $id = array(
+    'th' => $th_id,
+    'en' => $en_id
+  );
+
+  $query = new WP_Query($args);
+
+  foreach ($query->posts as $post) {
+    $post_id = $post->ID;
+    
+    // Get ACF fields
+    $fields = get_fields($post_id);
+    $post_type = get_post_type($post_id);
+    $status_terms = get_the_terms($post_id, 'project_status');
+    $status = $status_terms ? $status_terms[0]->slug : null;
+
+    // Process content layouts
+    $processed_content = array();
+    
+    // Define content layout key based on URL
+    $content_layout_key = (strpos($_SERVER['HTTP_HOST'], 'assetwise.co.th') !== false) ? 'v2_content' : 'content';
+    
+    // Get content fields
+    $all_fields = [];
+    if (isset($fields[$content_layout_key]) && is_array($fields[$content_layout_key])) {
+        $all_fields = $fields[$content_layout_key];
+    }
+
+    foreach ($all_fields as $section) {
+        switch ($section['acf_fc_layout']) {
+            case 'project_information':
+                //$processed_content['project_information_fields'] = $section;
+                $processed_content['brochure'] = $section['more_information']['url'];
+                $processed_content['progress'] = array(
+                    'updatedDate' => date('Y-m-d\TH:i:s', strtotime('first day of this month')),
+                    'overall' => (int)$section['percent'],
+                    'progressListed' => $section['progress_list'],
+                    'progressImages' => process_progress_gallery($section['image']),
+                );
+                break;
+            case 'location':
+                $processed_content['nearbyPlaces'] = [];
+                // foreach ($section['nearby_place'] as $tab) {
+                //     $tabname = $tab['tab_name'];
+                //     foreach ($tab['place'] as $place) {
+                //         $processed_content['nearbyPlaces'][] = array(
+                //             'group' => $tabname,
+                //             'name' => $place['place_name'],
+                //             'distance' => $place['distance']
+                //         );
+                //     }
+                // }
+                $processed_content['google_maps'] = $section['google_maps'];
+                break;
+            case 'gallery':
+                $processed_content['gallery_fields'] = $section;
+                break;
+            // case 'plan':
+            //     $processed_content['plans'] = [];
+            //     foreach ($section['plan'] as $tab) {
+            //         if ($tab['tab_name'] && (stripos($tab['tab_name'], 'unit') !== false || stripos($tab['tab_name'], 'ห้อง') !== false)) {
+            //             foreach ($tab['building'] as $building) {
+            //                 foreach ($building['floor'] as $floor) {
+            //                     array_push($processed_content['plans'], array(
+            //                         'name' => $floor['floor_name'],
+            //                         'image' => $floor['floor_image']['url']
+            //                     ));
+            //                 }
+            //             }
+            //         }
+            //     }
+            //     break;
+            case 'video':
+                $processed_content['videos'] = [];
+                foreach ($section['tab'] as $tab) {
+                    if ($tab['video']) {
+                        $url = explode('/', $tab['video'][0]['video_url'])[count(explode('/', $tab['video'][0]['video_url'])) - 1];
+                        if (!strpos($url, 'youtube')) {
+                            $url = 'https://www.youtube.com/embed/' . $url;
+                        }
+                        array_push($processed_content['videos'], array(
+                            'title' => $tab['tab_name'],
+                            'url' => $url
+                        ));
+                    }
+                }
+                break;
+        }
+    }
+
+    // Prepare Content
+
+    // Build response
+    $project = array(
+        'profileImage' => get_the_post_thumbnail_url($post_id, 'full'),
+        'name' => get_the_title($post_id),
+        'lang' => pll_get_post_language($post_id),
+        'description' => get_the_excerpt() ? get_the_excerpt() : '',
+        'progress' => $processed_content['progress'],
+        'location' => array(
+            'latitude' => '',
+            'longitude' => '',
+            'address' => '',
+            'mapUrl' => $processed_content['google_maps']
+        ),
+        // 'nearbyLocations' => $processed_content['nearbyPlaces'],
+        // 'plans' => $processed_content['plans'],
+        'nearbyLocations' => [],
+        'plans' => [],
+        'gallery' => process_gallery_fields($processed_content['gallery_fields']),
+        'brochures' => $processed_content['brochure'],
+        'videos' => $processed_content['videos']
+    );
+    
+    wp_reset_postdata();
+    //array_push($data, $project);
+  }
+
+  return rest_ensure_response($project);
   
   return new WP_Error('no_project', 'Project not found', array('status' => 404));
 }
@@ -681,32 +804,11 @@ add_action('rest_api_init', function () {
 });
 
 function get_promotion_listed($request) {
-
-  // Add filter to exclude specific titles
-  add_filter('posts_where', function($where) {
-    $exclude_titles = array(
-        'thank you',
-        'Thank You',
-        'Thank you',
-        'test',
-        'Test',
-        'ทดสอบ'
-      );
-      
-      foreach ($exclude_titles as $title) {
-        $where .= " AND post_title NOT LIKE '%" . esc_sql($title) . "%'";
-      }
-      
-      return $where;
-  });
-
   $args = array(
     'post_type' => 'promotion',
     'posts_per_page' => -1,
     'post_status' => 'publish',
     'lang' => 'th',
-    'orderby' => 'date',
-    'order' => 'DESC'
   );
 
   $query = new WP_Query($args);
@@ -716,22 +818,21 @@ function get_promotion_listed($request) {
       while ($query->have_posts()) {
           $query->the_post();
           $item_en = pll_get_post(get_the_ID(), 'en');
-          $banner = get_field('banner_mobile', get_the_ID());
           $promotion_listed[] = array(
-            'th' => array(
-              'id' => get_the_ID(),
-              'title' => get_the_title(),
-              'key' => get_post_field('post_name'),
-              'caption' => get_field('card_caption') === null ? '' : get_field('card_caption'),
-              'featured_image' => $banner['url']
-            ),
-            'en' => $item_en ? array(
-              'id' => $item_en,
-              'title' => get_the_title($item_en),
-              'key' => get_post_field('post_name', $item_en),
-              'caption' => get_field('card_caption', $item_en) === null ? '' : get_field('card_caption', $item_en),
-              'featured_image' => $banner['url']
-            ) :[],
+              'th' => array(
+                  'id' => get_the_ID(),
+                  'title' => get_the_title(),
+                  'key' => get_post_field('post_name'),
+                  'caption' => get_field('card_caption') === null ? '' : get_field('card_caption'),
+                  'featured_image' => get_the_post_thumbnail_url(get_the_ID(), 'full'),
+              ),
+              'en' => $item_en ? array(
+                  'id' => $item_en,
+                  'title' => get_the_title($item_en),
+                  'key' => get_post_field('post_name', $item_en),
+                  'caption' => get_field('card_caption', $item_en) === null ? '' : get_field('card_caption', $item_en),
+                  'featured_image' => get_the_post_thumbnail_url($item_en, 'full'),
+              ) : null,
           );
       }
   }
