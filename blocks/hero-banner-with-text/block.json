@@ -1,0 +1,16 @@
+{
+  "name": "acf/hero-banner-with-text",
+  "title": "Hero Banner With Text",
+  "description": "A custom hero banner with text block that uses ACF fields.",
+  "style": [ "file:./hero-banner-with-text.css" ],
+  "category": "formatting",
+  "icon": "admin-comments",
+  "keywords": ["hero", "banner", "text"],
+  "acf": {
+      "mode": "preview",
+      "renderTemplate": "hero-banner-with-text.php"
+  },
+  "supports": {
+      "anchor": true
+  }
+}

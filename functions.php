@@ -2887,3 +2887,9 @@ function asw_front_page_scripts() {
     }
 }
 add_action('wp_footer', 'asw_front_page_scripts');
+
+function asw_register_acf_blocks() {
+    register_block_type(__DIR__ . '/blocks/hero-banner-with-text');
+}
+
+add_action('init', 'asw_register_acf_blocks');
