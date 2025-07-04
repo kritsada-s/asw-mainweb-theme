@@ -62,11 +62,11 @@
     <div onclick="handle_about_menu(2)" class="about-menu px-0 lg:px-3 <?= $current_page === 'award' ? 'font-medium about-active-menu-item' : '' ?>">
       <?= pll__('รางวัลและความสำเร็จ') ?>
     </div>
-    <!-- <sp class="hidden lg:block" style="height: 1rem;"></sp>
+    <sp class="hidden lg:block" style="height: 1rem;"></sp>
 
-    <div onclick="handle_about_menu(2)" class="about-menu px-0 lg:px-3 <?= $current_page === 'recent-projects' ? 'font-medium about-active-menu-item' : '' ?>">
+    <div onclick="handle_about_menu(3)" class="about-menu px-0 lg:px-3 <?= $current_page === 'recent-projects' ? 'font-medium about-active-menu-item' : '' ?>">
       โครงการที่ผ่านมา
-    </div> -->
+    </div>
 
     <div class="hidden lg:block absolute bg-ci-grey-900" style="width: 2.5px;height: 100%;left: 1.15px;z-index: 1;">
       <div class="about_vbar"></div>

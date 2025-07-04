@@ -6,7 +6,7 @@
 	}
 	.about-menu{
 		color: var(--ci-grey-400);
-		transition: all .s;
+		transition: all .15s;
 	}
 	.cl-ci-orange-500{
 		color: var(--ci-orange-500) !important;
@@ -27,9 +27,6 @@
 	.about-ani:hover .bg-cover, .about-ani:hover, .about-wrap:hover .about-ani {
 		transform: scale(1.07);
 		transition: all .8s;
-	}
-	.about_hline{
-		/*width: 100%;*/
 	}
 	.about_hbar{
 		width: 28px;
@@ -83,9 +80,6 @@
 		.side-nav-menu, .side-nav-menu-about {
 			border-left: 0; 
 			border-bottom: 0; 
-		}
-		.side-nav-menu-about{
-			/*width: 91.5vw;*/
 		}
 		#bg-circle{
 			top: calc(10% + 50vw);
@@ -431,7 +425,6 @@ function pad($num){
 </script>
 <section id="home-slider">
 	<div id="home-slider-inner">
-		<!-- <div class="home-slider-shadow pointer-events-none"></div> -->
 		<div id="home-slider-slides">
 			<?php 
 			foreach ($slider as $key => $v) {
@@ -468,22 +461,6 @@ function pad($num){
 			}
 			?> 
 		</div>
-		<!-- <div id="home-slider-arrow">
-			<img src="/wp-content/uploads/2022/09/slide-arrow-l.png" class="-l" onclick="changeSlider(-1);stopAutoplay()">
-			<img src="/wp-content/uploads/2022/09/slide-arrow-r.png" class="-r" onclick="changeSlider(1);stopAutoplay()">
-		</div>
-		<div id="home-slider-count">
-			<div >
-				<h3 class="-num-min">01</h3>
-			</div>
-			<div class="-num-bar">
-				<div class=""></div>
-			</div>
-			<div><h3 class="-num-next">02</h3></div>
-			<div>
-				<p style="margin-left: 3px;">/<span class="-num-max">06</span></p>
-			</div>
-		</div> -->
 	</div>
 	<div id="home-slider-inner-mob">
 		<style type="text/css">
@@ -717,18 +694,31 @@ function pad($num){
 </div>
 <sp class=""></sp>
 <!--=== The Section Boxes : about us ===-->
-<section id="about-us" class="">
-	<!-- <div id="bg-circle" class="absolute">
-		<img src="/wp-content/uploads/2022/12/circle.png">
-	</div> -->
+<section id="recent-projects" class="">
 	<div class="cont-pd  pt-2 xl:pt-10 -pb-10">
-		<div id="about-info-section"></div>
+		<div id="recent-projects-info-section"></div>
 		<div class="grid grid-flow-row lg:grid-cols-12 gap-4">
 			<div class="lg:col-span-3">
 				<!--=== The Section Boxes : about-menu award ===-->
 				<?php get_template_part('page-templates/about-page-sidebar'); ?>
 			</div>
 			<style type="text/css">
+				.recent-project-card {
+					box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+					position: relative;
+				}
+				.recent-project-card::before {
+					content: '';
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					width: 100%;
+					height: 60%;
+					background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
+				}
+				.card-status {
+					color: #8d38e2;
+				}
 				@media (max-width: 767px) {
 					#about-asw .cont-pd{
 						padding: 0;
@@ -739,168 +729,64 @@ function pad($num){
 				}
 				
 			</style>
-			<style type="text/css">
-				.arrow-l{
-					height: 48px;
-					top: 47%;
-					left: 1%;
-					opacity: 1;
-					transition: .5s;
-				}
-				.arrow-r{
-					height: 48px;
-					top: 47%;
-					right: 1%;
-					opacity: 1;
-					transition: .5s;
-				}
-				.arrow-l:hover, .arrow-r:hover{
-					filter: brightness(200%);
-				}
-				.about-year{
-					transform: rotate(-90deg);
-					top: 16px;
-					z-index: 999;
-				}
-				@media (max-width: 767px) {
-					.reward-hover{
-						padding-left: 2.0rem;
-					}
-					.modal-img-content{
-						width: 100%;
-						/*height: 100%;*/
-						top: 0;
-					}
-					.mySlides{
-						height: 100% !important;
-						align-items: unset !important;
-					}
-					.mySlides img{
-						height: auto !important;
-						width: 100% !important;
-					}
-				}
-				.reward-year{
-					color: var(--ci-grey-100);
-					transition: .8s all;
-				}
-				.reward-hover{
-					transition: all .3s calc(var(--x) * .25s);
-					transform: translateY(100px);
-					opacity: .0;
-				}
-				.reward-hover[data-x="-1"]{
-					transition: none;
-				}
-				.reward-hover[data-show="1"]{
-					opacity: 1;
-					transform: translateY(0px);
-				}
-				.reward-hover:hover .reward-hovered{
-					left: 0%;
-					transition: .8s all;
-				}
-				.reward-hover:hover .reward-img{
-					transform: scale(1.08);
-					transition: .8s all;
-				}
-				.reward-hover:hover .reward-year{
-					transition: .8s all;
-					color: white;
-				}
-				.reward-year, .reward-img{
-					transition: .8s all;
-				}
-				.reward-hovered{
-					position: absolute;
-					width: 100%;
-					height: 100%;
-					top: 0;
-					left: -100%;
-					background-color: rgba(18, 63, 109, 0.7);
-					transition: .8s all;
-				}
-			</style>
-			<div id="reward-asw" class="lg:col-span-9">
-				<div class="grid grid-cols-2 md:grid-cols-3 gap-x-3 gap-y-6 md:gap-x-3 md:gap-y-10">
-					<?php
-					foreach ($f['reward'] as $key => $value){ 
-						// pre($value);
-						?>
-						<div class="col-span-1 pointer reward-hover relative overflow-hidden" onclick="openModal();currentSlide(<?= $key ?>)" data-show="0" data-x="null">
-							<div  class="bg-cover blank reward-img" ratio="1:1"  style="background-image: url('<?= $value['trophy']['url'] ?>');"></div>
-							<div class="top-left about-year">
-								<span class="reward-year f26-22"><?=$value['year']?></span>
-							</div>
-							<div class="reward-hovered flex flex-col pl-4 pb-4 text-white justify-end">
-								<h5><?=$value['name']?></h5>
-								<sp class="h-5"></sp>
-								<p><?php pll_e('อ่านเพิ่มเติม')?></p>
-							</div>
-						</div>
-						<div class="col-span-1 block md:hidden">
-							<span class="cl-ci-grey-100" style="font-size: 22px;line-height: 28px;font-weight: 500;"><?= $value['name'] ?></span>
-							<p class="cl-ci-veri-300" style="font-size: 22px;line-height: 28px;font-weight: 400;padding-top: 8px;" onclick="openModal();currentSlide(<?= $key ?>)"><?php pll_e('อ่านเพิ่มเติม')?></p>
-						</div>
-					<?php }
+			<?php 
+			// Query Sold out Projects
+			$args = array(
+				'post_type' => 'condominium',
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'project_status',
+						'field' => 'slug',
+						'terms' => 'sold-out',
+					),
+				),
+				'posts_per_page' => -1,
+			);
+			$sold_out_projects = new WP_Query($args);
+			?>
+			<div class="lg:col-span-9">
+				<h2 class="font-medium mb-5"><?= pll_e('โครงการที่ผ่านมาของเรา') ?></h2>
+				<div class="recent-projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7">
+				<?php foreach ($sold_out_projects->posts as $project) { ?>
+					<?php 
+						$logo = get_field('logo', $project->ID);
+						$status = get_the_terms($project->ID, 'project_status');
+						$type = get_the_terms($project->ID, 'project-type');
+						$locations = get_the_terms($project->ID, 'project_location');
+						$p_loc = '';
+						$start_price = get_field('price', $project->ID);
+						foreach ($locations as $location) {
+							if ($location->parent !== 0) {
+								$p_loc = $location->name;
+								break;
+							}
+						}
 					?>
-				</div>
-				<sp class="h-12 md:h-20" style=""></sp>
-			</div>
-
-			<div id="Modal-img" class="modal-img scroll-hid">
-				<span class="close cursor" onclick="closeModal()" style="top: 8px;right: 4vw;z-index: 10;">&times;</span>
-				<div class="fixed" style="top: 0;z-index: 1;background-color: transparent;width: 100%;height: 100%;" onclick="closeModal()"></div>
-				<div class="modal-img-content" style="z-index: 9;">
-					<?php
-					foreach ($f['reward'] as $key => $value) {
-						// pre($value);
-						// $value['project'][$i]->ID
-						?>
-						<div class="mySlides" style="justify-content: center;align-items: center;height: 85vh;">
-							<div class="grid grid-rows-3 md:grid-rows-1 md:grid-cols-12" style="width: 100%;">
-								<div class="row-span-1 md:col-span-7">
-									<div class="bg-cover blank" mob-ratio="1:1" style="background-image:url('<?=$value['image']['url']?>');height: 100%;">
-									</div>
-								</div>
-								<div class="row-span-2 md:row-span-1 md:col-span-5 bg-white flex ">
-									<div class="px-4 pt-10 pb-10 md:px-8 md:pt-12 md:pb-32 w-full">
-										<?php 
-										$pjSize = ofsize($value['projects']);
-										if ($pjSize>0) {
-											?>
-											<span class="cl-ci-grey-400" style="font-size: 18px;font-weight: 700;line-height: 20px;">Project</span>
-											<h5 class="cl-ci-grey-100" style="font-size: 30px;line-height: 32px;font-weight: 500;">
-												<?php
-												foreach ($value['projects'] as $kk => $val) {
-													if ($kk == 0) {
-														echo $val->post_title;
-													}
-													else{
-														echo ", " . $val->post_title;
-													}
-												}
-												?>
-											</h5>
-											<sp style="height: 33px;" ></sp>
-											<?php
-										}
-										?>
-										<span class="cl-ci-grey-400" style="font-size: 18px;font-weight: 700;line-height: 20px;">Award Winner</span>
-										<h5 class="cl-ci-grey-100" style="font-size: 30px;line-height: 32px;font-weight: 500;"><?= $value['name'] ?></h5>
-										<sp style="height: 23px;" ></sp>
-										<img src="<?= $value['trophy']['url']?>" style="height: 160px;width:auto;margin:0;">
-										<sp style="height: 13px;" ></sp>
-										<span class="cl-ci-grey-400" style="font-size: 22px;font-weight: 400;line-height: 28px;">by <?=$value['by']?></span>
-									</div>
-								</div>
+					<a href="<?= get_the_permalink($project->ID) ?>" class="recent-project-card">
+						<div class="card-header flex justify-between items-center gap-5 py-5 pr-4">
+							<div class="left border-l-4 border-[#8d38e2] py-2 pl-4">
+								<span class="card-status font-medium"><?= $status[0]->name ?></span>
+							</div>
+							<div class="right">
+								<img class="w-auto max-h-[40px]" src="<?= $logo['url'] ?>" alt="<?= $project->post_title ?>">
 							</div>
 						</div>
-					<?php }
-					?>
+						<img src="<?= get_the_post_thumbnail_url($project->ID, 'full') ?>" class="aspect-[2/3] object-cover w-full" alt="<?= $project->post_title ?>">
+						<div class="card-footer absolute bottom-0 left-0 w-full p-4 text-white flex justify-between items-end">
+							<div class="left">
+								<p><?= $type[0]->name ?></p>
+								<p><?= $p_loc ?></p>
+							</div>
+							<div class="right text-right leading-[0.85] text-[16px]">
+								เริ่มต้น
+								<span class="text-[32px] block"><?= $start_price ?></span>
+								ล้านบาท
+							</div>
+						</div>
+					</a>
+				<?php } ?>
 				</div>
-				<img src="/wp-content/uploads/2022/09/slide-arrow-l.png" class="absolute pointer hidden md:block arrow-l" onclick="plusSlides(-1)" style="z-index: 9;">
-				<img src="/wp-content/uploads/2022/09/slide-arrow-r.png" class="absolute pointer hidden md:block arrow-r" onclick="plusSlides(1)" style="z-index: 9;">
+				<div class="h-20"></div>
 			</div>
 		</div>
 	</div>
