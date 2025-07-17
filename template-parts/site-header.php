@@ -661,7 +661,7 @@ if (str_contains($_SERVER['REQUEST_URI'], 'condominium')) {
                                <div data-pll data-pll-th="show" data-pll-en="show" data-pll-cn="show" class="menu-txt"><a href="/<?=$xlang?>/promotion" class="menu-txt"><?php pll_e('โปรโมชั่น')?></a></div>     
                            <?php endif ?>
 
-                           <div data-pll data-pll-th="show" data-pll-en="show" data-pll-cn="show" class="menu-txt"><a href="/<?=$xlang?>/about-us" class="menu-txt"><?php pll_e('รู้จักแอสเซทไวส์')?></a></div>
+                           <div data-pll data-pll-th="show" data-pll-en="show" data-pll-cn="show" class="menu-txt"><a href="/<?=$xlang?>/20th-anniversary/" class="menu-txt"><?php pll_e('รู้จักแอสเซทไวส์')?></a></div>
                            <div data-pll data-pll-th="show" data-pll-en="show" data-pll-cn="show" class="menu-txt"><a target="_blank" href="https://investor.assetwise.co.th/<?=$xlang?>/home" class="menu-txt"><?php pll_e('นักลงทุนสัมพันธ์')?></a></div>
                            <sp class=""></sp>
                            <div class="bg-ci-blue-400" style="width: 75px;height: 1px;"></div>
