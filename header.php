@@ -119,7 +119,6 @@ if (!is_user_logged_in() AND 0) {
         <div id="loadscreen" data-loaded="0">
          <div class="-inner">
             <lottie-player class="load-img" src="/wp-content/themes/seed-spring/css/load.json" background="transparent"  speed="1"  loop autoplay></lottie-player>
-            <img src="<?= get_template_directory_uri() ?>/img/logo.svg">
         </div>
     </div>
     <div class="scroll-to-top"></div>
