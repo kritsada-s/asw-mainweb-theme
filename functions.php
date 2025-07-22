@@ -2279,7 +2279,11 @@ function wpa_promotion_post_link( $post_link, $id = 0 ){
             if ($parent) {
                 $parent_ID = $parent->ID;
                 $parent_terms = wp_get_object_terms( $parent_ID, 'promotion_type' );
-                return str_replace( '%promotion_type%' , $parent_terms[0]->slug , $post_link );
+                if ($parent_terms) {
+                    return str_replace( '%promotion_type%' , $parent_terms[0]->slug , $post_link );
+                }else{
+                    return $post_link;
+                }
             }
         }
     }
@@ -2535,6 +2539,7 @@ function asw_project_render_theme($template_name,$common_layout){
         }
     }
     ?>
+    <?php include(get_template_directory().'/template-parts/loan-calc-collapse.php'); ?>
     <!-- =====🔺🔺🔺🔺🔺 End Template V2 Loop 🔺🔺🔺🔺🔺===== -->
     <!-- =====👇👇👇👇👇 Start Template V2 Scroll JS 👇👇👇👇👇===== -->
     <?php
