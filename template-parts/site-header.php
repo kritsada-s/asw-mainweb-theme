@@ -96,6 +96,7 @@ if ($masthead == 0) {
 
 @media (min-width: 992px) {
     .site-branding img {
+        width: 186px;
         max-height: 20px;
         margin-top:
         <?= $site_logo_margin ?>
@@ -177,6 +178,10 @@ if ($masthead == 0) {
 .site-branding {
     position: static;
     transform: unset;
+}
+
+.site-branding img {
+    width: 160px;
 }
 
 
@@ -297,7 +302,7 @@ if (str_contains($_SERVER['REQUEST_URI'], 'condominium')) {
             <div class="col-span-6 xl:col-span-9 flex items-center relative site-left-bar">
                 <div class="site-branding">
                     <a href="<?php echo home_url(); ?>" class="logo_lang- logo-hide-cont-left-">
-                        <img src="/wp-content/uploads/2023/05/CleanShot-2566-05-08-at-04.57.00@2x.png">
+                        <img alt="AssetWise" src="<?= get_template_directory_uri() ?>/img/asw-logo_horizontal.svg">
                     </a>
                     <div class="grid grid-flow-col gap-4" id="header-nav-items">
                         <nav id="site-navigation" class="site-nav-d _desktop txt-menu dbfon" style="font-weight: 400;">
@@ -343,7 +348,7 @@ if (str_contains($_SERVER['REQUEST_URI'], 'condominium')) {
                                     document.querySelector('.-h-lang-this-lang img').src = `/wp-content/themes/seed-spring/img/${thislang.slug}.png`;
                                 }else{
                                     //ถ้าจะเปิดจีนเหมือนเดิม เอา if ด้านล่างออก
-                                    if(lll != 'cn'){
+                                    if(lll != 'cn' && lll != 'ru'){
                                         lang_html += `<a href="${thislang.url}" class="-this-lang-${lll}">
                                         <img src="/wp-content/themes/seed-spring/img/${lll}.png" class="inline" style="width: 24px;margin-right: 5px;">
                                         <h6 class="inline-block site-lang-txt">${thislang.name}</h6>
@@ -355,7 +360,7 @@ if (str_contains($_SERVER['REQUEST_URI'], 'condominium')) {
                             let mob_html = ``
                             for(let i in page_lang){
                                 //ถ้าจะเปิดจีนเหมือนเดิม เอา if ด้านล่างออก
-                                if(i != 'cn'){
+                                if(i != 'cn' && i != 'ru'){
                                     mob_html += `<a style="" href="${page_lang[i].url}">${page_lang[i].name}</a>`
                                 }
                             }
@@ -371,7 +376,7 @@ if (str_contains($_SERVER['REQUEST_URI'], 'condominium')) {
                             //     mob_html += `<a style="" href="${page_lang['cn'].url}">${page_lang['cn'].name}</a>`
                             // }
 
-                            document.querySelector('.ham-lang-mob').innerHTML = mob_html
+                            //document.querySelector('.ham-lang-mob').innerHTML = mob_html
                         }
                         window.addEventListener("load", (event) => {
                             setLangSite()
@@ -641,7 +646,8 @@ if (str_contains($_SERVER['REQUEST_URI'], 'condominium')) {
                     <img src="/wp-content/themes/seed-spring/img/<?=$xlang?>/logo-asw.png"
                     class="flex items-start mt-6 ml-10"  style="max-width: 188px;">
                     <div class="ham-lang-mob">
-
+                        <a href="<?=$translations['th']['url']?>" class="<?=$translations['th']['current_lang'] ? 'underline' : ''?>" title="TH">TH</a>
+                        <a href="<?=$translations['en']['url']?>" class="<?=$translations['en']['current_lang'] ? 'underline' : ''?>" title="EN">EN</a>
                     </div>
                     <!-- <div class="bg-cover" style="width: 270px; height: 40px;background-image: url('/wp-content/uploads/2022/10/Screen-Shot-2565-07-14-at-17.49-1.png');"></div> -->
                     <sp class=""></sp>
