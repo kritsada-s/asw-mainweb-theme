@@ -2846,41 +2846,44 @@ function asw_front_page_scripts() {
         ?>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
-                console.log('Fetching jobs data...');
-                // Add your front page specific JavaScript code here
-                const myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
-                myHeaders.append("Authorization", "Bearer TcSUiv0UDb31Oyiy/9w+tyDcyYCwbIjhFCSufmpjFZAR9qLGXxADP3dK17ult9Ur56mHHsnooRRERRYX40bR+RUCpTPRUyhVTj0XYHVz0ZNR6KK/wI8uQQKx+hvDdf4cm9wLoglDQ92itnpc9wHiNFxGrbsssfHJPrzxxNDe5y8IOwIzOOqifFTGoESCQSTRXkdO7Tj+woTkLQYkMW2bdxK0McokHO6ZcVZAPPsDqLiriCkWS+ps4nGc0xJpjE9SVAxUkV+pNmAcUgmPXMTXtQ==");
+                const jobsListElement = document.getElementById('wrs_jobs_list');
+                if (jobsListElement) {
+                    console.log('Fetching jobs data...');
+                    // Add your front page specific JavaScript code here
+                    const myHeaders = new Headers();
+                    myHeaders.append("Content-Type", "application/json");
+                    myHeaders.append("Authorization", "Bearer TcSUiv0UDb31Oyiy/9w+tyDcyYCwbIjhFCSufmpjFZAR9qLGXxADP3dK17ult9Ur56mHHsnooRRERRYX40bR+RUCpTPRUyhVTj0XYHVz0ZNR6KK/wI8uQQKx+hvDdf4cm9wLoglDQ92itnpc9wHiNFxGrbsssfHJPrzxxNDe5y8IOwIzOOqifFTGoESCQSTRXkdO7Tj+woTkLQYkMW2bdxK0McokHO6ZcVZAPPsDqLiriCkWS+ps4nGc0xJpjE9SVAxUkV+pNmAcUgmPXMTXtQ==");
 
-                const raw = JSON.stringify({
-                "companyID": "00000000-0000-0000-0000-000000000000",
-                "bConnectionID": "7B93F134-D373-4227-B5A6-6B619FF0E355",
-                "departmentName": "",
-                "jobPosition": "",
-                "perPage": 10,
-                "page": 1,
-                "total": 10,
-                "searchStr": "",
-                "urgently": true,
-                "announce": true,
-                "published": true
-                });
+                    const raw = JSON.stringify({
+                    "companyID": "00000000-0000-0000-0000-000000000000",
+                    "bConnectionID": "7B93F134-D373-4227-B5A6-6B619FF0E355",
+                    "departmentName": "",
+                    "jobPosition": "",
+                    "perPage": 10,
+                    "page": 1,
+                    "total": 10,
+                    "searchStr": "",
+                    "urgently": true,
+                    "announce": true,
+                    "published": true
+                    });
 
-                const requestOptions = {
-                method: "POST",
-                headers: myHeaders,
-                body: raw,
-                redirect: "follow"
-                };
+                    const requestOptions = {
+                    method: "POST",
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: "follow"
+                    };
 
-                fetch("https://aswservice.com/wrsapi/JobAnnouncement/JobAnnouncementsByPage", requestOptions)
-                .then((response) => response.json())
-                .then((result) => {
-                    //console.log(result.jobs);
-                    const jobsListElement = document.getElementById('wrs_jobs_list');
-                    jobsListElement.innerHTML = result.jobs.map(job => `<li><a href="https://careers.assetwise.co.th/jobs/?id=${job.jobID}" class="text-neutral-500 hover:text-neutral-900 cursor-pointer">${job.jobPosition}</a></li>`).join('');
-                })
-                .catch((error) => console.error(error));
+                    fetch("https://aswservice.com/wrsapi/JobAnnouncement/JobAnnouncementsByPage", requestOptions)
+                    .then((response) => response.json())
+                    .then((result) => {
+                        //console.log(result.jobs);
+                        const jobsListElement = document.getElementById('wrs_jobs_list');
+                        jobsListElement.innerHTML = result.jobs.map(job => `<li><a href="https://careers.assetwise.co.th/jobs/?id=${job.jobID}" class="text-neutral-500 hover:text-neutral-900 cursor-pointer">${job.jobPosition}</a></li>`).join('');
+                    })
+                    .catch((error) => console.error(error));
+                }
             });
         </script>
         <?php
@@ -2895,3 +2898,46 @@ function asw_float_panel() {
     }
 }
 add_action('wp_footer', 'asw_float_panel');
+
+// Block specific email addresses in CF7 forms
+add_filter('wpcf7_validate', 'block_specific_emails', 10, 2);
+function block_specific_emails($result, $tags) {
+    // Get email field from submitted form
+    $blocked_list = array(
+        [
+            'Email' => 'pakornnakorn9@gmail.com',
+            'Fname' => 'pakorn',
+            'Lname' => 'nakorn',
+            'Tel' => '0953616765',
+        ]
+    );
+    $submission = WPCF7_Submission::get_instance();
+    if ($submission) {
+        $posted_data = $submission->get_posted_data();
+        
+        // Loop through form fields to find email field
+        foreach ($blocked_list as $blocked_user) {
+            $is_blocked = true;
+            foreach ($posted_data as $key => $value) {
+                if (strpos(strtolower($key), 'email') !== false && strtolower($value) === strtolower($blocked_user['Email'])) {
+                    $result->invalidate($key, 'This email address is not allowed.');
+                    break 2;
+                }
+                if (strpos(strtolower($key), 'fname') !== false && strtolower($value) === strtolower($blocked_user['Fname'])) {
+                    $result->invalidate($key, 'This first name is not allowed.');
+                    break 2;
+                }
+                if (strpos(strtolower($key), 'lname') !== false && strtolower($value) === strtolower($blocked_user['Lname'])) {
+                    $result->invalidate($key, 'This last name is not allowed.');
+                    break 2;
+                }
+                if (strpos(strtolower($key), 'tel') !== false && strtolower($value) === strtolower($blocked_user['Tel'])) {
+                    $result->invalidate($key, 'This phone number is not allowed.');
+                    break 2;
+                }
+            }
+        }
+    }
+    return $result;
+}
+
