@@ -9,6 +9,8 @@ $content = aswv2_gen_master($master,$content,$layout);
 act_template_project_css($opt,$template_name,$layout);
 if (!empty($f['terms_conditions'])) {
     $terms_conditions_page = $f['terms_conditions']->ID;
+} else {
+    $terms_conditions_page = '';
 }
 ?>
 <section id="project-footer" class="footer-line">
