@@ -2896,14 +2896,6 @@ function asw_front_page_scripts() {
 }
 //add_action('wp_footer', 'asw_front_page_scripts');
 
-function asw_float_panel() {
-    // Check if current post type is condominium or house
-    if (is_singular(['condominium', 'house'])) {
-       include 'template-parts/float-panel.php';
-    }
-}
-add_action('wp_footer', 'asw_float_panel');
-
 // Block specific email addresses in CF7 forms
 add_filter('wpcf7_validate', 'block_specific_emails', 10, 2);
 function block_specific_emails($result, $tags) {
