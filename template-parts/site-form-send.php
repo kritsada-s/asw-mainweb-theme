@@ -28,7 +28,7 @@
         aswFormOptionsData[e.value] = {id:e.value,option:{},isRedirect:false,redirect:''}
       }
     }
-    console.log(aswFormOptions.length)
+    //console.log(aswFormOptions.length)
     for(let form_id of aswFormOptions){
       console.log('form id:',form_id)
       fetch('/api/api-internal-form-get-options/?form='+form_id)
