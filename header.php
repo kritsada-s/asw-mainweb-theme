@@ -6,7 +6,7 @@ $f_body = get_field('body_code');
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
