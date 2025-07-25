@@ -558,9 +558,9 @@
 </div>
 
 <div class="pl-10 pt-8 flex flex-row items-center">
-	<a href="/home" class="cl-ci-blue-400">หน้าแรก</a>
+	<a href="/home" class="cl-ci-blue-400"><?php pll_e('หน้าแรก') ?></a>
 	<img src="/wp-content/uploads/2023/01/Vector-84.png" style="margin:0px 12px;">
-	<a href="/about-us" class="">รู้จักแอสเซทไวส์</a>
+	<a href="/about-us" class=""><?php pll_e('รู้จักแอสเซทไวส์') ?></a>
 </div>
 <sp class=""></sp>
 <!--=== The Section Boxes : about us ===-->
