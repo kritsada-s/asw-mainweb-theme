@@ -79,7 +79,7 @@ function project_card($post) {
           </div>
         </div>
       <?php } else if ($content['acf_fc_layout'] === 'projects_listed_layout') { ?>
-        <div id="content-layout-<?= $count; ?>" class="projects-listed-layout py-12">
+        <div id="content-layout-<?= $count; ?>" class="projects-listed-layout py-12 bg-gradient-to-b from-[#EDF2F7] to-[#fff]">
           <div class="container px-5 lg:px-0 mx-auto">
             <?php
             $loc = [];
@@ -102,7 +102,7 @@ function project_card($post) {
             <h2 class="text-[42px] mb-5 text-center font-medium"><?= $content['title']; ?></h2>
             <div class="project-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
               <?php foreach ($projects->posts as $project) { ?>
-                <?= project_card($project); ?>
+                <?= get_template_part('template-parts/project-card-master', null, array('post' => $project)); ?>
               <?php } ?>
             </div>
           </div>
