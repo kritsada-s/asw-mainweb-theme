@@ -210,6 +210,7 @@ if ($masthead == 0) {
     min-width: calc(100% + 2rem);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .04), 0 2px 4px 0 rgba(0, 0, 0, .08);
     text-align: left;
+    z-index: 999;
 }
 .change-lang:hover .-more-lang{
     display: grid;
