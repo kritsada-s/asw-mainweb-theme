@@ -1,10 +1,19 @@
+<?php
+/**
+ * Template Name: ASW Club 360
+ *
+ * @package SeedSpring
+ */
+?>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <?php get_header() ?>
 
 <?php
 $f = get_fields();
-$slider = $f['home_banner'];
+if(isset($f['home_banner'])){
+	$slider = $f['home_banner'];
+}
 ?>
 <!--=== The Section Boxes : banner ===-->
 <section id="banner" class="">

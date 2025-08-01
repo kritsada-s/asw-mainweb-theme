@@ -2,7 +2,9 @@
 
 <?php
 $f = get_fields();
-$slider = $f['home_banner'];
+if(isset($f['home_banner'])){
+	$slider = $f['home_banner'];
+}
 ?>
 <!--=== The Section Boxes : banner ===-->
 <section id="banner" class="">
