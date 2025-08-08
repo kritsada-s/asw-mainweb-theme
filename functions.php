@@ -1989,7 +1989,7 @@ function admin_cf7_footer() {
             }
         </style>
         <?php
-        if ($_REQUEST['page'] == 'wpcf7') {
+        if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'wpcf7') {
             $is_cf7 == true;
             $cf7_id = $_REQUEST['post'];
             if ($cf7_id != '') {
@@ -2937,4 +2937,3 @@ function block_specific_emails($result, $tags) {
     }
     return $result;
 }
-
