@@ -2,9 +2,7 @@
 
 <?php
 $f = get_fields();
-if(isset($f['home_banner'])){
-	$slider = $f['home_banner'];
-}
+//$slider = $f['home_banner'];
 ?>
 <!--=== The Section Boxes : banner ===-->
 <section id="banner" class="">
@@ -843,7 +841,7 @@ onclick="show_promo_arrow(1)">
 					$v = get_postdata($post->ID);
 					?>
 					<div class="col-span-1 ani-club bg-ci-grey-900" data-show="0" data-x="null">
-						<div class="grid grid-rows-12- px-4 py-6">
+						<div class="grid px-4 py-6">
 							<a href="<?= get_the_permalink() ?>" class="">
 								<div class="<?php if ($chk % 2 == 1) {
 									echo 'flex flex-col-reverse';
@@ -940,7 +938,7 @@ onclick="show_promo_arrow(1)">
 					?>
 					<div class="col-span-1 ani-club bg-ci-grey-900" data-show="0" data-x="null">
 						<a href="<?= get_the_permalink() ?>" class="">
-							<div class="grid grid-rows-12- px-4 py-6">
+							<div class="grid px-4 py-6">
 								<div class="<?php if ($chk % 2 == 1) {echo 'flex flex-col-reverse'; } ?>">
 
 									<div class="overflow-hidden">

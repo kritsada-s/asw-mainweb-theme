@@ -806,7 +806,7 @@ if(isset($f['home_banner'])){
 									$v = get_postdata($post->ID);
 									?>
 									<div class="col-span-1 ani-club bg-ci-grey-900" data-show="0" data-x="null">
-										<div class="grid grid-rows-12 px-4 py-6">
+										<div class="grid px-4 py-6">
 											<a href="<?= get_the_permalink() ?>" class="">
 												<div class="<?php if ($chk % 2 == 1) {
 													echo 'flex flex-col-reverse';
@@ -939,7 +939,7 @@ if(isset($f['home_banner'])){
 								?>
 								<div class="col-span-1 ani-club" data-show="0" data-x="null">
 									<a href="<?= get_the_permalink() ?>" class="">
-										<div class="grid grid-rows-12 bg-ci-grey-900 px-4 py-6">
+										<div class="grid bg-ci-grey-900 px-4 py-6">
 											<div class="<?php if ($chk % 2 == 1) {
 												echo 'flex flex-col-reverse';
 											} ?>">
@@ -1071,7 +1071,7 @@ if(isset($f['home_banner'])){
 						?>
 						<div class="col-span-1 ani-club" data-show="0" data-x="null">
 							<a href="<?= get_the_permalink() ?>" class="">
-								<div class="grid grid-rows-12 bg-ci-grey-900 px-4 py-6">
+								<div class="grid bg-ci-grey-900 px-4 py-6">
 									<div class="<?php if ($chk % 2 == 1) {
 										echo 'flex flex-col-reverse';
 									} ?>">
@@ -1203,7 +1203,7 @@ if(isset($f['home_banner'])){
 				?>
 				<div class="col-span-1 ani-club" data-show="0" data-x="null">
 					<a href="<?= get_the_permalink() ?>" class="">
-						<div class="grid grid-rows-12 bg-ci-grey-900 px-4 py-6">
+						<div class="grid bg-ci-grey-900 px-4 py-6">
 							<div class="<?php if ($chk % 2 == 1) {
 								echo 'flex flex-col-reverse';
 							} ?>">
