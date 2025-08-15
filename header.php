@@ -22,7 +22,8 @@ $f_body = get_field('body_code');
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+    <!-- fontawesome all 5.0.4 -->
+    <link href="<?=get_template_directory_uri() ?>/css/all-504.css?t=<?=time()?>" rel="stylesheet">
     <script type="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <?php wp_head(); ?>
     <link rel="stylesheet" href="<?=get_template_directory_uri() ?>/css/asw.css?t=<?=time()?>" />

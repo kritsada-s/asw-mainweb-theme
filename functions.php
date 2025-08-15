@@ -2938,3 +2938,24 @@ function block_specific_emails($result, $tags) {
     return $result;
 }
 
+// order by date in archive page
+function custom_archive_order( $query ) {
+    if ( $query->is_archive() && $query->is_main_query() ) {
+        // Example: Order by title in ascending order
+        $query->set( 'orderby', 'date' );
+        $query->set( 'order', 'DESC' );
+    }
+}
+add_action( 'pre_get_posts', 'custom_archive_order' );
+
+/**
+ * Filter the excerpt "read more" string.
+ *
+ * @param string $more "Read more" excerpt string.
+ * @return string (Maybe) modified "read more" excerpt string.
+ */
+function asw_excerpt_more( $more ) {
+	return '...';
+}
+add_filter( 'excerpt_more', 'asw_excerpt_more' );
+

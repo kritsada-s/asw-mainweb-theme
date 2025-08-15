@@ -1,4 +1,5 @@
-<link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+<!-- fontawesome all 5.0.4 -->
+<link href="<?=get_template_directory_uri() ?>/css/all-504.css?t=<?=time()?>" rel="stylesheet">
 <?php 
 global $masthead;
 if (!isset($masthead)) {//ถ้าไม่ได้ตั้งค่า masthead มาตั้งแต่ไฟล์เทมเพลตที่เรียกใช้

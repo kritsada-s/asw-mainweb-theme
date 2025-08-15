@@ -8,6 +8,11 @@ $s_type_url = 'condominium';
 $term_pj_location = asw_get_term_nest('project_location');
 $term_pj_type = asw_get_term_nest('project-type');
 
+// Validate required data
+if (!$term_pj_location || !$term_pj_type) {
+    wp_die('Required taxonomy data not found');
+}
+
 $endtime = microtime(true); // Bottom of page
 // printf("Page loaded in %f seconds", $endtime - $starttime );
 
@@ -83,14 +88,15 @@ $endtime = microtime(true); // Bottom of page
 		<h1 class="f56-42 cl-ci-grey-200"><?=$s_type_title?></h1>
 		<sp class="m"></sp>
 		<div class="cl-ci-grey-400 f26-22 condo-pad-desc">
-			<?= $f['description'];?>
+			<?= isset($f['description']) ? $f['description'] : '';?>
 		</div>
 		<sp class="xl"></sp>
 
 		
 
 		<div class="grid grid-cols-2 md:flex md:flex-wrap md:justify-center gap-4 md:gap-6 px-1 sm:px-4 lg:px-40">
-			<?php
+					<?php
+		if (isset($term_pj_type['condominium']) && isset($term_pj_type['condominium']->child)) {
 			foreach ($term_pj_type['condominium']->child as $key => $value) {
 				$iconic = get_field('project_logo',$value->taxonomy . '_' . $value->term_id);
 				$is_show = get_field('is_show',$value->taxonomy . '_' . $value->term_id);
@@ -99,13 +105,14 @@ $endtime = microtime(true); // Bottom of page
 					?>
 					<div class="col-span-1 rounded-lg graylogo graylogo-size py-2 flex items-center justify-center">
 						<a href="<?=$condo_link;?>" class="block">
-							<img src="<?=$iconic['url']?>">
+							<img src="<?= isset($iconic['url']) ? $iconic['url'] : '';?>">
 						</a>
 					</div>
 					<?php 
 				}
 			}
-			?>
+		}
+		?>
 		</div>
 	</div>
 	<sp class="" style="height: 40px;"></sp>
@@ -364,9 +371,10 @@ $endtime = microtime(true); // Bottom of page
 				</div>
 				<div id="filter_location" class="quick-filter-toggle-2">
 					<div class="bg-white round" style="padding:45px 24px;padding-top: 30px;">
-						<span class="cl-ci-blue-300" style="font-size: 26px;"><?php pll_e('ในกรุงเทพฯ')?></span>
-						<sp style="height: 8px;" ></sp>
-						<?php
+											<span class="cl-ci-blue-300" style="font-size: 26px;"><?php pll_e('ในกรุงเทพฯ')?></span>
+					<sp style="height: 8px;" ></sp>
+					<?php
+					if (isset($term_pj_location['in-bangkok']) && isset($term_pj_location['in-bangkok']->child)) {
 						foreach ($term_pj_location['in-bangkok']->child as $key => $value) { 
 							?>
 							<div class="flex inline-flex popup-filter" slug="<?=$value->slug?>" num="1" onclick="check_chk(this, 1);sort_info()">
@@ -377,14 +385,16 @@ $endtime = microtime(true); // Bottom of page
 						</div>
 						<?php 
 					}
-					?>
+				}
+				?>
 
 					<div style="padding-top: 42px;padding-bottom: 22px;">
 						<hr style="width: 80px;background-color: var(--cl-ci-grey-900);">
 					</div>
-					<span class="cl-ci-blue-300" style="font-size: 26px;"><?php pll_e('ต่างจังหวัด')?></span>
-					<sp style="height: 8px;" ></sp>
-					<?php
+									<span class="cl-ci-blue-300" style="font-size: 26px;"><?php pll_e('ต่างจังหวัด')?></span>
+				<sp style="height: 8px;" ></sp>
+				<?php
+				if (isset($term_pj_location['upcountry']) && isset($term_pj_location['upcountry']->child)) {
 					foreach ($term_pj_location['upcountry']->child as $key => $value) { 
 						?>
 						<div class="flex inline-flex popup-filter" slug="<?=$value->slug?>" num="1" onclick="check_chk(this, 1);sort_info()">
@@ -395,14 +405,16 @@ $endtime = microtime(true); // Bottom of page
 					</div>
 					<?php 
 				}
-				?>
+			}
+			?>
 			</div>
 		</div>
 		<div id="filter_project" class="quick-filter-toggle-3">
 			<div class="bg-white round" style="padding:48px 32px;padding-top: 30px;">
-				<span class="cl-ci-blue-300" style="font-size: 26px;"><?=$s_type_title?></span>
-				<sp style="height: 8px;" ></sp>
-				<?php
+							<span class="cl-ci-blue-300" style="font-size: 26px;"><?=$s_type_title?></span>
+			<sp style="height: 8px;" ></sp>
+			<?php
+			if (isset($term_pj_type['condominium']) && isset($term_pj_type['condominium']->child)) {
 				foreach ($term_pj_type['condominium']->child as $key => $value) {
 					$iconic = get_field('project_logo',$value->taxonomy . '_' . $value->term_id); 
 					$is_show = get_field('is_show',$value->taxonomy . '_' . $value->term_id);
@@ -411,25 +423,31 @@ $endtime = microtime(true); // Bottom of page
 						<div class="flex inline-flex popup-filter" slug="<?=$value->slug?>" num="2" onclick="check_chk(this, 2);sort_info()">
 							<label class="check-wrap" termId="<?=$value->term_id?>" name="<?= $value->name ?>">
 								<input type="checkbox" name="<?= $value->name ?>">
-								<img src="<?=$iconic['url']?>" style="width: auto;height: 30px;margin-right: 5px;" >
+								<img src="<?= isset($iconic['url']) ? $iconic['url'] : '';?>" style="width: auto;height: 30px;margin-right: 5px;" >
 
 								<span class="checkmark" style="margin-top: 4px;"></span>
 							</label>
 						</div>
 					<?php }
 				}
-				?>
+			}
+			?>
 			</div>
 		</div>
-		<?php 
-		if (pll_current_language()=='en') {
-			$filter_price = get_field('filter_price_range',39867);
-		}else if(pll_current_language()=='cn') {
-			$filter_price = get_field('filter_price_range',39868);
-		}else{
-			$filter_price = get_field('filter_price_range',2);
-		}
-		?>
+			<?php 
+	$filter_price = array();
+	if (pll_current_language()=='en') {
+		$filter_price = get_field('filter_price_range',39867);
+	}else if(pll_current_language()=='cn') {
+		$filter_price = get_field('filter_price_range',39868);
+	}else{
+		$filter_price = get_field('filter_price_range',2);
+	}
+	// Ensure filter_price is an array
+	if (!is_array($filter_price)) {
+		$filter_price = array();
+	}
+	?>
 		<style type="text/css">
 			#filter_cost[data-open="-1"]{
 				display: none !important;
@@ -444,18 +462,20 @@ $endtime = microtime(true); // Bottom of page
 
 		<div id="filter_cost" class="quick-filter-toggle-4" data-open="-1" style="top: 5px; left: 50%;">
 			<div class="bg-white round py-4">
-				<?php 
+							<?php 
+			if (!empty($filter_price)) {
 				foreach ($filter_price as $key => $value) {
 					?>
-					<div class="flex inline popup-filter-price p-2 pointer pl-6" onclick="filter_price_select(this)" data-price-max="<?=$value['max']?>" data-price-min="<?=$value['min']?>">
-						<label class="pointer" for="type_condo"><?=$value['label']?></label>
+					<div class="flex inline popup-filter-price p-2 pointer pl-6" onclick="filter_price_select(this)" data-price-max="<?= isset($value['max']) ? $value['max'] : '';?>" data-price-min="<?= isset($value['min']) ? $value['min'] : '';?>">
+						<label class="pointer" for="type_condo"><?= isset($value['label']) ? $value['label'] : '';?></label>
 						<div class="ratio-box" style="display:none;">
 							<div class="ratio-box-inner-x"></div>
 						</div>
 					</div>
 					<?php
 				}
-				?>
+			}
+			?>
 			</div>
 		</div>
 	</div>
@@ -698,9 +718,10 @@ $endtime = microtime(true); // Bottom of page
 	<sp class="sp-mini"></sp>
 	<div id="filter_loca_mini" class="mini-filter-toggle-1">
 		<div class="bg-white">
-			<span class="pl-3 cl-ci-blue-300" style="font-size: 26px;"><?php pll_e('ในกรุงเทพฯ')?></span>
-			<br>
-			<?php
+					<span class="pl-3 cl-ci-blue-300" style="font-size: 26px;"><?php pll_e('ในกรุงเทพฯ')?></span>
+		<br>
+		<?php
+		if (isset($term_pj_location['in-bangkok']) && isset($term_pj_location['in-bangkok']->child)) {
 			foreach ($term_pj_location['in-bangkok']->child as $key => $value) { 
 				?>
 				<div class="flex inline-flex popup-filter" slug="<?=$value->slug?>" num="1" onclick="check_chk(this, 1);sort_info()">
@@ -711,11 +732,13 @@ $endtime = microtime(true); // Bottom of page
 			</div>
 			<?php 
 		}
-		?>
+	}
+	?>
 		<sp style="height: 20px;"></sp>
-		<span class="pl-3 cl-ci-blue-300" style="font-size: 26px;"><?php pll_e('ต่างจังหวัด')?></span>
-		<br>
-		<?php
+			<span class="pl-3 cl-ci-blue-300" style="font-size: 26px;"><?php pll_e('ต่างจังหวัด')?></span>
+	<br>
+	<?php
+	if (isset($term_pj_location['upcountry']) && isset($term_pj_location['upcountry']->child)) {
 		foreach ($term_pj_location['upcountry']->child as $key => $value) { 
 			?>
 			<div class="flex inline-flex popup-filter" slug="<?=$value->slug?>" num="1" onclick="check_chk(this, 1);sort_info()">
@@ -726,7 +749,8 @@ $endtime = microtime(true); // Bottom of page
 		</div>
 		<?php 
 	}
-	?>
+}
+?>
 </div>
 <sp style="height: 20px;"></sp>
 <hr style="color: var(--cl-ci-grey-900);width: 100%;">
@@ -749,9 +773,10 @@ $endtime = microtime(true); // Bottom of page
 <sp class="sp-mini"></sp>
 <div id="filter_brand_mini" class="mini-filter-toggle-2">
 	<div class="bg-white">
-		<span class="pl-3 cl-ci-blue-300" style="font-size: 26px;"><?=$s_type_title?></span>
-		<br>
-		<?php
+			<span class="pl-3 cl-ci-blue-300" style="font-size: 26px;"><?=$s_type_title?></span>
+	<br>
+	<?php
+	if (isset($term_pj_type['condominium']) && isset($term_pj_type['condominium']->child)) {
 		foreach ($term_pj_type['condominium']->child as $key => $value) {
 			$iconic = get_field('project_logo',$value->taxonomy . '_' . $value->term_id); 
 			$is_show = get_field('is_show',$value->taxonomy . '_' . $value->term_id);
@@ -760,14 +785,15 @@ $endtime = microtime(true); // Bottom of page
 				<div class="flex inline-flex popup-filter" slug="<?=$value->slug?>" num="2" onclick="check_chk(this, 2);sort_info()">
 					<label class="check-wrap" termId="<?=$value->term_id?>" name="<?= $value->name ?>">
 						<input type="checkbox" name="<?= $value->name ?>">
-						<img src="<?=$iconic['url']?>" style="width: auto;height: 30px;margin-right: 5px;" >
+						<img src="<?= isset($iconic['url']) ? $iconic['url'] : '';?>" style="width: auto;height: 30px;margin-right: 5px;" >
 
 						<span class="checkmark" style="margin-top: 4px;"></span>
 					</label>
 				</div>
 			<?php }
 		}
-		?>
+	}
+	?>
 	</div>
 	<sp style="height: 20px;"></sp>
 	<hr style="color: var(--cl-ci-grey-900);width: 100%;">
@@ -793,15 +819,17 @@ $endtime = microtime(true); // Bottom of page
 <div id="filter_cost_mini" class="mini-filter-toggle-3">
 	<div class="bg-white pl-5">
 		<?php 
-		foreach ($filter_price as $key => $value) {
-			?>
-			<div class="flex inline popup-filter-price -mini p-2 pointer justify-between pr-0" onclick="filter_price_select(this)" data-price-max="<?=$value['max']?>" data-price-min="<?=$value['min']?>">
-				<label class="pointer" for="type_condo"><?=$value['label']?></label>
-				<div class="ratio-box">
-					<div class="ratio-box-inner"></div>
+		if (!empty($filter_price)) {
+			foreach ($filter_price as $key => $value) {
+				?>
+				<div class="flex inline popup-filter-price -mini p-2 pointer justify-between pr-0" onclick="filter_price_select(this)" data-price-max="<?= isset($value['max']) ? $value['max'] : '';?>" data-price-min="<?= isset($value['min']) ? $value['min'] : '';?>">
+					<label class="pointer" for="type_condo"><?= isset($value['label']) ? $value['label'] : '';?></label>
+					<div class="ratio-box">
+						<div class="ratio-box-inner"></div>
+					</div>
 				</div>
-			</div>
-			<?php
+				<?php
+			}
 		}
 		?>
 	</div>
@@ -915,14 +943,15 @@ $endtime = microtime(true); // Bottom of page
 </script>
 
 <?php 
-$pro_type = explode(",", $_GET['type']);
-$pro_loca = explode(",", $_GET['location']);
-$pro_brand = explode(",", $_GET['brand']);
-$pro_price = ($_GET['price']);
+// Validate and sanitize $_GET parameters
+$pro_type = isset($_GET['type']) && !empty($_GET['type']) ? explode(",", sanitize_text_field($_GET['type'])) : array('');
+$pro_loca = isset($_GET['location']) && !empty($_GET['location']) ? explode(",", sanitize_text_field($_GET['location'])) : array('');
+$pro_brand = isset($_GET['brand']) && !empty($_GET['brand']) ? explode(",", sanitize_text_field($_GET['brand'])) : array('');
+$pro_price = isset($_GET['price']) ? sanitize_text_field($_GET['price']) : '';
 
 // new price
-$pro_price_max = ($_GET['price_max']);
-$pro_price_min = ($_GET['price_min']);
+$pro_price_max = isset($_GET['price_max']) ? sanitize_text_field($_GET['price_max']) : '';
+$pro_price_min = isset($_GET['price_min']) ? sanitize_text_field($_GET['price_min']) : '';
 // end new price
 
 $lis_type = array();
@@ -934,10 +963,16 @@ foreach ($pro_type as $key => $value) {
 	array_push($lis_type, $stat_label);
 }
 foreach ($pro_loca as $key => $value) {
-	array_push($lis_loca, get_term($value)->name);
+	$term = get_term($value);
+	if (!is_wp_error($term) && $term) {
+		array_push($lis_loca, $term->name);
+	}
 }
 foreach ($pro_brand as $key => $value) {
-	array_push($lis_brand, get_term($value)->name);
+	$term = get_term($value);
+	if (!is_wp_error($term) && $term) {
+		array_push($lis_brand, $term->name);
+	}
 }
 
 ?>
@@ -1802,8 +1837,12 @@ foreach ($pro_brand as $key => $value) {
 					'taxonomy'  => 'private-project',
 					'field'     => 'slug',
 					'terms'     => 'private',
+					'operator'  => 'NOT IN'),
+				array(
+					'taxonomy'  => 'project_status',
+					'field'     => 'slug',
+					'terms'     => 'sold-out',
 					'operator'  => 'NOT IN')
-
 			),
 		);
 		$loop = new WP_Query( $args );
@@ -1863,7 +1902,10 @@ foreach ($pro_brand as $key => $value) {
 			$order = 0;
 			while ( $loop->have_posts() ) : $loop->the_post(); {
 				$featured_img = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
-				$cate_name = wp_get_object_terms( $post->ID, 'project-type');
+							$cate_name = wp_get_object_terms( $post->ID, 'project-type');
+			$cate_parent = null;
+			$cate_brand = null;
+			if (!is_wp_error($cate_name) && !empty($cate_name)) {
 				foreach ($cate_name as $pjt_k => $pjt_v) {
 					if ($pjt_v->parent == 0) {
 						$cate_parent = $pjt_v;
@@ -1871,7 +1913,12 @@ foreach ($pro_brand as $key => $value) {
 						$cate_brand = $pjt_v;
 					}
 				}
-				$loca_name = wp_get_object_terms( $post->ID, 'project_location');
+			}
+			
+			$loca_name = wp_get_object_terms( $post->ID, 'project_location');
+			$loca_parent = null;
+			$loca_child = null;
+			if (!is_wp_error($loca_name) && !empty($loca_name)) {
 				foreach ($loca_name as $pjt_k => $pjt_v) {
 					if ($pjt_v->parent == 0) {
 						$loca_parent = $pjt_v;
@@ -1879,58 +1926,73 @@ foreach ($pro_brand as $key => $value) {
 						$loca_child = $pjt_v;
 					}
 				}
-				
-				$stat_name = wp_get_object_terms( $post->ID, 'project_status');
+			}
+			
+			$stat_name = wp_get_object_terms( $post->ID, 'project_status');
+			$cate_icon = null;
+			$stat_color = '';
+			$stat_label = '';
+			
+			if ($cate_parent) {
 				$cate_icon = get_field('icon','project-type' . '_' . $cate_parent->term_id);
+			}
+			
+			if (!is_wp_error($stat_name) && !empty($stat_name)) {
 				$stat_color = get_field('color','project_status' . '_' . $stat_name[0]->term_id);
 				$stat_label = get_field('label','project_status' . '_' . $stat_name[0]->term_id);
-				$price = get_field('price');
-				$order++;
-				$pj_price = 0;
+			}
+			
+			$price = get_field('price');
+			$order++;
+			$pj_price = 0;
+			if ($price) {
 				$float_value = (float) $price;
 				if (strval($float_value) == $price) {
 					$pj_price = floatval($price)*100;
 				}
-				$logo = get_field('logo')['sizes']['large'];
+			}
+			
+			$logo_field = get_field('logo');
+			$logo = (isset($logo_field['sizes']['large'])) ? $logo_field['sizes']['large'] : '';
 				?>
-				<div data-compare-id="<?=$post->ID?>" data-compare-selected="0" the="<?=$cate_parent->name?>" cate="<?=$cate_brand->name?>" data-price="<?=$pj_price?>" data-date="<?=$order?>" loca="<?=$loca_child->name?>" type="<?=$stat_label?>" class="home-project-card col-span-1 project-card card-img" style="--i:<?=$order?>;order:calc( var(--i) * var(--sortby) * -1);display: grid;">
-					<a href="<?=get_the_permalink()?>" class="" target="_blank">
-						<div data-compare-id="<?=$post->ID?>" class="card-project relative pointer grid grid-cols-2 md:block" data-show="0" data-x="null">
-							<div class="py-4 col-start-2 col-span-1" style="padding-right: 12px;background-color: white;">
-								<div class="grid grid-rows-2 md:grid-rows-1 md:grid-cols-2">
-									<div class="row-span-1 md:col-span-1 pl-4 flex items-center" style="color: <?= $stat_color ?>;border-left: 4px solid <?= $stat_color ?>;">
-										<span class="" style="font-weight: 700;font-size: 18px;line-height: 20px;"><?=$stat_name[0]->name?></span>
-									</div>
-									<div class="row-start-1 row-span-1 md:col-start-2 md:col-span-1">
-										<img src="<?= $logo?>" class="project-card-logo">
-									</div>
+							<div data-compare-id="<?=$post->ID?>" data-compare-selected="0" the="<?= $cate_parent ? $cate_parent->name : '';?>" cate="<?= $cate_brand ? $cate_brand->name : '';?>" data-price="<?=$pj_price?>" data-date="<?=$order?>" loca="<?= $loca_child ? $loca_child->name : '';?>" type="<?=$stat_label?>" class="home-project-card col-span-1 project-card card-img" style="--i:<?=$order?>;order:calc( var(--i) * var(--sortby) * -1);display: grid;">
+				<a href="<?=get_the_permalink()?>" class="" target="_blank">
+					<div data-compare-id="<?=$post->ID?>" class="card-project relative pointer grid grid-cols-2 md:block" data-show="0" data-x="null">
+						<div class="py-4 col-start-2 col-span-1" style="padding-right: 12px;background-color: white;">
+							<div class="grid grid-rows-2 md:grid-rows-1 md:grid-cols-2">
+								<div class="row-span-1 md:col-span-1 pl-4 flex items-center" style="color: <?= $stat_color ?>;border-left: 4px solid <?= $stat_color ?>;">
+									<span class="" style="font-weight: 700;font-size: 18px;line-height: 20px;"><?= !is_wp_error($stat_name) && !empty($stat_name) ? $stat_name[0]->name : '';?></span>
 								</div>
-							</div>
-							<div class="overflow-hidden row-start-1 col-span-1">
-								<div class="bg-cover blank project-card-image" ratio="2:3" style="background-image:linear-gradient(0deg, #000c,#0008,#0001, transparent,transparent,transparent),url('<?php echo get_the_post_thumbnail_url($post->ID, '2048x2048') ?>');">
-								</div>
-							</div>
-							<div class="bottom-left project-card-info-1">
-								<div class="flex flex-row items-center" class="f22-20">
-									<img src="<?=$cate_icon['url']?>" class="project-card-icon -condo"><?=$cate_parent->name?>
-								</div>
-								<div class="flex flex-row items-center" class="f22-20" style="margin-top: 6px;">
-									<img src="/wp-content/uploads/2022/10/Icon-in-input-1.png" class="project-card-icon -loca"><?=$loca_child->name?>
-								</div>
-							</div>
-							<div class="bottom-right project-card-info-2">
-								<div class="-desktop">
-									<?php pll_e('เริ่มต้น')?>
-									<div class="txt-price"><?=$price?></div>
-									<?php pll_e('ล้านบาท')?>
-								</div>
-								<div class="-mobile">
-									<div><?php pll_e('เริ่มต้น')?></div>
-									<span class="txt-price" style="margin-right: 9px;"><?=$price?></span><?php pll_e('ล้านบาท')?>
+								<div class="row-start-1 row-span-1 md:col-start-2 md:col-span-1">
+									<img src="<?= $logo?>" class="project-card-logo">
 								</div>
 							</div>
 						</div>
-					</a>
+						<div class="overflow-hidden row-start-1 col-span-1">
+							<div class="bg-cover blank project-card-image" ratio="2:3" style="background-image:linear-gradient(0deg, #000c,#0008,#0001, transparent,transparent,transparent),url('<?php echo get_the_post_thumbnail_url($post->ID, '2048x2048') ?>');">
+							</div>
+						</div>
+						<div class="bottom-left project-card-info-1">
+							<div class="flex flex-row items-center" class="f22-20">
+								<img src="<?= isset($cate_icon['url']) ? $cate_icon['url'] : '';?>" class="project-card-icon -condo"><?= $cate_parent ? $cate_parent->name : '';?>
+							</div>
+							<div class="flex flex-row items-center" class="f22-20" style="margin-top: 6px;">
+								<img src="/wp-content/uploads/2022/10/Icon-in-input-1.png" class="project-card-icon -loca"><?= $loca_child ? $loca_child->name : '';?>
+							</div>
+						</div>
+						<div class="bottom-right project-card-info-2">
+							<div class="-desktop">
+								<?php pll_e('เริ่มต้น')?>
+								<div class="txt-price"><?= $price ? $price : '';?></div>
+								<?php pll_e('ล้านบาท')?>
+							</div>
+							<div class="-mobile">
+								<div><?php pll_e('เริ่มต้น')?></div>
+								<span class="txt-price" style="margin-right: 9px;"><?= $price ? $price : '';?></span><?php pll_e('ล้านบาท')?>
+							</div>
+						</div>
+					</div>
+				</a>
 					<div class="-pj-cp" data-show="0" data-compare-id="<?=$post->ID?>" onclick="cp_add_project(`<?=$post->ID?>`,`<?=$post->post_name?>`,`<?=$post->post_title?>`)">
 						<div class="-s0">
 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -2036,8 +2098,8 @@ foreach ($pro_brand as $key => $value) {
 </script>
 
 <script type="text/javascript">
-	url_min = "<?=$_GET['price_min']?>"
-	url_max = "<?=$_GET['price_max']?>"
+	url_min = "<?= isset($_GET['price_min']) ? sanitize_text_field($_GET['price_min']) : '';?>"
+	url_max = "<?= isset($_GET['price_max']) ? sanitize_text_field($_GET['price_max']) : '';?>"
 	if ($(`[data-price-max="${url_max}"][data-price-min="${url_min}"]`)) {
 		xconsolex.log('not have')
 		$(`[data-price-max="${url_max}"][data-price-min="${url_min}"]`).click()
