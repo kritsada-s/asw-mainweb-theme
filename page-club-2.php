@@ -5,7 +5,6 @@
  * @package SeedSpring
  */
 ?>
-<script src="https://cdn.tailwindcss.com"></script>
 
 <?php get_header() ?>
 
