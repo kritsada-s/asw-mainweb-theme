@@ -41,17 +41,17 @@ function project_card($post) {
     width: 100%;
     height: 100%;
     background-color: #000;
-    opacity: 0.4;
+    opacity: 0.5;
     z-index: 1;
   }
 </style>
 
 <div id="project_by_location">
-  <div class="pbl-banner min-h-[250px] xl:min-h-[420px] bg-cover bg-center flex items-center justify-center relative" style="background-image: url(<?php echo $hero_banner_image; ?>);">
+  <div class="pbl-banner min-h-[250px] xl:min-h-[300px] bg-cover bg-center flex items-center justify-center relative" style="background-image: url(<?php echo $hero_banner_image; ?>);">
     <div class="pbl-banner-content text-center relative z-10 w-11/12 mx-auto">
       <h3 class="text-white font-medium">ASSETWISE</h3>
-      <h1 class="pbl-banner-title text-white lg:!text-6xl font-medium"><?php echo $hero_banner_title; ?></h1>
-      <p class="pbl-banner-subtitle text-white text-[20px]"><?php echo $hero_banner_subtitle; ?></p>
+      <h1 class="pbl-banner-title text-white lg:!text-5xl font-medium"><?php echo $hero_banner_title; ?></h1>
+      <p class="pbl-banner-subtitle text-white text-[18px] md:text-[20px]"><?php echo $hero_banner_subtitle; ?></p>
     </div>
   </div>
 
