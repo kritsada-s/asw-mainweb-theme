@@ -117,6 +117,9 @@ function pad($num)
 	}
 }
 ?>
+<pre>
+	<?php print_r($f); ?>
+</pre>
 <script type="text/javascript">
 	function pad(num, size) {
 		num = num.toString();

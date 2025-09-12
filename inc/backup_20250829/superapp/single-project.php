@@ -1,32 +1,22 @@
 <?php
-do_action('qm/debug', 'API Endpoint Loaded');
-
-include('superapp/utils.php');
-include('superapp/all-projects.php');
-include('superapp/single-project.php');
-include('superapp/promotions.php');
-
-// ==========================================
-// TEST FUNCTION
-// ==========================================
-
+// Add custom REST API endpoint for specific project
 add_action('rest_api_init', function () {
-  register_rest_route('wp/v2', '/project-test/(?P<id>[0-9]+)', array(
-    'methods' => 'GET',
-    'callback' => 'get_specific_project_test',
-    'permission_callback' => '__return_true',
-    'args' => array(
-      'id' => array(
-        'required' => true,
-        'validate_callback' => function($param) {
-          return is_numeric($param);
-        }
+  register_rest_route('wp/v2', '/project/(?P<id>[0-9]+)', array(
+      'methods' => 'GET',
+      'callback' => 'get_specific_project',
+      'permission_callback' => '__return_true',
+      'args' => array(
+          'id' => array(
+              'required' => true,
+              'validate_callback' => function($param) {
+                  return is_numeric($param);
+              }
+          )
       )
-    )
   ));
 });
 
-function get_specific_project_test($request) {
+function get_specific_project($request) {
   $id = (int)$request['id'];
   $lang = pll_get_post_language($id);
   $content_layout_key = 'v2_content';
@@ -65,12 +55,50 @@ function get_specific_project_test($request) {
     'gallery' => $processed_project_content['gallery'],
     'brochure' => $processed_project_content['brochure'] ?? '',
     'videos' => $processed_project_content['videos'] ?? [],
-    'webLink' => get_permalink($id)
+    'webLink' => get_permalink($id),
+    'utm_source' => 'asw-app_register'
   );
 
   return rest_ensure_response($project_data);
   
   return new WP_Error('no_project', 'Project not found', array('status' => 404));
+}
+
+// Add REST API for get Facility
+add_action('rest_api_init', function () {
+  register_rest_route('asw-api/v1', '/getProjectFacility', array(
+    'methods' => 'GET',
+    'callback' => 'get_project_facility',
+    'permission_callback' => '__return_true',
+    'args' => array(
+      'url' => array(
+        'required' => true,
+        'validate_callback' => function($param) {
+          return is_string($param);
+        }
+      )
+    )
+  ));
+});
+
+function get_project_facility($request) {
+  $id = url_to_postid($request['url']);
+  $fields = get_fields($id);
+  if (isset($fields['v2_content']) && is_array($fields['v2_content'])) {
+    foreach ($fields['v2_content'] as $content_block) {
+      if ($content_block['acf_fc_layout'] === 'facility') {
+        $processed_content = $content_block['facility'];
+      }
+    }
+  }
+  foreach ($processed_content as $content) {
+    $response[] = array(
+      'image' => $content['image']['url'],
+      'title' => $content['title'],
+      'description' => $content['description']
+    );
+  }
+  return rest_ensure_response($response);
 }
 
 ?>

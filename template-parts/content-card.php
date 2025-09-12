@@ -3,7 +3,7 @@
  * Loop Name: Content Card
  */
 ?>
-<article id="post-<?php the_ID(); ?>" <?php post_class('content-item xxx -card'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('content-item -card'); ?>>
     <div class="pic">
         <a href="<?php the_permalink(); ?>" title="Permalink to <?php the_title_attribute(); ?>" rel="bookmark">
             <?php if(has_post_thumbnail()) : ?>
