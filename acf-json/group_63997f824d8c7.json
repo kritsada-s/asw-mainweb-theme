@@ -3,6 +3,13 @@
     "title": "🧾 Project Info",
     "fields": [
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_647aebdd75ab5",
             "label": "Project ID",
             "name": "project_id",
@@ -16,12 +23,6 @@
                 "class": "",
                 "id": ""
             },
-            "show_column_filter": false,
-            "allow_bulkedit": false,
-            "allow_quickedit": false,
-            "show_column": false,
-            "show_column_weight": 1000,
-            "show_column_sortable": false,
             "default_value": "",
             "min": "",
             "max": "",
@@ -31,6 +32,13 @@
             "append": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_6564b3d747c54",
             "label": "Project Code",
             "name": "project_code",
@@ -52,6 +60,13 @@
             "append": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_63997f86232d9",
             "label": "Project Logo",
             "name": "logo",
@@ -65,12 +80,6 @@
                 "class": "",
                 "id": ""
             },
-            "show_column_filter": false,
-            "allow_bulkedit": false,
-            "allow_quickedit": false,
-            "show_column": false,
-            "show_column_weight": 1000,
-            "show_column_sortable": false,
             "uploader": "",
             "return_format": "array",
             "dropzone": 1,
@@ -86,6 +95,13 @@
             "library": "all"
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": 0,
+            "allow_quickedit": 0,
+            "show_column": 0,
+            "show_column_weight": 1000,
+            "show_column_sortable": 0,
             "key": "field_63997f8c232da",
             "label": "Price",
             "name": "price",
@@ -99,12 +115,6 @@
                 "class": "",
                 "id": ""
             },
-            "show_column_filter": false,
-            "allow_bulkedit": 0,
-            "allow_quickedit": 0,
-            "show_column": 0,
-            "show_column_weight": 1000,
-            "show_column_sortable": 0,
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -112,6 +122,13 @@
             "maxlength": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_6403a42c98447",
             "label": "Telephone Number",
             "name": "telephone_number",
@@ -125,12 +142,6 @@
                 "class": "",
                 "id": ""
             },
-            "show_column_filter": false,
-            "allow_bulkedit": false,
-            "allow_quickedit": false,
-            "show_column": false,
-            "show_column_weight": 1000,
-            "show_column_sortable": false,
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -138,6 +149,13 @@
             "append": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_6403a45598449",
             "label": "Line ID",
             "name": "line_id",
@@ -151,12 +169,6 @@
                 "class": "",
                 "id": ""
             },
-            "show_column_filter": false,
-            "allow_bulkedit": false,
-            "allow_quickedit": false,
-            "show_column": false,
-            "show_column_weight": 1000,
-            "show_column_sortable": false,
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -164,6 +176,13 @@
             "append": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_6403a47a9844b",
             "label": "Facebook",
             "name": "facebook",
@@ -177,12 +196,6 @@
                 "class": "",
                 "id": ""
             },
-            "show_column_filter": false,
-            "allow_bulkedit": false,
-            "allow_quickedit": false,
-            "show_column": false,
-            "show_column_weight": 1000,
-            "show_column_sortable": false,
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -190,6 +203,13 @@
             "append": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_6403a4b79844d",
             "label": "Sales Gallery",
             "name": "sales_gallery",
@@ -203,12 +223,6 @@
                 "class": "",
                 "id": ""
             },
-            "show_column_filter": false,
-            "allow_bulkedit": false,
-            "allow_quickedit": false,
-            "show_column": false,
-            "show_column_weight": 1000,
-            "show_column_sortable": false,
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -216,6 +230,13 @@
             "append": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_674445f35ad5d",
             "label": "Terms & Conditions",
             "name": "terms_conditions",
@@ -249,6 +270,13 @@
             "save_post_type": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_6819c72cc0d36",
             "label": "Project Coordinates",
             "name": "coordinates",
@@ -271,6 +299,13 @@
             "append": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_6819c740c0d37",
             "label": "Project Address",
             "name": "project_address",
@@ -293,6 +328,13 @@
             "append": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_6819d617f31fc",
             "label": "Project Short Description",
             "name": "project_short_description",
@@ -316,6 +358,13 @@
             "new_lines": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_686b33e6bcbef",
             "label": "Floating Action Bar",
             "name": "is_show_floating_action_bar",
@@ -336,6 +385,64 @@
             "ui_on_text": "Show",
             "ui_off_text": "Hide",
             "ui": 1
+        },
+        {
+            "allow_backendsearch": 0,
+            "show_column_filter": false,
+            "allow_bulkedit": 0,
+            "allow_quickedit": 0,
+            "show_column": 0,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
+            "key": "field_68cb6ee3885a0",
+            "label": "ชื่อโครงการภาษาไทย",
+            "name": "project_name_th",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "translations": "sync",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "allow_backendsearch": 0,
+            "show_column_filter": false,
+            "allow_bulkedit": 0,
+            "allow_quickedit": 0,
+            "show_column": 0,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
+            "key": "field_68cb6f03885a1",
+            "label": "ชื่อโครงการอังกฤษ",
+            "name": "project_name_en",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "translations": "sync",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -373,7 +480,8 @@
         "json"
     ],
     "acfe_form": 0,
+    "qef_simple_location_rules": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1751856183
+    "modified": 1758162708
 }

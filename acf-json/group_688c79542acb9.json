@@ -3,6 +3,13 @@
     "title": "Campaign Template",
     "fields": [
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_688c795499f13",
             "label": "Hero Banner",
             "name": "hero_banner",
@@ -26,6 +33,13 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
+                    "allow_backendsearch": false,
+                    "show_column_filter": false,
+                    "allow_bulkedit": false,
+                    "allow_quickedit": false,
+                    "show_column": false,
+                    "show_column_weight": 1000,
+                    "show_column_sortable": false,
                     "key": "field_688c79bc99f15",
                     "label": "Desktop Banner",
                     "name": "desktop_banner",
@@ -57,6 +71,13 @@
                     "parent_repeater": "field_688c795499f13"
                 },
                 {
+                    "allow_backendsearch": false,
+                    "show_column_filter": false,
+                    "allow_bulkedit": false,
+                    "allow_quickedit": false,
+                    "show_column": false,
+                    "show_column_weight": 1000,
+                    "show_column_sortable": false,
                     "key": "field_688c79d299f16",
                     "label": "Mobile Banner",
                     "name": "mobile_banner",
@@ -90,6 +111,13 @@
             ]
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_688c7cb68fdca",
             "label": "Page Setting",
             "name": "page_setting",
@@ -108,6 +136,13 @@
             "acfe_group_modal": 0,
             "sub_fields": [
                 {
+                    "allow_backendsearch": false,
+                    "show_column_filter": false,
+                    "allow_bulkedit": false,
+                    "allow_quickedit": false,
+                    "show_column": false,
+                    "show_column_weight": 1000,
+                    "show_column_sortable": false,
                     "key": "field_688c7cc58fdcb",
                     "label": "Show Project Label",
                     "name": "show_project_label",
@@ -130,11 +165,18 @@
                     "ui": 1
                 },
                 {
+                    "allow_backendsearch": false,
+                    "show_column_filter": 0,
+                    "allow_bulkedit": 0,
+                    "allow_quickedit": 0,
+                    "show_column": 0,
+                    "show_column_weight": 1000,
+                    "show_column_sortable": false,
                     "key": "field_688c7d30b4ee2",
-                    "label": "Group Project",
-                    "name": "group_project",
+                    "label": "Display Type",
+                    "name": "display_type",
                     "aria-label": "",
-                    "type": "true_false",
+                    "type": "select",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -143,13 +185,22 @@
                         "class": "",
                         "id": ""
                     },
-                    "message": "",
-                    "default_value": 0,
+                    "choices": {
+                        "default": "Default",
+                        "group": "Group",
+                        "tabs": "Tabs"
+                    },
+                    "default_value": "default",
+                    "return_format": "value",
+                    "multiple": 0,
+                    "allow_custom": 0,
+                    "search_placeholder": "",
                     "translations": "copy_once",
-                    "allow_in_bindings": 0,
-                    "ui_on_text": "",
-                    "ui_off_text": "",
-                    "ui": 1
+                    "allow_null": 0,
+                    "allow_in_bindings": 1,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": ""
                 }
             ],
             "acfe_group_modal_close": 0,
@@ -157,6 +208,13 @@
             "acfe_group_modal_size": "large"
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_688c799799f14",
             "label": "Campaign Detail",
             "name": "campaign_detail",
@@ -175,6 +233,13 @@
             "acfe_group_modal": 0,
             "sub_fields": [
                 {
+                    "allow_backendsearch": false,
+                    "show_column_filter": false,
+                    "allow_bulkedit": false,
+                    "allow_quickedit": false,
+                    "show_column": false,
+                    "show_column_weight": 1000,
+                    "show_column_sortable": false,
                     "key": "field_688c7b31f6036",
                     "label": "Campaign Title",
                     "name": "campaign_title",
@@ -197,6 +262,13 @@
                     "append": ""
                 },
                 {
+                    "allow_backendsearch": false,
+                    "show_column_filter": false,
+                    "allow_bulkedit": false,
+                    "allow_quickedit": false,
+                    "show_column": false,
+                    "show_column_weight": 1000,
+                    "show_column_sortable": false,
                     "key": "field_688c7b3ff6037",
                     "label": "Campaign Description",
                     "name": "campaign_description",
@@ -225,6 +297,13 @@
             "acfe_group_modal_size": "large"
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": 0,
+            "allow_quickedit": 0,
+            "show_column": 0,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_688c7b57f5837",
             "label": "Projects Selector Plain",
             "name": "projects_selector_plain",
@@ -236,8 +315,8 @@
                 [
                     {
                         "field": "field_688c7d30b4ee2",
-                        "operator": "!=",
-                        "value": "1"
+                        "operator": "==",
+                        "value": "default"
                     }
                 ]
             ],
@@ -256,10 +335,10 @@
             "multiple": 0,
             "save_custom": 0,
             "save_post_status": "publish",
+            "translations": "copy_once",
             "acfe_bidirectional": {
                 "acfe_bidirectional_enabled": "0"
             },
-            "translations": "copy_once",
             "allow_null": 0,
             "allow_in_bindings": 0,
             "bidirectional": 0,
@@ -268,6 +347,13 @@
             "save_post_type": ""
         },
         {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
             "key": "field_688c7baff5838",
             "label": "Projects Selector Group",
             "name": "projects_selector_group",
@@ -280,7 +366,7 @@
                     {
                         "field": "field_688c7d30b4ee2",
                         "operator": "==",
-                        "value": "1"
+                        "value": "group"
                     }
                 ]
             ],
@@ -299,6 +385,13 @@
             "rows_per_page": 20,
             "sub_fields": [
                 {
+                    "allow_backendsearch": false,
+                    "show_column_filter": false,
+                    "allow_bulkedit": false,
+                    "allow_quickedit": false,
+                    "show_column": false,
+                    "show_column_weight": 1000,
+                    "show_column_sortable": false,
                     "key": "field_688c7be8f5839",
                     "label": "Project Group",
                     "name": "project_group",
@@ -317,6 +410,13 @@
                     "acfe_group_modal": 0,
                     "sub_fields": [
                         {
+                            "allow_backendsearch": false,
+                            "show_column_filter": false,
+                            "allow_bulkedit": false,
+                            "allow_quickedit": false,
+                            "show_column": false,
+                            "show_column_weight": 1000,
+                            "show_column_sortable": false,
                             "key": "field_688c7bfbf583a",
                             "label": "Group Name",
                             "name": "group_name",
@@ -339,6 +439,13 @@
                             "append": ""
                         },
                         {
+                            "allow_backendsearch": false,
+                            "show_column_filter": false,
+                            "allow_bulkedit": false,
+                            "allow_quickedit": false,
+                            "show_column": false,
+                            "show_column_weight": 1000,
+                            "show_column_sortable": false,
                             "key": "field_688c7c0df583b",
                             "label": "Project Object",
                             "name": "project_object",
@@ -362,6 +469,13 @@
                             "rows_per_page": 20,
                             "sub_fields": [
                                 {
+                                    "allow_backendsearch": false,
+                                    "show_column_filter": false,
+                                    "allow_bulkedit": false,
+                                    "allow_quickedit": false,
+                                    "show_column": false,
+                                    "show_column_weight": 1000,
+                                    "show_column_sortable": false,
                                     "key": "field_688c7c1cf583c",
                                     "label": "Project",
                                     "name": "project",
@@ -400,6 +514,13 @@
                                     "parent_repeater": "field_688c7c0df583b"
                                 },
                                 {
+                                    "allow_backendsearch": false,
+                                    "show_column_filter": false,
+                                    "allow_bulkedit": false,
+                                    "allow_quickedit": false,
+                                    "show_column": false,
+                                    "show_column_weight": 1000,
+                                    "show_column_sortable": false,
                                     "key": "field_688c7c65f583d",
                                     "label": "Project Title",
                                     "name": "project_title",
@@ -423,6 +544,13 @@
                                     "parent_repeater": "field_688c7c0df583b"
                                 },
                                 {
+                                    "allow_backendsearch": false,
+                                    "show_column_filter": false,
+                                    "allow_bulkedit": false,
+                                    "allow_quickedit": false,
+                                    "show_column": false,
+                                    "show_column_weight": 1000,
+                                    "show_column_sortable": false,
                                     "key": "field_688c7c70f583e",
                                     "label": "Project Location",
                                     "name": "project_location",
@@ -446,6 +574,13 @@
                                     "parent_repeater": "field_688c7c0df583b"
                                 },
                                 {
+                                    "allow_backendsearch": false,
+                                    "show_column_filter": false,
+                                    "allow_bulkedit": false,
+                                    "allow_quickedit": false,
+                                    "show_column": false,
+                                    "show_column_weight": 1000,
+                                    "show_column_sortable": false,
                                     "key": "field_688c7c80f583f",
                                     "label": "Project Price",
                                     "name": "project_price",
@@ -477,6 +612,250 @@
                     "parent_repeater": "field_688c7baff5838"
                 }
             ]
+        },
+        {
+            "allow_backendsearch": false,
+            "show_column_filter": false,
+            "allow_bulkedit": false,
+            "allow_quickedit": false,
+            "show_column": false,
+            "show_column_weight": 1000,
+            "show_column_sortable": false,
+            "key": "field_68ca5d575c8c5",
+            "label": "Project Selector Tabs",
+            "name": "project_selector_tabs",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_688c7d30b4ee2",
+                        "operator": "==",
+                        "value": "tabs"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "acfe_repeater_stylised_button": 0,
+            "layout": "block",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "allow_backendsearch": 0,
+                    "show_column_filter": false,
+                    "allow_bulkedit": 0,
+                    "allow_quickedit": 0,
+                    "show_column": 0,
+                    "show_column_weight": 1000,
+                    "show_column_sortable": false,
+                    "key": "field_68ca5d755c8c6",
+                    "label": "Tab Label",
+                    "name": "tab_label",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "translations": "translate",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_68ca5d575c8c5"
+                },
+                {
+                    "allow_backendsearch": false,
+                    "show_column_filter": false,
+                    "allow_bulkedit": false,
+                    "allow_quickedit": false,
+                    "show_column": false,
+                    "show_column_weight": 1000,
+                    "show_column_sortable": false,
+                    "key": "field_68ca68b22dc20",
+                    "label": "Projects Group",
+                    "name": "projects_group",
+                    "aria-label": "",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "acfe_repeater_stylised_button": 0,
+                    "layout": "block",
+                    "min": 0,
+                    "max": 0,
+                    "collapsed": "",
+                    "button_label": "Add Row",
+                    "rows_per_page": 20,
+                    "sub_fields": [
+                        {
+                            "allow_backendsearch": 0,
+                            "show_column_filter": false,
+                            "allow_bulkedit": 0,
+                            "allow_quickedit": 0,
+                            "show_column": 0,
+                            "show_column_weight": 1000,
+                            "show_column_sortable": false,
+                            "key": "field_68ca68e02dc21",
+                            "label": "Group Label",
+                            "name": "group_label",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "translations": "translate",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_68ca68b22dc20"
+                        },
+                        {
+                            "allow_backendsearch": false,
+                            "show_column_filter": false,
+                            "allow_bulkedit": false,
+                            "allow_quickedit": false,
+                            "show_column": false,
+                            "show_column_weight": 1000,
+                            "show_column_sortable": false,
+                            "key": "field_68ca68ea2dc22",
+                            "label": "Projects",
+                            "name": "projects",
+                            "aria-label": "",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "acfe_repeater_stylised_button": 0,
+                            "layout": "table",
+                            "pagination": 0,
+                            "min": 0,
+                            "max": 0,
+                            "collapsed": "",
+                            "button_label": "Add Row",
+                            "rows_per_page": 20,
+                            "sub_fields": [
+                                {
+                                    "allow_backendsearch": false,
+                                    "show_column_filter": false,
+                                    "allow_bulkedit": 0,
+                                    "allow_quickedit": 0,
+                                    "show_column": 0,
+                                    "show_column_weight": 1000,
+                                    "show_column_sortable": false,
+                                    "key": "field_68ca69092dc23",
+                                    "label": "Project",
+                                    "name": "project",
+                                    "aria-label": "",
+                                    "type": "post_object",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "post_type": [
+                                        "condominium",
+                                        "house"
+                                    ],
+                                    "post_status": [
+                                        "publish"
+                                    ],
+                                    "taxonomy": [
+                                        "project_status:sold-out",
+                                        "project_status:new_project",
+                                        "project_status:ready_project"
+                                    ],
+                                    "return_format": "id",
+                                    "multiple": 0,
+                                    "save_custom": 0,
+                                    "save_post_status": "publish",
+                                    "translations": "copy_once",
+                                    "acfe_bidirectional": {
+                                        "acfe_bidirectional_enabled": "0"
+                                    },
+                                    "allow_null": 0,
+                                    "allow_in_bindings": 0,
+                                    "bidirectional": 0,
+                                    "ui": 1,
+                                    "bidirectional_target": [],
+                                    "save_post_type": "",
+                                    "parent_repeater": "field_68ca68ea2dc22"
+                                },
+                                {
+                                    "allow_backendsearch": 0,
+                                    "show_column_filter": false,
+                                    "allow_bulkedit": 0,
+                                    "allow_quickedit": 0,
+                                    "show_column": 0,
+                                    "show_column_weight": 1000,
+                                    "show_column_sortable": false,
+                                    "key": "field_68ca69162dc24",
+                                    "label": "Price",
+                                    "name": "price",
+                                    "aria-label": "",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "translations": "translate",
+                                    "maxlength": "",
+                                    "allow_in_bindings": 0,
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "parent_repeater": "field_68ca68ea2dc22"
+                                }
+                            ],
+                            "parent_repeater": "field_68ca68b22dc20"
+                        }
+                    ],
+                    "parent_repeater": "field_68ca5d575c8c5"
+                }
+            ]
         }
     ],
     "location": [
@@ -505,7 +884,8 @@
         "json"
     ],
     "acfe_form": 0,
+    "qef_simple_location_rules": 0,
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1754037624
+    "modified": 1758185006
 }

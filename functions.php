@@ -2937,3 +2937,13 @@ function block_specific_emails($result, $tags) {
     }
     return $result;
 }
+
+function asw_enqueue_vue_app() {
+    wp_enqueue_script('my-vue-app', get_template_directory_uri() . '/app/vue-sample/main.js', array(), '2.7.14', true);
+}
+add_action('wp_enqueue_scripts', 'asw_enqueue_vue_app');
+
+function asw_vue_app_shortcode() {
+    return '<div id="app"></div>';
+}
+add_shortcode('vue-app', 'asw_vue_app_shortcode');

@@ -796,7 +796,8 @@ function pad($num){
 					while ( $loop->have_posts() ) : $loop->the_post(); {
 						$cate_name = wp_get_post_terms( $post->ID, 'promotion_type');
 						$v = get_fields(); 
-						$featured_img = get_field('banner_mobile',$post->ID)['sizes']['medium-large-thumb'];
+						//var_dump(get_field('banner_mobile',get_the_ID()));
+						$featured_img = get_field('banner_mobile',$post->ID)['sizes']['large'];
 						$card_caption = $v['card_caption'];
 						if ($featured_img == '') {
 							$featured_img = get_the_post_thumbnail_url($post->ID,'large');
