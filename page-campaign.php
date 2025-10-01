@@ -8,6 +8,7 @@
  $fields = get_fields();
  $hero_banner = $fields['hero_banner'];
  $settings = $fields['page_setting'];
+ $cmp_detail = $fields['campaign_detail'];
 
 function clean_string($string) {
     // Remove zero-width space characters from string
@@ -62,14 +63,22 @@ function clean_string($string) {
   #register_section label, #register_section h2 {
     color: #fff;
   }
+  #register_section button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  #register_section button.loading {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 </style>
 
 <?php if ($hero_banner) : ?>
   <section id="banner">
     <?php foreach ($hero_banner as $banner) : ?>
       <div class="banner-item">
-        <img src="<?php echo $banner['desktop_banner']['url']; ?>" alt="<?php echo $banner['desktop_banner']['alt']; ?>" class="desktop-only">
-        <img src="<?php echo $banner['mobile_banner']['url']; ?>" alt="<?php echo $banner['mobile_banner']['alt']; ?>" class="mobile-only">
+        <img id="banner_desktop" src="<?php echo $banner['desktop_banner']['url']; ?>" alt="<?php echo $banner['desktop_banner']['alt']; ?>" class="desktop-only">
+        <img id="banner_mobile" src="<?php echo $banner['mobile_banner']['url']; ?>" alt="<?php echo $banner['mobile_banner']['alt']; ?>" class="mobile-only">
       </div>
     <?php endforeach; ?>
   </section>
@@ -105,8 +114,16 @@ function clean_string($string) {
 <?php elseif ($settings['display_type'] == 'tabs') : ?>
     <div class="tabs-container">
       <div class="w-full">
+        <div class="campaign-details pt-10">
+          <div class="campaign-details-item w-full lg:w-4/5 mx-auto">
+            <?php if ($cmp_detail) : ?>
+              <h1 class="text-[26px] md:text-[36px] font-bold leading-tight text-center text-[#0167bc]"><?= clean_string($cmp_detail['campaign_title']); ?></h1>
+              <div class="campaign-description text-center"><?= $cmp_detail['campaign_description']; ?></div>
+            <?php endif; ?>
+          </div>
+        </div>
         <div class="tab-buttons w-full relative">
-          <div class="w-full lg:w-4/5 mx-auto grid grid-cols-2 lg:grid-cols-4 pt-10 pb-7 gap-2 md:gap-5 px-4">
+          <div class="w-full lg:w-4/5 mx-auto grid grid-cols-2 lg:grid-cols-4 py-7 gap-2 md:gap-5 px-4">
             <?php foreach (get_field('project_selector_tabs', get_the_ID()) as $index => $tab) : ?>
               <button class="tab-button group flex items-center justify-center gap-4 min-h-10 p-4 rounded-lg transition-all duration-300 leading-none <?php echo $index === 0 ? 'active' : ''; ?>" data-tab="tab-<?php echo $index; ?>">
                 <div class="w-[30px] md:w-7 h-[30px] md:h-7 shrink-0">
@@ -193,7 +210,7 @@ function clean_string($string) {
           box.addEventListener('click', function() {
             removeCheckedClass();
             this.classList.toggle('checked');
-            console.log(this.dataset.projectId);
+            //console.log(this.dataset.projectId);
 
             const projectName = this.querySelector('.project_detail h4').textContent;
             document.getElementById('project_name').textContent = projectName;
@@ -239,7 +256,9 @@ function clean_string($string) {
         <input type="hidden" id="utm_medium" name="utm_medium" value="<?= isset($_GET['utm_medium']) ? $_GET['utm_medium'] : ''; ?>">
         <input type="hidden" id="utm_campaign" name="utm_campaign" value="<?= isset($_GET['utm_campaign']) ? $_GET['utm_campaign'] : ''; ?>">
         <input type="hidden" id="utm_term" name="utm_term" value="<?= isset($_GET['utm_term']) ? $_GET['utm_term'] : ''; ?>">
+        <input type="hidden" id="utm_id" name="utm_id" value="<?= isset($_GET['utm_id']) ? $_GET['utm_id'] : ''; ?>">
         <input type="hidden" id="utm_content" name="utm_content" value="<?= isset($_GET['utm_content']) ? $_GET['utm_content'] : ''; ?>">
+        <input type="hidden" id="thankyou_image" name="thankyou_image" value="<?= get_the_post_thumbnail_url(get_the_ID(), 'full'); ?>" readonly>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label for="fname" class="block font-medium text-gray-700 mb-2">ชื่อ *</label>
@@ -273,10 +292,14 @@ function clean_string($string) {
         
         <div class="flex items-start space-x-3">
           <input type="checkbox" id="consent" name="consent" required class="mt-1 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-          <label for="consent" class="text-gray-700 leading-none text-[16px] md:text-[18px]">บริษัทฯ จะจัดเก็บข้อมูลของท่าน เพื่อการติดต่อแจ้งข้อมูลข่าวสารที่เกี่ยวข้องกับ ผลิตภัณฑ์ บริการของบริษัทฯ และนำเสนอโครงการที่น่าสนใจ คลิกที่นี่เพื่อดู <a href="https://assetwise.co.th/privacy-policy/" class="text-white underline hover:text-gray-200">นโยบายความเป็นส่วนตัว</a></label>
+          <label for="consent" class="text-gray-700 leading-none text-[16px] md:text-[18px]">บริษัทฯ จะจัดเก็บข้อมูลของท่าน เพื่อการติดต่อแจ้งข้อมูลข่าวสารที่เกี่ยวข้องกับ ผลิตภัณฑ์ บริการของบริษัทฯ และนำเสนอโครงการที่น่าสนใจ คลิกที่นี่เพื่อดู<a class="text-white underline hover:text-gray-200" href="<?= $settings['terms_conditions']; ?>" title="ข้อตกลงและเงื่อนไข" target="_blank">ข้อตกลงและเงื่อนไข</a> และ<a href="https://assetwise.co.th/privacy-policy/" class="text-white underline hover:text-gray-200" target="_blank">นโยบายความเป็นส่วนตัว</a></label>
         </div>
         <div class="text-center">
-          <button id="submit_btn" type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105">
+          <button id="submit_btn" type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center mx-auto gap-2">
+            <svg id="loading_spinner" class="animate-spin -ml-1 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
             ลงทะเบียน
           </button>
         </div>
@@ -288,36 +311,45 @@ function clean_string($string) {
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.querySelector('#submit_btn');
+    const loadingSpinner = document.querySelector('#loading_spinner');
     submitBtn.addEventListener('click', function(e) {
       e.preventDefault();
+      submitBtn.classList.add('disabled');
+      loadingSpinner.classList.remove('hidden');
       const projectId = document.getElementById('project_id').value;
       if (projectId == '') {
         alert('กรุณาเลือกโครงการ');
+        submitBtn.classList.remove('disabled');
+        loadingSpinner.classList.add('hidden');
         return;
       }
-      // Collect form values
-      const contactTime = document.getElementById('contact_time').value;
+      // Collect form values with validation
+      const contactTime = document.getElementById('contact_time')?.value || '';
+      const contactTimeParts = contactTime.split(' ');
+      
       const formData = {
-        ProjectID: Number(document.getElementById('project_id').value),
+        ProjectID: Number(document.getElementById('project_id')?.value || 0),
         ContactChannelID: 21,
         ContactTypeID: 35,
         FollowUpID: 42,
         RefID: 20250919,
-        Ref: document.getElementById('project_name').textContent,
+        Ref: document.getElementById('project_name')?.textContent || '',
         RefDate: new Date().toISOString(),
-        Fname: document.getElementById('fname').value,
-        Lname: document.getElementById('lname').value,
-        Tel: document.getElementById('tel').value,
-        Email: document.getElementById('email').value,
-        AppointTime: contactTime.split(' ')[0],
-        AppointTimeEnd: contactTime.split(' ')[2],
+        Fname: document.getElementById('fname')?.value || '',
+        Lname: document.getElementById('lname')?.value || '',
+        Tel: document.getElementById('tel')?.value || '',
+        Email: document.getElementById('email')?.value || '',
+        AppointTime: contactTimeParts[0] || '',
+        AppointTimeEnd: contactTimeParts[2] || '',
         FlagPersonalAccept: true,
         FlagContactAccept: true,
-        utm_source: document.getElementById('utm_source').value,
-        utm_medium: document.getElementById('utm_medium').value,
-        utm_campaign: document.getElementById('utm_campaign').value,
-        utm_term: document.getElementById('utm_term').value,
-        utm_content: document.getElementById('utm_content').value
+        utm_source: document.getElementById('utm_source')?.value || '',
+        utm_medium: document.getElementById('utm_medium')?.value || '',
+        utm_campaign: document.getElementById('utm_campaign')?.value || '',
+        utm_term: document.getElementById('utm_term')?.value || '',
+        utm_id: document.getElementById('utm_id')?.value || '',
+        utm_content: document.getElementById('utm_content')?.value || '',
+        thankyou_image: document.getElementById('thankyou_image')?.value || ''
       };
 
       // Send data to API
@@ -329,19 +361,51 @@ function clean_string($string) {
         body: JSON.stringify(formData)
       })
       .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          alert('ลงทะเบียนสำเร็จ');
-          // Reset form
-          document.querySelector('form').reset();
+      .then(response => {
+        console.log(response);
+        if (response.Success) {
+          // Send to webhook with proper error handling
+          fetch('https://node.assetwise.dev/webhook/asw-log-sheet', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+          })
+          .then(webhookResponse => {
+            if (!webhookResponse.ok) {
+              console.warn('Webhook failed:', webhookResponse.status);
+            }
+            return webhookResponse;
+          })
+          .then(() => {
+            document.querySelector('form')?.reset();
+            // Redirect to thank you page
+            const currentPath = window.location.pathname;
+            const thankYouPath = currentPath + (currentPath.endsWith('/') ? '' : '/') + 'thank-you/';
+            window.location.href = thankYouPath;
+          })
+          .catch(webhookError => {
+            console.error('Webhook error:', webhookError);
+            // Still proceed with redirect even if webhook fails
+            document.querySelector('form')?.reset();
+            const currentPath = window.location.pathname;
+            const thankYouPath = currentPath + (currentPath.endsWith('/') ? '' : '/') + 'thank-you/';
+            window.location.href = thankYouPath;
+          });
         } else {
           alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+          submitBtn.classList.remove('disabled');
+          loadingSpinner.classList.add('hidden');
         }
       })
       .catch(error => {
         console.error('Error:', error);
         alert('เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่อีกครั้ง');
+        submitBtn.classList.remove('disabled');
+        loadingSpinner.classList.add('hidden');
       });
+      
     });
   });
 </script>
