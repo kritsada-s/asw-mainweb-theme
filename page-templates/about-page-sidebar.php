@@ -2,20 +2,27 @@
   $current_page = basename(get_permalink());
 ?>
 <script>
-  function handle_about_menu(index) {
-    let path = '';
+  function handle_about_menu(index, url) {
+    let lang = document.documentElement.lang;
+    let basePath = '';    
+    if (lang === 'en-US') {
+      basePath = '/en';
+    }
     switch (index) {
       case 0:
-        path = '/20th-anniversary';
+        path = basePath + '/20th-anniversary';
         break;
       case 1:
-        path = '/about-us';
+        path = basePath + '/about-us';
         break;
       case 2:
-        path = '/award';
+        path = basePath + '/award';
         break;
       case 3:
-        path = '/recent-projects';
+        path = basePath + '/recent-projects';
+        break;
+      case 4:
+        path = basePath + '/in-focus';
         break;
     }
 
@@ -54,13 +61,19 @@
       20<sup>th</sup> Anniversary
     </div>
     <sp class="hidden lg:block" style="height: 1rem;"></sp>
-    <div onclick="handle_about_menu(1)" class="about-menu px-0 lg:px-3 <?= $current_page === 'about-us' ? 'font-medium about-active-menu-item' : '' ?>">
+
+    <!-- <div onclick="handle_about_menu(1)" class="about-menu px-0 lg:px-3 <?= $current_page === 'about-us' ? 'font-medium about-active-menu-item' : '' ?>">
       <?= pll__('เกี่ยวกับแอสเซทไวส์') ?>
     </div>
-    <sp class="hidden lg:block" style="height: 1rem;"></sp>
+    <sp class="hidden lg:block" style="height: 1rem;"></sp> -->
 
     <div onclick="handle_about_menu(2)" class="about-menu px-0 lg:px-3 <?= $current_page === 'award' ? 'font-medium about-active-menu-item' : '' ?>">
       <?= pll__('รางวัลและความสำเร็จ') ?>
+    </div>
+    <sp class="hidden lg:block" style="height: 1rem;"></sp>
+
+    <div onclick="handle_about_menu(4)" class="about-menu px-0 lg:px-3 <?= $current_page === 'in-focus' ? 'font-medium about-active-menu-item' : '' ?>">
+      <?= pll__('Assetwise in Focus') ?>
     </div>
     <!-- <sp class="hidden lg:block" style="height: 1rem;"></sp>
 

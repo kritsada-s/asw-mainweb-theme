@@ -2038,7 +2038,7 @@ html, body{
 			<div class="row-span-1 md:col-span-1 flex justify-end">
 				<div  id="sortby-box-wrap" class="box-fil-date pointer relative" data-sortby="-1" data-sorttype="date" onclick="turnon_sorting()">
 					<span class="sortby-box" data-sortby="-1" data-sorttype="date">
-						<?php pll_e('เรียงลำดับโครงการ')?>เรียงลำดับโครงการ&nbsp;&nbsp;&nbsp;&nbsp;
+						<?php pll_e('เรียงลำดับโครงการ')?>
 					</span>
 					<span class="sortby-box" data-sortby="1" data-sorttype="date">
 						<?php pll_e('เรียงตามโครงการเก่า')?> <img src="/wp-content/uploads/2022/10/Vector.png" style="height: .3rem;transform:rotate(-90deg);display: inline-block;"> <?php pll_e('ใหม่')?>
