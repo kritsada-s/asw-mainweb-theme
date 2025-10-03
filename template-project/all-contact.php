@@ -7,6 +7,7 @@ $opt = $args[4];
 $layout = $args[5];
 $content = aswv2_gen_master($master,$content,$layout);
 act_template_project_css($opt,$template_name,$layout);
+$terms_conditions_page = '';
 if (!empty($f['terms_conditions'])) {
     $terms_conditions_page = $f['terms_conditions']->ID;
 }

@@ -7,11 +7,12 @@ $opt = $args[4];
 $layout = $args[5];
 $content = aswv2_gen_master($master,$content,$layout);
 act_template_project_css($opt,$template_name,$layout);
-$concept_max = ofsize($content['idea']);
+$concept_max = ofsize($content['idea'] ?? []);
 
-$bg = acf_img($content['bg_img']);
+$bg = acf_img($content['bg_img'] ?? null);
 $has_tour = 0;
-if ($content['virtual_file']['ID'] != '') {
+$virtual_file = is_array($content['virtual_file'] ?? null) ? $content['virtual_file'] : [];
+if (($virtual_file['ID'] ?? '') !== '') {
     $has_tour = 1;
 }
 if ($has_tour) {
@@ -112,7 +113,7 @@ if ($has_tour) {
                                     <div class="video-item">
                                         <div class="bg-cover video-item-slider-slide-video" style="background-color:#000;">
                                             <div class="plyr-slider-wrap">
-                                                <?= jb_ytplayer($vv['video_url'], 'slide_player_t' . $i . '_' . ($vi + 1), $vv['video_cover_image']['sizes']['large']); ?>
+                                                <?= jb_ytplayer($vv['video_url'] ?? '', 'slide_player_t' . $i . '_' . ($vi + 1), $vv['video_cover_image']['sizes']['large'] ?? ''); ?>
                                             </div>
                                         </div>
                                     </div>

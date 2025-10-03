@@ -5,8 +5,8 @@ $template_name = $args[2];
 $master = $args[3];
 $opt = $args[4];
 $layout = $args[5];
-$content = aswv2_gen_master($master,$content,$layout);
-act_template_project_css($opt,$template_name,$layout);
+$content = aswv2_gen_master($master, $content, $layout);
+act_template_project_css($opt, $template_name, $layout);
 ?>
 
 <section id="location" class="is-on-nav is-on-nav-mob">
@@ -16,9 +16,9 @@ act_template_project_css($opt,$template_name,$layout);
                 <div id="location-side-left-bg"></div>
                 <div id="location-side-left-content">
                     <div id="location-side-left-content-title" class="theme-title">
-                        <span class="title-c"><?php pll_e('ทำเลที่ตั้ง')?></span>
-                        <span class="title-b"><?php pll_e('ทำเลที่ตั้ง')?></span>
-                        <h2 class="title-a"><?php pll_e('ทำเลที่ตั้ง')?></h2>
+                        <span class="title-c"><?php pll_e('ทำเลที่ตั้ง') ?></span>
+                        <span class="title-b"><?php pll_e('ทำเลที่ตั้ง') ?></span>
+                        <h2 class="title-a"><?php pll_e('ทำเลที่ตั้ง') ?></h2>
                     </div>
                     <div id="location-side-left-content-body">
                         <p class="location-body">
@@ -29,16 +29,17 @@ act_template_project_css($opt,$template_name,$layout);
                         <a href="<?= $content['google_maps'] ?>" class="info-btn-gg" target="_blank">
                             <span class="info-btn-txt" style="font-weight: 400;align-items: center;">
                                 <img src="<?= $content['google_maps_icon']['sizes']['medium'] ?>" class="location-pin"
-                                style="width: 18px;height: 24px;">
-                                <?php pll_e('Google Maps โครงการ')?>
+                                    style="width: 18px;height: 24px;">
+                                <?php pll_e('Google Maps โครงการ') ?>
                             </span>
                         </a>
                     </div>
                 </div>
             </div>
             <div id="location-side-right">
-                <img src="<?= $content['maps_image']['url'] ?>" class="location-map jb-lightbox pointer "
-                style="--img:url(<?= $content['maps_image']['url'] ?>)">
+                <?php if ($content['maps_image']) { ?>
+                    <img src="<?= $content['maps_image']['url'] ?>" class="location-map jb-lightbox pointer " style="--img:url(<?= $content['maps_image']['url'] ?>)">
+                <?php } ?>
             </div>
             <div id="location-side-tab-head" class="px-4 xl:px-0" data-tab="1">
                 <?php if ($content['nearby_place']): ?>
@@ -48,61 +49,61 @@ act_template_project_css($opt,$template_name,$layout);
                             <div class="info-tabs-blocks">
                                 <div class="info-tabs-rail">
                                     <?php foreach ($content['nearby_place'] as $key => $value) {
-                                     ?>
+                                    ?>
                                         <div onclick="location_tab_chang(this.dataset.i)" data-i="<?= $key ?>" class="info-tab">
                                             <span class="location-tab-txt">
                                                 <span class="inline-block location-tabs-icon"
-                                                style="--icon:url(<?= $value['icon']['url'] ?>)">
-                                                <img class="w-5" src="<?= $value['icon']['url'] ?>">
+                                                    style="--icon:url(<?= $value['icon']['url'] ?>)">
+                                                    <img class="w-5" src="<?= $value['icon']['url'] ?>">
+                                                </span>
+                                                <span class="location-tabs-txt-name">
+                                                    <?= $value['tab_name'] ?>
+                                                </span>
                                             </span>
-                                            <span class="location-tabs-txt-name">
-                                                <?= $value['tab_name'] ?>
-                                            </span>
-                                        </span>
-                                    </div>
-                                <?php } ?>
+                                        </div>
+                                    <?php } ?>
+                                </div>
                             </div>
+                            <div class="info-tabs-block-arrow -right"></div>
                         </div>
-                        <div class="info-tabs-block-arrow -right"></div>
                     </div>
-                </div>
-            <?php endif; ?>
-        </div>
-        <?php
-        foreach ($content['nearby_place'] as $key => $value) { ?>
-
-            <div data-i="<?= $key ?>" class="location-side-tab-body scroll-hid- px-4 xl:px-0">
-                <div class="location-side-tab-body-inner">
-                    <?php foreach ($value['place'] as $keyy => $item) { ?>
-
-                        <div class="location-pin-p">
-                            <!-- <div class="location-pin" style="background-image: url(<?= $content['place_icon']['sizes']['medium'] ?>);"></div> -->
-                            <img src="<?= $content['place_icon']['sizes']['medium'] ?>" class="location-pin"
-                            style="width: 18px;height: 24px;">
-                            <div class="location-text">
-                                <p class="-title">
-                                    <?= $item['place_name'] ?>
-                                </p>
-                                <?php
-                                if ($item['distance']):
-                                    ?>
-                                    <p class="-dist">-
-                                        <?= $item['distance'] ?>
-                                    </p>
-                                    <?php
-                                endif;
-                                ?>
-                            </div>
-                            <span class="safari-wrapping-fix"></span>
-                        </div>
-
-                    <?php } ?>
-                </div>
+                <?php endif; ?>
             </div>
-        <?php } ?>
-    </div>
+            <?php if ($content['nearby_place']) { ?>
+                <?php foreach ($content['nearby_place'] as $key => $value) { ?>
+                    <div data-i="<?= $key ?>" class="location-side-tab-body scroll-hid- px-4 xl:px-0">
+                        <div class="location-side-tab-body-inner">
+                            <?php foreach ($value['place'] as $keyy => $item) { ?>
 
-</div>
+                                <div class="location-pin-p">
+                                    <!-- <div class="location-pin" style="background-image: url(<?= $content['place_icon']['sizes']['medium'] ?>);"></div> -->
+                                    <img src="<?= $content['place_icon']['sizes']['medium'] ?>" class="location-pin"
+                                        style="width: 18px;height: 24px;">
+                                    <div class="location-text">
+                                        <p class="-title">
+                                            <?= $item['place_name'] ?>
+                                        </p>
+                                        <?php
+                                        if ($item['distance']):
+                                        ?>
+                                            <p class="-dist">-
+                                                <?= $item['distance'] ?>
+                                            </p>
+                                        <?php
+                                        endif;
+                                        ?>
+                                    </div>
+                                    <span class="safari-wrapping-fix"></span>
+                                </div>
+
+                            <?php } ?>
+                        </div>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+        </div>
+
+    </div>
 </section>
 
 <script type="text/javascript">
@@ -141,39 +142,41 @@ act_template_project_css($opt,$template_name,$layout);
 <?php
 switch ($template_name) {
     case 'elegant':
-    ?>
-    <script>
-        function render_video_slider() {
-            let node = document.createElement("div")
-            let width = document.querySelector('#location .info-tab').offsetWidth
-            node.classList.add('-absolute')
-            node.classList.add('location-tab-slider')
-            node.style.setProperty('--l', 0)
-            node.style.setProperty('--w', width)
-            document.querySelector('#location .info-tabs-blocks .info-tabs-rail').appendChild(node)
-        }
-        render_video_slider()
-    </script>
-    <?php
-    break;
+?>
+        <script>
+            function render_video_slider() {
+                let node = document.createElement("div")
+                let width = document.querySelector('#location .info-tab').offsetWidth
+                node.classList.add('-absolute')
+                node.classList.add('location-tab-slider')
+                node.style.setProperty('--l', 0)
+                node.style.setProperty('--w', width)
+                document.querySelector('#location .info-tabs-blocks .info-tabs-rail').appendChild(node)
+            }
+            render_video_slider()
+        </script>
+<?php
+        break;
 }
 ?>
 
 <script type="module">
     import hammerjs from "https://cdn.skypack.dev/hammerjs@2.0.8";
     var els = $$('.location-side-tab-body');
-    for(let el of els){
+    for (let el of els) {
         var hammerTime = new Hammer(el);
-        hammerTime.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL });
-        hammerTime.on("panend", function (ev) {
+        hammerTime.get('pan').set({
+            direction: Hammer.DIRECTION_HORIZONTAL
+        });
+        hammerTime.on("panend", function(ev) {
 
             let i = 0;
             var body = $$('.location-side-tab-body');
             let max = body.length;
-            for(let b of body){
+            for (let b of body) {
                 if (b.dataset.show == '1') {
                     break;
-                }else{
+                } else {
                     i++;
                 }
             }
@@ -186,8 +189,8 @@ switch ($template_name) {
             } else if (ev.deltaX < -20) {
                 di = +1;
             }
-            i = (((i+di)%max)+max)%max
-            xconsolex.log('new i',i)
+            i = (((i + di) % max) + max) % max
+            xconsolex.log('new i', i)
             $$('#location-wrap .info-tab')[i].click()
 
         })

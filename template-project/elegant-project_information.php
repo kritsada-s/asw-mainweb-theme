@@ -38,7 +38,7 @@ act_template_project_css($opt,$template_name,$layout);
             <div class="grid grid-cols-12 py-10 project-info-section pj-info-tab-1" data-show="1">
                 <div class="col-span-12">
                     <div class="info-mob-img">
-                        <img src="<?= $content['information_image']['sizes']['1536x1536'] ?>">
+                        <img src="<?= $content['information_image'] && $content['information_image']['sizes']['1536x1536'] ? $content['information_image']['sizes']['1536x1536'] : '' ?>">
                     </div>
                 </div>
                 <div class="col-span-6 info-alt-items">
@@ -48,7 +48,7 @@ act_template_project_css($opt,$template_name,$layout);
                             ?>
                             <div class="col-span-6 pb-10 alt-items ">
                                 <div>
-                                    <img class="alt-items-img" src="<?= $value['icon']['url'] ?>"
+                                    <img class="alt-items-img" src="<?= $value['icon'] && $value['icon']['url'] ? $value['icon']['url'] : '' ?>"
                                     style="width: auto;height: 32px;">
                                 </div>
                                 <div>
@@ -59,15 +59,15 @@ act_template_project_css($opt,$template_name,$layout);
                                         <?= $value['text'] ?>
                                     </p>
                                     <ul class="list-disc">
-                                        <?php
-                                        foreach ($value['bullet'] as $key => $v) {
-                                            ?>
-                                            <li style="color: var(--text-color)">
-                                                <?= $v['text'] ?>
-                                            </li>
-                                            <?php
-                                        }
-                                        ?>
+                                        <?php if (is_array($value['bullet'])) { ?>
+                                            <?php foreach ($value['bullet'] as $key => $v) {  ?>
+                                                <?php if ($v && $v['text'] != '') { ?>
+                                                <li style="color: var(--text-color)">
+                                                    <?= $v['text'] ?>
+                                                </li>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        <?php } ?>
                                     </ul>
                                 </div>
                             </div>
@@ -137,7 +137,7 @@ act_template_project_css($opt,$template_name,$layout);
                     <?php
                 }
             }
-            if ($progress_size <= 3) {
+            if ($progress_size <= 3 && is_array($content['progress_list'])) {
                 foreach ($content['progress_list'] as $key => $value) {
                     ?>
                     <div class="progress-item col-span-12">

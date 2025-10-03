@@ -44,8 +44,6 @@ act_template_project_css($opt,$template_name,$layout);
                         <div id="info-detail-wrap">
                             <div>
                                 <div id="info-detail">
-                                    <div style="display: none;"><?php  pre($content); ?></div>
-
                                     <?php
 
                                     foreach ($content['details'] as $key => $value) {
@@ -61,13 +59,11 @@ act_template_project_css($opt,$template_name,$layout);
                                                 <div class="info-detail-body">
                                                     <?= $value['text'] ?>
                                                     <ul class="ml-6">
-                                                        <?php
-                                                        foreach ($value['bullet'] as $key => $v) {
-                                                            ?>
-                                                            <li class="list-disc"><?= $v['text'] ?></li>
-                                                            <?php
-                                                        }
-                                                        ?>
+                                                        <?php foreach ((array)($value['bullet'] ?? []) as $key => $v) { ?>
+                                                            <?php if ($v && $v['text'] != '') { ?>
+                                                                <li class="list-disc"><?= $v['text'] ?></li>
+                                                            <?php } ?>
+                                                        <?php } ?>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -149,12 +145,14 @@ act_template_project_css($opt,$template_name,$layout);
                         }
                         ?>
                         <div class="progress-show <?= ($progress_size > 3) ? 'grid-cols-2' :  'grid-cols-1' ?>">
-                            <?php foreach ($content['progress_list'] as $key => $value) : ?>
+                            <?php foreach ((array)($content['progress_list'] ?? []) as $key => $value) : ?>
                                 <div class="progress-item">
-                                    <label><?= $value['name'] ?></label>
+                                    <?php if ($value) { ?>
+                                        <label><?= $value['name'] ?></label>
+                                    <?php } ?>
                                     <div class="progress-bar">
-                                        <span class="-bar" data-percent="<?= $value['percent'] ?>" style="--pc:0"><span class="-bar-inner"></span></span>
-                                        <span class="-percent"><?= $value['percent'] ?>%</span>
+                                        <span class="-bar" data-percent="<?= $value['percent'] ?? 0 ?>" style="--pc:0"><span class="-bar-inner"></span></span>
+                                        <span class="-percent"><?= $value['percent'] ?? 0 ?>%</span>
                                     </div>
                                 </div>
                             <?php endforeach ?>

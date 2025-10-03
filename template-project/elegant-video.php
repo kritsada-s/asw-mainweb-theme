@@ -105,7 +105,7 @@ act_template_project_css($opt,$template_name,$layout);
 
 										<div class="bg-cover video-item-slider-slide-video" style="background-color:#000;">
 											<div class="plyr-slider-wrap">
-												<?= jb_ytplayer($vv['video_url'], 'slide_player_t' . $i . '_' . ($vi + 1), $vv['video_cover_image']['sizes']['large']); ?>
+												<?= jb_ytplayer($vv['video_url'], 'slide_player_t' . $i . '_' . ($vi + 1), $vv['video_cover_image'] && $vv['video_cover_image']['sizes']['large'] ? $vv['video_cover_image']['sizes']['large'] : ''); ?>
 											</div>
 										</div>
 									</div>

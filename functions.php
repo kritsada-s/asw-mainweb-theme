@@ -8,6 +8,7 @@
  * @package seed
  */
 
+
 /* LAYOUT */
 if (!isset($GLOBALS['s_blog_layout'])) {
     $GLOBALS['s_blog_layout']          = 'full-width';
@@ -244,7 +245,7 @@ function seed_scripts()
     wp_enqueue_style('s-desktop', get_theme_file_uri('/css/desktop.css'), array(), filemtime(get_theme_file_path('/css/desktop.css')), '(min-width: 992px)');
     wp_enqueue_style('s-ie', get_theme_file_uri('/css/ie.css'), array(), filemtime(get_theme_file_path('/css/ie.css')), '(-ms-high-contrast: none), (-ms-high-contrast: active)');
     wp_enqueue_style('spring-jayss', get_theme_file_uri('/css/jayss2/jayss-wp.css?t=') . time(), array(), get_theme_file_uri('/css/jayss2/jayss-wp.css?t=') . time());
-    wp_enqueue_style('s-style', get_theme_file_uri('/style.css?t=' . time()), array(), filemtime(get_theme_file_path('/style.css?t=' . time())));
+    wp_enqueue_style('s-style', get_theme_file_uri('/style.css?t=' . time()), array(), filemtime(get_theme_file_path('/style.css')));
 
     if ($GLOBALS['s_style_css'] == 'enable') {
         wp_enqueue_style('s-style', get_stylesheet_uri());
@@ -264,6 +265,7 @@ function seed_scripts()
 
     wp_enqueue_script('s-scripts', get_theme_file_uri('/js/scripts.js'), array(), filemtime(get_theme_file_path('/js/scripts.js')), true);
     wp_enqueue_script('s-vanilla', get_theme_file_uri('/js/main-vanilla.js'), array(), filemtime(get_theme_file_path('/js/main-vanilla.js')), true);
+    wp_localize_script( 's-scripts', 'ajaxurl', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 
     if ($GLOBALS['s_jquery'] == 'enable') {
         wp_enqueue_script('s-jquery', get_theme_file_uri('/js/main-jquery.js'), array('jquery'), filemtime(get_theme_file_path('/js/main-jquery.js')), true);
@@ -1567,8 +1569,7 @@ function asw_tpj_scroll_js()
     <?php
 }
 
-function theme_overide_style($c)
-{   
+function theme_overide_style($c) {   
     // pre($c);
     $section = $c['acf_fc_layout'];
     switch ($section) {
@@ -1582,38 +1583,40 @@ function theme_overide_style($c)
         $section = "info";
         break;
     }
-    $bg_img = acf_img($c['bg_img']);
-    $bg_img_mobile = acf_img($c['bg_img_mobile']);
-    $bg_color = $c['bg_color'];
-    $text_color = $c['text_color'];
+    $bg_img = acf_img($c['bg_img'] ?? null);
+    $bg_img_mobile = acf_img($c['bg_img_mobile'] ?? null);
+    $bg_color = $c['bg_color'] ?? '';
+    $text_color = $c['text_color'] ?? '';
 
-    $swatch = $c['color_swatch'];
-    $element =  $c['element'];
+    $swatch = is_array($c['color_swatch'] ?? null) ? $c['color_swatch'] : [];
+    $element = is_array($c['element'] ?? null) ? $c['element'] : [];
 
-    $css = $c['css'];
-    $gd_start = ($c['gradient']['start'] != '') ? $c['gradient']['start'] : $swatch['mc_1'];
-    $gd_stop = ($c['gradient']['stop'] != '') ? $c['gradient']['stop'] : $swatch['mc_5'];
-    $gd_deg = ($c['gradient']['deg'] != '') ? $c['gradient']['deg'] : 90;
+    $css = $c['css'] ?? '';
+    $gradient = is_array($c['gradient'] ?? null) ? $c['gradient'] : [];
+    $gd_start = $gradient['start'] ?? ($swatch['mc_1'] ?? '');
+    $gd_stop = $gradient['stop'] ?? ($swatch['mc_5'] ?? '');
+    $gd_deg = $gradient['deg'] ?? 90;
     
     
-    $main_bg_color = $c['tab_block']['background_color'];
-    $main_bg_hover = $c['tab_block']['background_hover_color'];
+    $tab = is_array($c['tab_block'] ?? null) ? $c['tab_block'] : [];
+    $main_bg_color = $tab['background_color'] ?? '';
+    $main_bg_hover = $tab['background_hover_color'] ?? '';
 
-    $tab_color = $c['tab_block']['text_color'];
-    $tab_color_hover = $c['tab_block']['text_hover_color'];
+    $tab_color = $tab['text_color'] ?? '';
+    $tab_color_hover = $tab['text_hover_color'] ?? '';
 
-    $border_color = $c['tab_block']['border_color'];
-    $parent_bg = $c['tab_block']['parent_bg'];
+    $border_color = $tab['border_color'] ?? '';
+    $parent_bg = $tab['parent_bg'] ?? '';
 
 
     ?>
     <style type="text/css">
         #<?= $section ?> {
-            <?= $swatch['mc_1'] != '' ? "--mc-main-1:{$swatch['mc_1']};" : '';  ?>
-            <?= $swatch['mc_2'] != '' ? "--mc-main-2:{$swatch['mc_2']};" : '';  ?>
-            <?= $swatch['mc_3'] != '' ? "--mc-main-3:{$swatch['mc_3']};" : '';  ?>
-            <?= $swatch['mc_4'] != '' ? "--mc-main-4:{$swatch['mc_4']};" : '';  ?>
-            <?= $swatch['mc_5'] != '' ? "--mc-main-5:{$swatch['mc_5']};" : '';  ?>
+            <?= ($swatch['mc_1'] ?? '') !== '' ? "--mc-main-1:{$swatch['mc_1']};" : '';  ?>
+            <?= ($swatch['mc_2'] ?? '') !== '' ? "--mc-main-2:{$swatch['mc_2']};" : '';  ?>
+            <?= ($swatch['mc_3'] ?? '') !== '' ? "--mc-main-3:{$swatch['mc_3']};" : '';  ?>
+            <?= ($swatch['mc_4'] ?? '') !== '' ? "--mc-main-4:{$swatch['mc_4']};" : '';  ?>
+            <?= ($swatch['mc_5'] ?? '') !== '' ? "--mc-main-5:{$swatch['mc_5']};" : '';  ?>
             <?= $gd_start != '' ? "--mc-main-gd-start:{$gd_start};" : '';  ?>
             <?= $gd_stop != '' ? "--mc-main-gd-stop:{$gd_stop};" : '';  ?>
             <?= $gd_deg != '' ? "--mc-main-gd-deg:{$gd_deg}deg;" : '';  ?>
@@ -1636,9 +1639,9 @@ function theme_overide_style($c)
             <?= $border_color != '' ? "--mc-tab-border-cl:{$border_color};" : ""; ?>
             <?= $parent_bg != '' ? "--mc-tab-parent-bg:{$parent_bg};" : "" ?>
 
-            <?= $element['pagination_arrow'] != '' ? "--mc-arrow-up: url(" . acf_img($element['pagination_arrow'], 'medium') . ");" : '' ?>
-            <?= $element['pagination_chevron'] != '' ? "--mc-chevron-up: url(" . acf_img($element['pagination_chevron'], 'medium') . ");" : '' ?>
-            <?= $element['lightbox_arrow'] != '' ? "--mc-lightbox-arrow: url(" . acf_img($element['lightbox_arrow'], 'medium') . ");" : '' ?>
+            <?= ($element['pagination_arrow'] ?? '') !== '' ? "--mc-arrow-up: url(" . acf_img($element['pagination_arrow'], 'medium') . ");" : '' ?>
+            <?= ($element['pagination_chevron'] ?? '') !== '' ? "--mc-chevron-up: url(" . acf_img($element['pagination_chevron'], 'medium') . ");" : '' ?>
+            <?= ($element['lightbox_arrow'] ?? '') !== '' ? "--mc-lightbox-arrow: url(" . acf_img($element['lightbox_arrow'], 'medium') . ");" : '' ?>
 
         }
 
@@ -1656,8 +1659,10 @@ function theme_overide_style($c)
     }
 }
 
-function acf_img($obj, $size = '1536x1536')
-{
+function acf_img($obj, $size = '1536x1536') {
+    if ($obj == '') {
+        return '';
+    }
     return $obj['sizes'][$size];
 }
 
@@ -1989,9 +1994,9 @@ function admin_cf7_footer() {
             }
         </style>
         <?php
-        if ($_REQUEST['page'] == 'wpcf7') {
-            $is_cf7 == true;
-            $cf7_id = $_REQUEST['post'];
+        if (isset($_REQUEST['page']) && $_REQUEST['page'] == 'wpcf7') {
+            $is_cf7 = true;
+            $cf7_id = isset($_REQUEST['post']) ? $_REQUEST['post'] : '';
             if ($cf7_id != '') {
                 $cf7_api_id = '';
                 $group_ID = 'group_64744d6b8165f';
@@ -2269,21 +2274,23 @@ function cptui_register_my_cpts_promotions() {
 add_action( 'init', 'cptui_register_my_cpts_promotions' );
 
 function wpa_promotion_post_link( $post_link, $id = 0 ){
-    $post = get_post($id);  
+    $post = get_post($id);
     if ( is_object( $post ) ){
         $terms = wp_get_object_terms( $post->ID, 'promotion_type' );
-        if( $terms ){
+        if( $terms && !is_wp_error($terms) && !empty($terms) ){
             return str_replace( '%promotion_type%' , $terms[0]->slug , $post_link );
         }else{
             $parent = get_post_parent($post);
             if ($parent) {
                 $parent_ID = $parent->ID;
                 $parent_terms = wp_get_object_terms( $parent_ID, 'promotion_type' );
-                return str_replace( '%promotion_type%' , $parent_terms[0]->slug , $post_link );
+                if( $parent_terms && !is_wp_error($parent_terms) && !empty($parent_terms) ){
+                    return str_replace( '%promotion_type%' , $parent_terms[0]->slug , $post_link );
+                }
             }
         }
     }
-    return $post_link;  
+    return $post_link;
 }
 add_filter( 'post_type_link', 'wpa_promotion_post_link', 1, 3 );
 
@@ -2384,7 +2391,7 @@ function aswv2_gen_master($master_style,$content,$layout){
                     // pre($csv);
                     if ($csv == '') {
                         // pre('--- '.$csv.' blank so use master');
-                        $mix_content[$key][$csk] = $master_style[$key][$csk];
+                        $mix_content[$key][$csk] = $master_style[$key][$csk] ?? ($mix_content[$key][$csk] ?? '');
                     }
                     // pre('to');
                     // pre($mix_content[$key][$csk]);
@@ -2399,12 +2406,12 @@ function aswv2_gen_master($master_style,$content,$layout){
 
     foreach ($mix_content as $key => $value) {
         if (in_array($key, $style_group)) {
-            foreach ($value as $sk => $sv) {
+            foreach ((array)$value as $sk => $sv) {
                 $css_var = '--'.$layout.'--'.$key.'--'.$sk;
                 echo "$css_var:$sv;";
             }
         }else if($key == 'element'){
-            foreach ($value as $vk => $vv) {
+            foreach ((array)$value as $vk => $vv) {
                 if ($vk == 'pagination_arrow_slide') {
                     $vk = 'pagination_arrow';
                 }
@@ -2412,7 +2419,17 @@ function aswv2_gen_master($master_style,$content,$layout){
                 if ($vk == 'pagination_color') {
                     echo "$css_var:$vv;";   
                 }else{
-                    $vvv = $vv['sizes']['medium'];    
+                    $vvv = '';
+                    if (is_array($vv)) {
+                        if (isset($vv['sizes'])) {
+                            $vvv = $vv['sizes']['medium'] ?? ($vv['sizes']['large'] ?? '');
+                        }
+                        if ($vvv === '' && isset($vv['url'])) {
+                            $vvv = $vv['url'];
+                        }
+                    } elseif (is_string($vv)) {
+                        $vvv = $vv; // already a URL string
+                    }
                     if ($vvv!='') {
                         echo "$css_var:url($vvv);";   
                     }else{
@@ -2424,16 +2441,16 @@ function aswv2_gen_master($master_style,$content,$layout){
     }
     echo "--$layout--tab_line_color_gd: linear-gradient(calc(1deg*var(--$layout--tab_line_color--degree)), var(--$layout--tab_line_color--color_start), var(--$layout--tab_line_color--color_end));";
     echo "--$layout--color_gradient: linear-gradient(calc(1deg*var(--$layout--color_gradient--degree,var(--all--color_gradient--degree))), var(--$layout--color_gradient--color_start,var(--all--color_gradient--color_start)), var(--$layout--color_gradient--color_end,var(--all--color_gradient--color_end)));";
-    if ($mix_content['background_image']['sizes']['1536x1536'] != '') {
+    if (isset($mix_content['background_image']['sizes']['1536x1536']) && $mix_content['background_image']['sizes']['1536x1536'] != '') {
         echo '--'.$layout.'--background_image:url('.$mix_content['background_image']['sizes']['1536x1536'].');';// code...
     }
-    if ($mix_content['background_image_mobile']['sizes']['large'] != '') {
+    if (isset($mix_content['background_image_mobile']['sizes']['large']) && $mix_content['background_image_mobile']['sizes']['large'] != '') {
         echo '--'.$layout.'--background_image_mobile:url('.$mix_content['background_image_mobile']['sizes']['large'].');';
     }
-    if ($mix_content['background_color'] != '') {
+    if (isset($mix_content['background_color']) && $mix_content['background_color'] != '') {
         echo '--'.$layout.'--background_color:'.$mix_content['background_color'].';';
     }
-    if ($mix_content['background'] != '') {
+    if (isset($mix_content['background']) && $mix_content['background'] != '') {
         echo '--'.$layout.'--background_color:'.$mix_content['background'].';';
     }
 
@@ -2507,7 +2524,7 @@ function asw_project_render_theme($template_name,$common_layout){
     foreach ($v2_content as $key => $content) {
         $layout = $content['acf_fc_layout'];
         // pre($layout);
-        $show = $content['is_show'];
+        $show = $content['is_show'] ?? 'show';
         // pre($show);
         if ($show != 'hide') {
             $opt = $template_name;
@@ -2529,7 +2546,9 @@ function asw_project_render_theme($template_name,$common_layout){
             }
             ?>
             <style type="text/css">
-                <?=$content['css']?>
+                <?php if (isset($content['css'])) { ?>
+                    <?=$content['css']?>
+                <?php } ?>
             </style>
             <?php
         }
@@ -2543,7 +2562,7 @@ function asw_project_render_theme($template_name,$common_layout){
     <!-- =====🔺🔺🔺🔺🔺 End Template V2 Scroll JS 🔺🔺🔺🔺🔺===== -->
     <!-- ~~~~~~~~~~ End Template V2 ~~~~~~~~~~ -->
     <?php
-    if (in_array(get_the_ID(), [119385, 51128])) {
+    if (in_array(get_the_ID(), [119385])) {
       include(get_template_directory().'/template-parts/loan-calculator.php');
     }
     get_footer();
@@ -2887,3 +2906,67 @@ function asw_front_page_scripts() {
     }
 }
 add_action('wp_footer', 'asw_front_page_scripts');
+
+include_once(get_template_directory() . '/inc/api.php');
+
+// Block specific email addresses in CF7 forms
+add_filter('wpcf7_validate', 'block_specific_emails', 10, 2);
+function block_specific_emails($result, $tags) {
+    // Get email field from submitted form
+    $blocked_list = array(
+        [
+            'Email' => 'pakornnakorn9@gmail.com',
+            'Fname' => 'pakorn',
+            'Lname' => 'nakorn',
+            'Tel' => '0953616765',
+        ]
+    );
+    $submission = WPCF7_Submission::get_instance();
+    if ($submission) {
+        $posted_data = $submission->get_posted_data();
+        
+        // Loop through form fields to find email field
+        foreach ($blocked_list as $blocked_user) {
+            $is_blocked = true;
+            foreach ($posted_data as $key => $value) {
+                if (strpos(strtolower($key), 'email') !== false && strtolower($value) === strtolower($blocked_user['Email'])) {
+                    $result->invalidate($key, 'This email address is not allowed.');
+                    break 2;
+                }
+                if (strpos(strtolower($key), 'fname') !== false && strtolower($value) === strtolower($blocked_user['Fname'])) {
+                    $result->invalidate($key, 'This first name is not allowed.');
+                    break 2;
+                }
+                if (strpos(strtolower($key), 'lname') !== false && strtolower($value) === strtolower($blocked_user['Lname'])) {
+                    $result->invalidate($key, 'This last name is not allowed.');
+                    break 2;
+                }
+                if (strpos(strtolower($key), 'tel') !== false && strtolower($value) === strtolower($blocked_user['Tel'])) {
+                    $result->invalidate($key, 'This phone number is not allowed.');
+                    break 2;
+                }
+            }
+        }
+    }
+    return $result;
+}
+
+function custom_archive_order( $query ) {
+    if ( $query->is_archive() && $query->is_main_query() ) {
+        // Example: Order by title in ascending order
+        $query->set( 'orderby', 'date' );
+        $query->set( 'order', 'DESC' );
+    }
+}
+add_action( 'pre_get_posts', 'custom_archive_order' );
+
+/**
+ * Filter the excerpt "read more" string.
+ *
+ * @param string $more "Read more" excerpt string.
+ * @return string (Maybe) modified "read more" excerpt string.
+ */
+function asw_excerpt_more( $more ) {
+	return '...';
+}
+add_filter( 'excerpt_more', 'asw_excerpt_more' );

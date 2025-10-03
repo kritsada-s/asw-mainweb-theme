@@ -8,7 +8,7 @@ $layout = $args[5];
 $content = aswv2_gen_master($master,$content,$layout);
 act_template_project_css($opt,$template_name,$layout);
 ?>
-<section id="plan" class="is-on-nav is-on-nav-mob py-8 xl:py-16 bg-cover" style="background-image:url('<?= $content['background_image']['sizes']['1536x1536'] ?>')">
+<section id="plan" class="is-on-nav is-on-nav-mob py-8 xl:py-16 bg-cover" style="background-image:url('<?= $content['background_image'] && $content['background_image']['sizes']['1536x1536'] ? $content['background_image']['sizes']['1536x1536'] : '' ?>')">
     <div class="container mx-auto section-fade">
         <div class="plan-menu-content">
             <div class="plan-menu">

@@ -163,7 +163,7 @@ $search_popular = get_field('search_popular', 'option');
 			<div></div>
 			<div><img src="/wp-content/uploads/2023/05/search.png" class="w-full"></div>
 			<div class="full-h">
-				<input type="text" id="search-input" placeholder="<?php pll_e('ค้นหาเนื้อหาภายในเว็บไซต์')?>" onkeyup="search_event_key(event);findInDataListSearch()" value="<?=$_GET['s']?>">
+				<input type="text" id="search-input" placeholder="<?php pll_e('ค้นหาเนื้อหาภายในเว็บไซต์')?>" onkeyup="search_event_key(event);findInDataListSearch()" value="<?=$_GET['s'] ?? ''?>">
 				<div class="search-datalist" data-count="0">
 					<div class="cont-pd search-datalist-list"></div>
 				</div>

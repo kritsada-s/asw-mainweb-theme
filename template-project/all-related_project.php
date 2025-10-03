@@ -42,6 +42,7 @@ if (is_array($content['related_location_project'])) {
                 <div class="single-cards-wrap-block relative">
                     <div class="single-cards-wrap py-4" data-end="0">
                         <?php
+                        $key = 0;
                         foreach ($content['related_location_project'] as $key => $project) {
                             $field = get_fields($project->ID);
                             $cate_name = wp_get_object_terms( $project->ID, 'project-type');

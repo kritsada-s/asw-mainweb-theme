@@ -837,9 +837,11 @@ style="width: 95%;">
                     $pimg = get_field('project_image', $value->taxonomy . '_' . $value->term_id);
                     $h_condo_link = get_term_link($value->term_id);
                     if ($chk_con == 0) { ?>
-                        <script type="text/javascript">
-                            showUpperimg('<?= $pimg['url'] ?>')
-                        </script>
+                        <?php if ($pimg) { ?>
+                            <script type="text/javascript">
+                                showUpperimg('<?= $pimg['url'] ?>')
+                            </script>
+                        <?php } ?>
                         <div class="burger-card grid grid-cols-3 gap-4 px-8"
                         style="opacity: 1;transition: .5s ease;">
                     <?php }
@@ -848,11 +850,13 @@ style="width: 95%;">
                     </div>
                     <div class="burger-card grid grid-cols-3 gap-4 px-8">
                     <?php } ?>
-                    <div onmouseover="showUpperimg('<?= $pimg['url'] ?>')"
+                    <?php if ($pimg) { ?>
+                        <div onmouseover="showUpperimg('<?= $pimg['url'] ?>')"
                         class="burger-cards rounded-lg py-2 flex items-center pointer graylogo"
                         onclick="location.href='<?=$h_condo_link?>'">
-                        <img src="<?= $iconic['url'] ?>" style="height: 50px;">
-                    </div>
+                            <img src="<?= $iconic['url'] ?>" style="height: 50px;">
+                        </div>
+                    <?php } ?>
                     <?php
                     $chk_con++;
 

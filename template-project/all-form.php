@@ -23,7 +23,9 @@ $con_html = "<a href=\"{$content['contact_url']}\" class=\"form-icon inline-flex
 <section id="form" class="bg-cover lg:hidden form-mob">
 	<div class="container mx-auto">
 		<div class="form-pic-side">
-			<img src="<?= $content['promotion_image']['sizes']['large'] ?>" class="w-full">
+			<?php if ($content['promotion_image']) { ?>
+				<img src="<?= $content['promotion_image']['sizes']['large'] ?>" class="w-full">
+			<?php } ?>
 		</div>
 		<div class="register_mobile_form px-8">
 			<div class="form-template form-1">
@@ -49,7 +51,7 @@ $con_html = "<a href=\"{$content['contact_url']}\" class=\"form-icon inline-flex
 <section id="form" class="bg-cover hidden lg:block">
 	<div class="section-fade">
 		<?php
-		if ($content['promotion_image']['id'] != '') {
+		if ($content['promotion_image'] && $content['promotion_image']['id'] != '') {
 			if ($form_pattern == 'fix' && $form_type != 'bottom') {
 				?>
 				<div class="container mx-auto">
@@ -85,10 +87,12 @@ $con_html = "<a href=\"{$content['contact_url']}\" class=\"form-icon inline-flex
 							</div>
 						<?php endif ?>
 						<div class="col-span-6 flex">
-							<img src="<?= $content['promotion_image']['sizes']['large'] ?>" class="w-full">
+							<?php if ($content['promotion_image']) { ?>
+								<img src="<?= $content['promotion_image']['sizes']['large'] ?>" class="w-full">
+							<?php } ?>
 						</div>
 						<?php if ($form_type == 'right'): ?>
-							<div class="col-span-6 px-8 xl:px-0- bg-cover" style="background-image:url(<?= $content['form_bg']['sizes']['large'] ?>)">
+							<div class="col-span-6 px-8 xl:px-0- bg-cover" style="background-image:url(<?= $content['form_bg'] ? $content['form_bg']['sizes']['large'] : '' ?>)">
 								<div class="form-template form-1">
 									<h2 class="form-title"><?php pll_e('ลงทะเบียน')?></h2>
 									<?= $content['form'] ?>
@@ -159,8 +163,7 @@ $con_html = "<a href=\"{$content['contact_url']}\" class=\"form-icon inline-flex
 						<?php if ($form_type == 'right'): ?>
 							<div class="col-span-6"></div>
 						<?php endif ?>
-						<div class="col-span-6 bg-cover bg-center p-8"
-						style="background-image:url('<?= $content['form_bg']['sizes']['large'] ?>')">
+						<div class="col-span-6 bg-cover bg-center p-8" style="background-image:url('<?= $content['form_bg'] ? $content['form_bg']['sizes']['large'] : '' ?>')">
 						<div class="form-template form-1">
 							<h2 class="form-title"><?php pll_e('ลงทะเบียน')?></h2>
 							<?= $content['form'] ?>
@@ -310,9 +313,9 @@ $con_html = "<a href=\"{$content['contact_url']}\" class=\"form-icon inline-flex
 	.validate-consent[data-ispass="true"] {
 		display: none;
 	}
-	<?php if ($content['text_color'] != ''): ?>
+	<?php if (isset($content['text_color']) && $content['text_color'] != ''): ?>
 		#form  {
-			--mc-main-5: <?=$content['text_color']?>
+			--mc-main-5: <?=$content['text_color']['text_link']?>
 		}
 	<?php endif ?>
 </style>
