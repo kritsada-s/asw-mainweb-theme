@@ -2484,6 +2484,7 @@ function asw_project_render_theme($template_name,$common_layout){
     
     $v2_master = get_field('template_master');
     $v2_content = get_field('v2_content');
+    $projectCode = get_field('project_code', get_the_ID());
     $style_group = ['color_swatch','color_gradient','text_color','button_color','new_tab_block','tab_line_color','text_form_color','form_color','new_progress_color'];
 
     echo "<style>:root{";
@@ -2561,6 +2562,11 @@ function asw_project_render_theme($template_name,$common_layout){
     ?>
     <!-- =====🔺🔺🔺🔺🔺 End Template V2 Scroll JS 🔺🔺🔺🔺🔺===== -->
     <!-- ~~~~~~~~~~ End Template V2 ~~~~~~~~~~ -->
+    
+    <?php if ($projectCode != '') {
+        include(get_template_directory().'/template-parts/hotdeal-units.php');
+    }
+    ?>
     <?php
     if (in_array(get_the_ID(), [119385])) {
       include(get_template_directory().'/template-parts/loan-calculator.php');
