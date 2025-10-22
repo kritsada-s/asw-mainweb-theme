@@ -547,41 +547,6 @@ function process_participant_project($projects) {
   return $processed_content;
 }
 
-function process_participant_project_tabs($tabs) {
-  $project_ids = array();
-  
-  // Loop through each tab
-  foreach ($tabs as $tab) {
-    // Check if projects_group exists
-    if (isset($tab['projects_group']) && is_array($tab['projects_group'])) {
-      // Loop through each group
-      foreach ($tab['projects_group'] as $group) {
-        // Check if projects exists
-        if (isset($group['projects']) && is_array($group['projects'])) {
-          // Loop through each project and extract the project ID
-          foreach ($group['projects'] as $project_data) {
-            if (isset($project_data['project'])) {
-              $project_ids[] = $project_data['project'];
-            }
-          }
-        }
-      }
-    }
-  }
-
-  foreach ($project_ids as $project_id) {
-    $processed_content[] = array(
-      'id' => $project_id,
-      'title' => get_the_title($project_id),
-      'image' => get_the_post_thumbnail_url($project_id, 'full'),
-      'cis_id' => (int)get_field('project_id', $project_id),
-      'project_code' => get_field('project_code', $project_id)
-    );
-  }
-  
-  return $processed_content;
-}
-
 function process_related_promotion($items) {
   $processed_content = array();
   if (isset($items) && is_array($items) && count($items) > 0) {
@@ -612,84 +577,29 @@ function get_promotion_detail($request) {
   if ($query->have_posts()) {
       $query->the_post();
       $en_id = pll_get_post(get_the_ID(), 'en');
-
-      $template = get_page_template_slug(get_the_ID());
-
-      if ($template != '' && $template === 'page-campaign.php') {
-        $banner = get_field('hero_banner', get_the_ID());
-        $app_banner = $banner[0]['mobile_banner']['url'];
-        $page_setting = get_field('page_setting', get_the_ID());
-        $display_type = $page_setting['display_type'];
-
-        // Prepare Project Listed
-        if ($display_type === 'group') {
-          $project_listed = process_participant_project(get_field('participating-projects', get_the_ID()));
-        } elseif ($display_type === 'tabs') {
-          $project_listed = process_participant_project_tabs(get_field('project_selector_tabs', get_the_ID()));
-        } else {
-          $project_listed = array();
-        }
-
-        //Prepare TH object
-        $th = array(
+      $promotion_detail = array(
+        'th' => array(
           'id' => get_the_ID(),
           'title' => get_the_title(),
           'key' => get_post_field('post_name'),
           'caption' => get_field('card_caption') === null ? '' : get_field('card_caption'),
-          'banner' => $app_banner,
+          'banner' => get_field('banner_mobile')['url'],
           'content' => get_field('detail'),
-          'participant_project' => $project_listed,
+          'participant_project' => process_participant_project(get_field('participating-projects')),
           'related_promotions' => process_related_promotion(get_field('related_promotion')),
           'utm_source' => 'asw-app_register'
-        );
-
-        //Prepare EN object
-        if ($en_id !== 0) {
-          $en = array(
-            'id' => $en_id,
-            'title' => get_the_title($en_id),
-            'key' => get_post_field('post_name', $en_id),
-            'caption' => get_field('card_caption', $en_id) === null ? '' : get_field('card_caption', $en_id),
-            'banner' => $app_banner,
-            'content' => get_field('detail', $en_id),
-            'participant_project' => $project_listed,
-            'related_promotions' => process_related_promotion(get_field('related_promotion', $en_id)),
-            'utm_source' => 'asw-app_register'
-          );
-        } else {
-          $en = array();
-        }
-
-        $promotion_detail = array(
-          'th' => $th,
-          'en' => $en,
-        );
-      } else {
-        $promotion_detail = array(
-          'th' => array(
-            'id' => get_the_ID(),
-            'title' => get_the_title(),
-            'key' => get_post_field('post_name'),
-            'caption' => get_field('card_caption') === null ? '' : get_field('card_caption'),
-            'banner' => get_field('banner_mobile')['url'],
-            'content' => get_field('detail'),
-            'participant_project' => process_participant_project(get_field('participating-projects')),
-            'related_promotions' => process_related_promotion(get_field('related_promotion')),
-            'utm_source' => 'asw-app_register'
-          ),
-          'en' => $en_id ? array(
-            'id' => $en_id,
-            'title' => get_the_title($en_id),
-            'key' => get_post_field('post_name', $en_id),
-            'caption' => get_field('card_caption', $en_id) === null ? '' : get_field('card_caption', $en_id),
-            'banner' => get_field('banner_mobile', $en_id)['url'],
-            'content' => get_field('detail', $en_id),
-            'participant_project' => process_participant_project(get_field('participating-projects', $en_id)),
-            'related_promotions' => process_related_promotion(get_field('related_promotion', $en_id)),
-            'utm_source' => 'asw-app_register'
-          ) : array()
-        );
-      }
+        ),
+        'en' => $en_id ? array(
+          'id' => $en_id,
+          'title' => get_the_title($en_id),
+          'key' => get_post_field('post_name', $en_id),
+          'caption' => get_field('card_caption', $en_id) === null ? '' : get_field('card_caption', $en_id),
+          'banner' => get_field('banner_mobile', $en_id)['url'],
+          'content' => get_field('detail', $en_id),
+          'participant_project' => process_participant_project(get_field('participating-projects', $en_id)),
+          'related_promotions' => process_related_promotion(get_field('related_promotion', $en_id)),
+        ) : array()
+      );
   }
 
   wp_reset_postdata();

@@ -50,7 +50,7 @@ function get_promotion_listed($request) {
 
       $query->the_post();
       $item_en = pll_get_post(get_the_ID(), 'en');
-      $banner = get_field('banner_mobile', get_the_ID());
+      $banner = get_the_post_thumbnail_url(get_the_ID(), 'full');
 
       $promotion_listed[] = array(
         'th' => array(
@@ -58,14 +58,14 @@ function get_promotion_listed($request) {
           'title' => get_the_title(),
           'key' => get_post_field('post_name'),
           'caption' => get_field('card_caption') === null ? '' : get_field('card_caption'),
-          'featured_image' => $banner['url']
+          'featured_image' => $banner
         ),
         'en' => $item_en ? array(
           'id' => $item_en,
           'title' => get_the_title($item_en),
           'key' => get_post_field('post_name', $item_en),
           'caption' => get_field('card_caption', $item_en) === null ? '' : get_field('card_caption', $item_en),
-          'featured_image' => $banner['url']
+          'featured_image' => $banner
         ) : [],
       );
     }
