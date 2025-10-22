@@ -2947,3 +2947,15 @@ function asw_vue_app_shortcode() {
     return '<div id="app"></div>';
 }
 add_shortcode('vue-app', 'asw_vue_app_shortcode');
+
+add_action('wp_enqueue_scripts', function() {
+    if (is_singular() && (get_the_ID() == 87795 || get_the_ID() == 89579)) {
+        wp_enqueue_script(
+            'test-include-form-js',
+            get_template_directory_uri() . '/js/form-module.js?v=' . time(),
+            array(),
+            time(),
+            true
+        );
+    }
+});
