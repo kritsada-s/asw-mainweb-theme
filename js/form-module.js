@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const formModule = document.getElementById('form-module');
     
+    const flowKey = formModule.dataset.flow;
+    
     if (!formModule) return;
     
     // Get endpoint URL from data attribute or use default
-    const endpointUrl = formModule.dataset.endpointUrl || 'https://node.assetwise.dev/webhook/cis-leads-submission';
+    const endpointUrl = 'https://node.assetwise.dev/webhook/centralize-workflow';
     
     // Get UTM parameters from URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -158,7 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 utm_campaign: form.utm_campaign.value,
                 utm_content: form.utm_content.value,
                 utm_id: form.utm_id.value,
-                utm_term: form.utm_term.value
+                utm_term: form.utm_term.value,
+                flow_key: flowKey
             };
             
             // console.log('Form submitted:', formData);
