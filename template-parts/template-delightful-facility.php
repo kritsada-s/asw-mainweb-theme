@@ -667,7 +667,7 @@ if ($content['hide_b'] == 'hide') {
             }
         </style>
         <div class="facility-ast">
-            <img src="/wp-content/uploads/2023/03/strutture..png" alt="">
+            <img src="<?= ASW_MEDIA_PATH ?>/2023/03/strutture..png" alt="">
         </div>
     </div>
     <div id="facility-wrap" class="relative">

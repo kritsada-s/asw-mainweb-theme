@@ -87,7 +87,7 @@ $post_size = sizeof($result);
 		<div class="-r">
 			<a  class="see-more selected-all f30-28" href="/<?=pll_current_language()?>/?s=<?=$keyword?>&focus=project">
 				<h5 class="inline-block cl-ci-blue-300"><?php pll_e('ดูทั้งหมด')?></h5>
-				<img src="/wp-content/uploads/2022/09/arrow-r-main.png" class="inline-block" style="width:30px">
+				<img src="<?= ASW_MEDIA_PATH ?>/2022/09/arrow-r-main.png" class="inline-block" style="width:30px">
 			</a>
 		</div>
 	</div>

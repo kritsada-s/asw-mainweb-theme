@@ -163,7 +163,7 @@ $slider = $f['home_banner'];
 	</style>
 	<section id="asw-club" class="padding-l-vtc bg-ci-grey-900">
 		<div>
-			<img class="club-leaf01" src="/wp-content/uploads/2022/11/leaves-shadow-1.png" class="" style="">
+			<img class="club-leaf01" src="<?= ASW_MEDIA_PATH ?>/2022/11/leaves-shadow-1.png" class="" style="">
 
 		</div>
 		<div class="relative">
@@ -171,7 +171,7 @@ $slider = $f['home_banner'];
 		</div>
 		<div class="cont-pd flex flex-row items-center">
 			<a href="/<?=pll_current_language()?>/home" class="cl-ci-blue-400"><?php pll_e('หน้าแรก')?></a>
-			<img src="/wp-content/uploads/2023/01/Vector-84-1.png" style="margin:0px 12px;width: 5px;">
+			<img src="<?= ASW_MEDIA_PATH ?>/2023/01/Vector-84-1.png" style="margin:0px 12px;width: 5px;">
 			<a href="/<?=pll_current_language()?>/club" class=""><?php pll_e('แอสเซทไวส์คลับ')?></a>
 		</div>
 		<sp class="hidden lg:block"></sp>
@@ -208,7 +208,7 @@ $slider = $f['home_banner'];
 				$chk = 0;
 				?>
 				<div class="lg:col-span-9 overflow-hidden">
-					<img src="/wp-content/uploads/2022/09/slide-arrow-r.png" class="hidden lg:block club-slide--r --l"
+					<img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-r.png" class="hidden lg:block club-slide--r --l"
 					onclick="show_promo_arrow(-1)">
 					<div id="club_slides_wrap">
 						<div id="club_slides_num">
@@ -377,7 +377,7 @@ $slider = $f['home_banner'];
 												<h5 class="" style="font-weight: 500;">
 													<?php pll_e('อ่านเพิ่มเติม') ?>
 												</h5>
-												<img src="/wp-content/uploads/2022/09/arrow-r-main.png"
+												<img src="<?= ASW_MEDIA_PATH ?>/2022/09/arrow-r-main.png"
 												class="m-0 pl-1 lg:pl-2" style="width: auto; height: 35px;">
 											</div>
 										</div>
@@ -441,7 +441,7 @@ $slider = $f['home_banner'];
 									<h5 class="" style="font-weight: 500;">
 										<?php pll_e('อ่านเพิ่มเติม')?>
 									</h5>
-									<img src="/wp-content/uploads/2022/09/arrow-r-main.png"
+									<img src="<?= ASW_MEDIA_PATH ?>/2022/09/arrow-r-main.png"
 									class="m-0 pl-1 lg:pl-2" style="width: auto; height: 35px;">
 								</div>
 							</div>
@@ -507,7 +507,7 @@ $slider = $f['home_banner'];
 					<h5 class="" style="font-weight: 500;">
 						<?php pll_e('อ่านเพิ่มเติม')?>
 					</h5>
-					<img src="/wp-content/uploads/2022/09/arrow-r-main.png"
+					<img src="<?= ASW_MEDIA_PATH ?>/2022/09/arrow-r-main.png"
 					class="m-0 pl-1 lg:pl-2" style="width: auto; height: 35px;">
 				</div>
 			</div>
@@ -572,7 +572,7 @@ $title_chk = $chk;
 
 </div>
 <sp class="l"></sp>
-<img src="/wp-content/uploads/2022/09/slide-arrow-r.png" class="hidden lg:block club-slide--r"
+<img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-r.png" class="hidden lg:block club-slide--r"
 onclick="show_promo_arrow(1)">
 </div>
 </div>
@@ -769,8 +769,8 @@ onclick="show_promo_arrow(1)">
 <section id="club-info" class="padding-l-vtc">
 	<div id="club-info-section"></div>
 	<div>
-		<img src="/wp-content/uploads/2022/11/shutterstock_1574382076-1.png" class=" club-leaf02" style="">
-		<img src="/wp-content/uploads/2022/11/Group-793.png" class=" club-leaf03" style="">
+		<img src="<?= ASW_MEDIA_PATH ?>/2022/11/shutterstock_1574382076-1.png" class=" club-leaf02" style="">
+		<img src="<?= ASW_MEDIA_PATH ?>/2022/11/Group-793.png" class=" club-leaf03" style="">
 
 	</div>
 	<sp class="m"></sp>

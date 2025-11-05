@@ -363,7 +363,7 @@ $f = $args[1];
                 }
             </style>
             <div class="gallery-ast">
-                <img src="/wp-content/uploads/2023/03/la-galleria.png" alt="">
+                <img src="<?= ASW_MEDIA_PATH ?>/2023/03/la-galleria.png" alt="">
             </div>
         </div>
         <div class="gallery-wrap">

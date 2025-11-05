@@ -14,8 +14,8 @@ $v = get_fields();
 </style>
 <section id="banner-form" style="--img: url(<?= acf_img($v['background_image']) ?>)">
     <div class="-shadow">
-        <img class="shadow-1" src="/wp-content/uploads/2023/04/เงากิ่งไม้-3.png" alt="">
-        <img class="shadow-2" src="/wp-content/uploads/2023/04/leaves-shadow-1.png" alt="">
+        <img class="shadow-1" src="<?= ASW_MEDIA_PATH ?>/2023/04/เงากิ่งไม้-3.png" alt="">
+        <img class="shadow-2" src="<?= ASW_MEDIA_PATH ?>/2023/04/leaves-shadow-1.png" alt="">
     </div>
     <div class="-background">
         <div class="-l"></div>
@@ -31,31 +31,31 @@ $v = get_fields();
             <div class="-body">
                 <div class="-detail">
                     <div class="-wrap">
-                        <img src="/wp-content/uploads/2023/04/Group-1138.png" alt="">
+                        <img src="<?= ASW_MEDIA_PATH ?>/2023/04/Group-1138.png" alt="">
                         <div class="-desc">
                             <h6><?= $v['company_name'] ?></h6>
                             <p><?= $v['location_detail'] ?></p>
                             <a href="<?= $v['map_link'] ?>">
-                                <img src="/wp-content/uploads/2023/04/Vector-1.png" alt="">
+                                <img src="<?= ASW_MEDIA_PATH ?>/2023/04/Vector-1.png" alt="">
                                 <?php pll_e('ดูแผนที่')?>
                             </a>
                         </div>
                     </div>
                     <div class="-wrap">
-                        <img src="/wp-content/uploads/2023/04/Vector-21.png" alt="">
+                        <img src="<?= ASW_MEDIA_PATH ?>/2023/04/Vector-21.png" alt="">
                         <div class="-desc">
                             <h6><?= $v['telephone'] ?></h6>
                             <p><?= $v['time_available'] ?></p>
                         </div>
                     </div>
                     <div class="-wrap">
-                        <img src="/wp-content/uploads/2023/04/Group-1140.png" alt="">
+                        <img src="<?= ASW_MEDIA_PATH ?>/2023/04/Group-1140.png" alt="">
                         <div class="-desc">
                             <h6><?= $v['fax'] ?></h6>
                         </div>
                     </div>
                     <div class="-wrap">
-                        <img src="/wp-content/uploads/2023/04/Group-1139.png" alt="">
+                        <img src="<?= ASW_MEDIA_PATH ?>/2023/04/Group-1139.png" alt="">
                         <div class="-desc">
                             <h6><?= $v['email'] ?></h6>
                         </div>
@@ -188,7 +188,7 @@ $v = get_fields();
                         <sp class="hidden lg:block" style="height: 1rem;"></sp>
 
                         <div class="contact-menu px-0 lg:px-4">
-                             <a target="_blank" href="https://services.assetwise.co.th/DSRM/DSRForm" class=""><img src="/wp-content/uploads/2023/04/Vector-20.png" alt=""> <?php pll_e('พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล')?></a>
+                             <a target="_blank" href="https://services.assetwise.co.th/DSRM/DSRForm" class=""><img src="<?= ASW_MEDIA_PATH ?>/2023/04/Vector-20.png" alt=""> <?php pll_e('พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล')?></a>
                         </div>
                         <sp class="hidden lg:block" style="height: 1rem;"></sp>
 

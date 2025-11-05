@@ -2,6 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const formModule = document.getElementById('form-module');
     
     const flowKey = formModule.dataset.flow;
+    let bgImage = '';
+
+    if (formModule.dataset.bgimage) {
+        bgImage = formModule.dataset.bgimage;
+    }
+
+    console.log(bgImage);
     
     if (!formModule) return;
     
@@ -367,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
         style.textContent = `
             #form-module {
                 padding: 3rem 1rem;
-                background-image: url('https://assetwise.co.th/wp-content/uploads/2025/10/aquarous_agent-night_2025_register-bg.jpg');
+                background-image: url('${bgImage}');
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;

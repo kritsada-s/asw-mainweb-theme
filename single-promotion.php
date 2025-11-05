@@ -184,9 +184,9 @@ $v = get_fields();
 
 <div class="cont-pd py-6 flex flex-row items-center" style="white-space: nowrap;">
 	<a href="/<?=pll_current_language()?>/home" class="cl-ci-blue-400"><?php pll_e('หน้าแรก')?><?php pll_e('')?></a>
-	<img src="/wp-content/uploads/2023/01/Vector-84-1.png" style="margin:0px 12px;width: 5px;">
+	<img src="<?= ASW_MEDIA_PATH ?>/2023/01/Vector-84-1.png" style="margin:0px 12px;width: 5px;">
 	<a href="/<?=pll_current_language()?>/promotion" class="cl-ci-blue-400"><?php pll_e('โปรโมชั่น')?></a>
-	<img src="/wp-content/uploads/2023/01/Vector-84-1.png" style="margin:0px 12px;width: 5px;">
+	<img src="<?= ASW_MEDIA_PATH ?>/2023/01/Vector-84-1.png" style="margin:0px 12px;width: 5px;">
 	<a href="#!" class="truncate"><?php the_title() ?></a>
 </div>
 <section id="the_form" <?php if ($v['promotion_form']['is_show'] == 'hidden') : ?>class="hidden" <?php endif ?>>
@@ -253,7 +253,7 @@ $v = get_fields();
 									?>
 									<label class="cursor-pointer -label-pj">
 										<input type="checkbox" class="inline-block w-auto" name="the_form_project" data-pj="<?= $cv->name ?>" data-pj-wp-id="<?=$cf_id?>" data-pj-id="<?=$pj_id?>" onchange="set_form_project()">
-										<span class="ml-2">
+										<span class="ml-2 flex flex-col">
 											<?php if ($cf_id != '') : ?>
 												<a href="<?= $url ?>" class="">
 												<?php endif ?>
@@ -261,7 +261,7 @@ $v = get_fields();
 												<?php if ($cf_id != '') : ?>
 												</a>
 											<?php endif ?>
-											<?= $cf['description'] ?>
+											<span class="text-[19px] text-white opacity-90 leading-none"><?= $cf['description'] ?></span>
 										</span>
 									</label>
 								<?php endforeach ?>
@@ -552,7 +552,7 @@ if ($p) {
 			?>
 			<div class="s-container">
 				<div>
-					<img class="promo-leaf01" src="/wp-content/uploads/2022/11/shutterstock_1574382076-1.png">
+					<img class="promo-leaf01" src="<?= ASW_MEDIA_PATH ?>/2022/11/shutterstock_1574382076-1.png">
 				</div>
 				<h1>โครงการที่เข้าร่วม</h1>
 				<sp style="height: 52px;"></sp>
@@ -601,8 +601,8 @@ if ($p) {
 				$pos = get_postdata($v['project'][0]->ID);
 				?>
 				<div>
-					<img class="promo-leaf01" src="/wp-content/uploads/2022/11/shutterstock_1574382076-1.png">
-					<img class="promo-leaf02" src="/wp-content/uploads/2022/11/Group-793.png">
+					<img class="promo-leaf01" src="<?= ASW_MEDIA_PATH ?>/2022/11/shutterstock_1574382076-1.png">
+					<img class="promo-leaf02" src="<?= ASW_MEDIA_PATH ?>/2022/11/Group-793.png">
 				</div>
 				<div class="s-container relative">
 					<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
@@ -637,7 +637,7 @@ if ($p) {
 							<sp class="h-12"></sp>
 							<h5 class="">
 								<a href="<?= $v['project'][0]->guid ?>" class=""><?php pll_e('อ่านเพิ่มเติม')?>
-								<img src="/wp-content/uploads/2022/09/arrow-r-main.png" class="m-0 pl-2 inline-block" style="width: auto; height: 35px;">
+								<img src="<?= ASW_MEDIA_PATH ?>/2022/09/arrow-r-main.png" class="m-0 pl-2 inline-block" style="width: auto; height: 35px;">
 							</a>
 						</h5>
 
@@ -1188,7 +1188,7 @@ padding: 0 !important;
 				</div>
 				<h5 class="col-span-2 text-right pt-3">
 					<a href="/<?=pll_current_language()?>/promotion" class=""><?php pll_e('ดูทั้งหมด')?>
-					<img src="/wp-content/uploads/2022/09/arrow-r-main.png" class="m-0 pl-2 inline-block" style="width: auto; height: 35px;"></a>
+					<img src="<?= ASW_MEDIA_PATH ?>/2022/09/arrow-r-main.png" class="m-0 pl-2 inline-block" style="width: auto; height: 35px;"></a>
 				</h5>
 			</div>
 			<sp style="height: 48px;"></sp>

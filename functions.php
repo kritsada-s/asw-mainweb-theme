@@ -358,6 +358,10 @@ if (defined('JETPACK__VERSION')) {
     require get_template_directory() . '/inc/jetpack.php';
 }
 
+// Define main global media path to use across theme files
+if (!defined('ASW_MEDIA_PATH')) {
+    define('ASW_MEDIA_PATH', 'https://asw-medias.s3.amazonaws.com/uploads');
+}
 
 
 // Jabont

@@ -401,9 +401,9 @@
                     <?php
                     // }
                     ?>
-                    <img src="/wp-content/uploads/2022/09/slide-arrow-r.png" class="sub-nav-arrow --r"
+                    <img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-r.png" class="sub-nav-arrow --r"
                     onclick="sub_arrow(1)">
-                    <img src="/wp-content/uploads/2022/09/slide-arrow-r.png" class="sub-nav-arrow --l"
+                    <img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-r.png" class="sub-nav-arrow --l"
                     onclick="sub_arrow(-1)">
                 </div>
             </div>

@@ -634,14 +634,14 @@ if (str_contains($_SERVER['REQUEST_URI'], 'condominium')) {
     </style>
     <div id="menu-burger" class="fixed">
         <span class="close-menu cursor hidden" onclick="closeMenubur()" style="z-index: 10001;top: 25px;">&times;</span>
-        <img src="/wp-content/uploads/2022/10/Group-517.png"
+        <img src="<?= ASW_MEDIA_PATH ?>/2022/10/Group-517.png"
         style="width: 22px;z-index: 10001;top: 30px;" class="search-fix hidden"
         onclick="document.querySelector('#search-popup-wrap').dataset.toggle=1">
-        <a href="tel:02-168-0000"><img src="/wp-content/uploads/2022/10/Vector-9.png"
+        <a href="tel:02-168-0000"><img src="<?= ASW_MEDIA_PATH ?>/2022/10/Vector-9.png"
             style="width: 20px; z-index: 10001;top: 30px;" class="tel-fix hidden"></a>
             <div class="burger-main-wrap inline-flex w-full h-full">
                 <div id="burger-1" class="bg-ci-blue-300 container relative">
-                    <img src="/wp-content/uploads/2022/11/shutterstock_1574382076-1-1.png"
+                    <img src="<?= ASW_MEDIA_PATH ?>/2022/11/shutterstock_1574382076-1-1.png"
                     class="absolute pointer-events-none leaf-burger">
                     <img src="/wp-content/themes/seed-spring/img/<?=$xlang?>/logo-asw.png"
                     class="flex items-start mt-6 ml-10"  style="max-width: 188px;">
@@ -717,7 +717,7 @@ if (str_contains($_SERVER['REQUEST_URI'], 'condominium')) {
 </div>
 </div>
 <div id="burger-2" class="bg-white relative">
-    <img src="/wp-content/uploads/2022/11/image-74.png"
+    <img src="<?= ASW_MEDIA_PATH ?>/2022/11/image-74.png"
     class="absolute pointer-events-none w-bottom">
     <div id="default" class="flex items-center h-full pl-16 pr-16" style="width: 95%;padding-bottom: 140px;">
         <?php
@@ -826,9 +826,9 @@ style="width: 95%;">
 </div>
 <div class="">
     <div class="burger-arrow flex flex-row">
-        <img src="/wp-content/uploads/2022/09/slide-arrow-l.png"
+        <img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-l.png"
         class="relative w-10 h-10" onclick="burgerProjectArrow(-1)" style="margin-left: -30px;">
-        <img src="/wp-content/uploads/2022/09/slide-arrow-r.png"
+        <img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-r.png"
         class="relative w-10 h-10" onclick="burgerProjectArrow(1)" style="margin-right: -30px;">
     </div>
     <div style="overflow: hidden;height: 68px;padding-top: 1px;">
@@ -936,7 +936,7 @@ style="width: 95%;">
 </script>
 </div>
 <div id="condo-burger-mini" class="pt-20 px-8 hidden">
-    <img src="/wp-content/uploads/2022/11/arrow.png"
+    <img src="<?= ASW_MEDIA_PATH ?>/2022/11/arrow.png"
     class="back-burger" onclick="back_burger()">
     <div id="show-condo-mini">
         <span class="flex flex-row items-center justify-center">
@@ -970,9 +970,9 @@ style="width: 95%;">
     style="background-image:url('/wp-content/uploads/2022/11/Rectangle-235-2.jpg');transition: .3s linear !important;">
 </div>
 <div class="burger-arrow flex flex-row">
-    <img src="/wp-content/uploads/2022/09/slide-arrow-l.png"
+    <img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-l.png"
     class="relative w-10 h-10" onclick="burgerTownArrow(-1)" style="margin-left: -30px;">
-    <img src="/wp-content/uploads/2022/09/slide-arrow-r.png"
+    <img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-r.png"
     class="relative w-10 h-10" onclick="burgerTownArrow(1)" style="margin-right: -30px;">
 </div>
 <div style="overflow: hidden;height: 68px;padding-top: 1px;">
@@ -1077,7 +1077,7 @@ style="width: 95%;">
 
 </script>
 <div id="town-burger-mini" class="pt-20 px-8 hidden">
-    <img src="/wp-content/uploads/2022/11/arrow.png"
+    <img src="<?= ASW_MEDIA_PATH ?>/2022/11/arrow.png"
     class="back-burger" onclick="back_burger()">
     <div id="show-townhome-mini">
         <span class="flex flex-row items-center justify-center">

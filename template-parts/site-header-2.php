@@ -149,7 +149,7 @@ else{
             <div class="col-span-9 flex items-center relative site-left-bar">
                 <div class="site-branding">
                     <a href="<?php echo home_url(); ?>" class="logo_lang logo-hide-cont-left">
-                        <img src="/wp-content/uploads/2022/09/ASW_new_logo_horizon-e1613543557177-1.png">
+                        <img src="<?= ASW_MEDIA_PATH ?>/2022/09/ASW_new_logo_horizon-e1613543557177-1.png">
                     </a>
                     <div class="grid grid-flow-col gap-4">
                         <nav id="site-navigation" class="site-nav-d _desktop txt-menu dbfon" style="font-weight: 400;">
@@ -161,18 +161,18 @@ else{
             <div class="col-span-3 text-right flex items-center site-right-bar justify-end pl-12">
                 <div class="site-tools flex flex-row items-center gap-4">
                     <div class="flex flex-row items-center change-lang" style="margin-right: 10px;">
-                        <img src="/wp-content/uploads/2022/09/630635.png" class="inline" style="width: 24px;margin-right: 5px;">
+                        <img src="<?= ASW_MEDIA_PATH ?>/2022/09/630635.png" class="inline" style="width: 24px;margin-right: 5px;">
                         <h6 class="inline-block" style="margin-right: 8px;margin-left: 8px;font-weight: 400;font-size: 26px;line-height: 32px;">ไทย</h6>
                         <i class="fas fa-chevron-down size-s"></i>
                     </div>
                     <div class="tel-icon">
-                        <img src="/wp-content/uploads/2022/10/Vector-9.png" class="pointer" style="width: 22px;">
+                        <img src="<?= ASW_MEDIA_PATH ?>/2022/10/Vector-9.png" class="pointer" style="width: 22px;">
                         <div class="whitespace-nowrap tel-number">
                             02-168-0000
                         </div>
                     </div>
-                    <img src="/wp-content/uploads/2022/10/Group-517.png" class="pointer" style="width: 22px;">
-                    <img src="/wp-content/uploads/2022/10/Group-778.png" style="width: 22px;height: 18px;" class="pointer" onclick="openMenubur()">
+                    <img src="<?= ASW_MEDIA_PATH ?>/2022/10/Group-517.png" class="pointer" style="width: 22px;">
+                    <img src="<?= ASW_MEDIA_PATH ?>/2022/10/Group-778.png" style="width: 22px;height: 18px;" class="pointer" onclick="openMenubur()">
                 </div>
             </div>
         </div>
@@ -352,12 +352,12 @@ else{
 </style>
 <div id="menu-burger" class="fixed">
     <span class="close-menu cursor hidden" onclick="closeMenubur()" style="z-index: 10001;top: 25px;">&times;</span>
-    <img src="/wp-content/uploads/2022/10/Group-517.png" style="width: 22px;z-index: 10001;top: 30px;" class="search-fix hidden">
-    <img src="/wp-content/uploads/2022/10/Vector-9.png" style="width: 20px; z-index: 10001;top: 30px;" class="tel-fix hidden">
+    <img src="<?= ASW_MEDIA_PATH ?>/2022/10/Group-517.png" style="width: 22px;z-index: 10001;top: 30px;" class="search-fix hidden">
+    <img src="<?= ASW_MEDIA_PATH ?>/2022/10/Vector-9.png" style="width: 20px; z-index: 10001;top: 30px;" class="tel-fix hidden">
     <div class="burger-main-wrap inline-flex w-full h-full">
         <div id="burger-1" class="bg-ci-blue-300 container relative">
-            <img src="/wp-content/uploads/2022/11/shutterstock_1574382076-1-1.png" class="absolute pointer-events-none leaf-burger">
-            <img src="/wp-content/uploads/2022/10/Group-853.png" class="flex items-start mt-6 ml-10">
+            <img src="<?= ASW_MEDIA_PATH ?>/2022/11/shutterstock_1574382076-1-1.png" class="absolute pointer-events-none leaf-burger">
+            <img src="<?= ASW_MEDIA_PATH ?>/2022/10/Group-853.png" class="flex items-start mt-6 ml-10">
             <!-- <div class="bg-cover" style="width: 270px; height: 40px;background-image: url('/wp-content/uploads/2022/10/Screen-Shot-2565-07-14-at-17.49-1.png');"></div> -->
             <sp class=""></sp>
             <div id="burger-txt" class="relative grid grid-rows-2 gap-6 place-content-center pt-4" style="left: 120%;transition: 1s;">
@@ -409,7 +409,7 @@ else{
             </div>
         </div>
         <div id="burger-2" class="bg-white relative">
-            <img src="/wp-content/uploads/2022/11/image-74.png" class="absolute pointer-events-none w-bottom">
+            <img src="<?= ASW_MEDIA_PATH ?>/2022/11/image-74.png" class="absolute pointer-events-none w-bottom">
             <div id="default" class="flex items-center h-full pl-16 pr-16 pb-20" style="width: 85%;">
                 <div class="bg-cover blank bg-grey" ratio="16:10" style="background-image:url('/wp-content/uploads/2022/11/Rectangle-235.jpg')">
                 </div>
@@ -493,8 +493,8 @@ else{
                     </div>
                     <div class="">
                         <div class="burger-arrow flex flex-row">
-                            <img src="/wp-content/uploads/2022/09/slide-arrow-l.png" class="relative w-10 h-10" onclick="burgerProjectArrow(-1)" style="margin-left: -30px;">
-                            <img src="/wp-content/uploads/2022/09/slide-arrow-r.png" class="relative w-10 h-10" onclick="burgerProjectArrow(1)" style="margin-right: -30px;">
+                            <img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-l.png" class="relative w-10 h-10" onclick="burgerProjectArrow(-1)" style="margin-left: -30px;">
+                            <img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-r.png" class="relative w-10 h-10" onclick="burgerProjectArrow(1)" style="margin-right: -30px;">
                         </div>
                         <div style="overflow: hidden;height: 68px;padding-top: 1px;">
                             <div class="burger-cards-wrap">
@@ -589,7 +589,7 @@ else{
                         </script>
                     </div>
                     <div id="condo-burger-mini" class="pt-20 px-8 hidden">
-                        <img src="/wp-content/uploads/2022/11/arrow.png" class="back-burger" onclick="back_burger()">
+                        <img src="<?= ASW_MEDIA_PATH ?>/2022/11/arrow.png" class="back-burger" onclick="back_burger()">
                         <div id="show-condo-mini">
                             <span class="flex flex-row items-center justify-center">
                                 <h6 class="">คอนโดมิเนียม</h6>
@@ -618,8 +618,8 @@ else{
                             <div id="town-upper-img" class="bg-cover blank bg-grey" ratio="facebook" style="background-image:url('/wp-content/uploads/2022/11/Rectangle-235-2.jpg');transition: .3s linear !important;">
                             </div>
                             <div class="burger-arrow flex flex-row">
-                                <img src="/wp-content/uploads/2022/09/slide-arrow-l.png" class="relative w-10 h-10" onclick="burgerTownArrow(-1)" style="margin-left: -30px;">
-                                <img src="/wp-content/uploads/2022/09/slide-arrow-r.png" class="relative w-10 h-10" onclick="burgerTownArrow(1)" style="margin-right: -30px;">
+                                <img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-l.png" class="relative w-10 h-10" onclick="burgerTownArrow(-1)" style="margin-left: -30px;">
+                                <img src="<?= ASW_MEDIA_PATH ?>/2022/09/slide-arrow-r.png" class="relative w-10 h-10" onclick="burgerTownArrow(1)" style="margin-right: -30px;">
                             </div>
                             <div style="overflow: hidden;height: 68px;padding-top: 1px;">
                                 <div class="burger-town-cards-wrap">
@@ -707,7 +707,7 @@ else{
                                 }
                             </script>
                             <div id="town-burger-mini" class="pt-20 px-8 hidden">
-                                <img src="/wp-content/uploads/2022/11/arrow.png" class="back-burger" onclick="back_burger()">
+                                <img src="<?= ASW_MEDIA_PATH ?>/2022/11/arrow.png" class="back-burger" onclick="back_burger()">
                                 <div id="show-townhome-mini">
                                     <span class="flex flex-row items-center justify-center">
                                         <h6 class="">บ้านและทาวน์โฮม</h6>
