@@ -1630,7 +1630,7 @@ if ($f['featured_1']['is_open'] == 'open') {
 				while ($loop->have_posts()):
 					$loop->the_post();
 					$featured_img = wp_get_attachment_image_src($post->ID, 'medium-large-thumb');
-					$v = get_postdata($post->ID);
+					$v = get_post($post->ID);
 					if ($chk == 1) {
 				?>
 						<div class="col-span-1 news-item-<?= $chk ?> relative" data-aos="fade-up" data-aos-duration="500"
@@ -1661,7 +1661,7 @@ if ($f['featured_1']['is_open'] == 'open') {
 									<div id="middle-news-pic">
 										<div style="overflow: hidden;">
 											<div class="bg-cover blank" ratio="1:1"
-												style="background-image:url('<?php echo get_the_post_thumbnail_url($value->ID, 'medium-large-thumb') ?>');">
+												style="background-image:url('<?php echo get_the_post_thumbnail_url($post->ID, 'medium-large-thumb') ?>');">
 											</div>
 										</div>
 									</div>
@@ -1672,7 +1672,7 @@ if ($f['featured_1']['is_open'] == 'open') {
 								} ?>
 								<div class="home-news-date-sp"></div>
 								<div class="row-span-1 cl-ci-grey-300 home-news-date">
-									<?= asw_date_format($v['Date']) ?>
+									<?= asw_date_format($v->Date) ?>
 								</div>
 							</div>
 						</div>
@@ -1686,7 +1686,7 @@ if ($f['featured_1']['is_open'] == 'open') {
 									<div class="line04"></div>
 									<div style="overflow: hidden;">
 										<div class="bg-cover blank" ratio="1:1"
-											style="background-image:url('<?php echo get_the_post_thumbnail_url($value->ID, 'medium-large-thumb') ?>');">
+											style="background-image:url('<?php echo get_the_post_thumbnail_url($post->ID, 'medium-large-thumb') ?>');">
 										</div>
 									</div>
 								</div>
@@ -1709,7 +1709,7 @@ if ($f['featured_1']['is_open'] == 'open') {
 								</div>
 								<div class="home-news-date-sp"></div>
 								<div class="row-span-1 cl-ci-grey-300 home-news-date">
-									<?= asw_date_format($v['Date']) ?>
+									<?= asw_date_format($v->Date) ?>
 								</div>
 							</div>
 						</div>

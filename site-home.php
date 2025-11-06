@@ -1609,7 +1609,7 @@ style="z-index: 3;background-color: white;padding-top: 4rem;padding-bottom: 3rem
 			while ($loop->have_posts()):
 				$loop->the_post();
 				$featured_img = wp_get_attachment_image_src($post->ID, 'medium-large-thumb');
-				$v = get_postdata($post->ID);
+				$v = get_post($post->ID);
 				if ($chk == 1) {
 					?>
 					<div class="col-span-1 news-item-<?= $chk ?> relative" data-aos="fade-up" data-aos-duration="500"
@@ -1652,7 +1652,7 @@ style="z-index: 3;background-color: white;padding-top: 4rem;padding-bottom: 3rem
 					<div class="home-news-date-sp"></div>
 					<div class="row-span-1 cl-ci-grey-300 home-news-date">
 						<?php
-						$date = strtotime($v['Date']);
+						$date = strtotime($v->Date);
 						$month = gmdate("F", $date);
 						switch ($month) {
 							case "January":
@@ -1733,7 +1733,7 @@ style="z-index: 3;background-color: white;padding-top: 4rem;padding-bottom: 3rem
 			<div class="home-news-date-sp"></div>
 			<div class="row-span-1 cl-ci-grey-300 home-news-date">
 				<?php
-				$date = strtotime($v['Date']);
+				$date = strtotime($v->Date);
 				$month = gmdate("F", $date);
 				switch ($month) {
 					case "January":
